@@ -1,0 +1,19 @@
+/*
+* Version: 1.0.0
+* Author: chengam
+* Email: chengam@chinasap.cn
+* Copyright 2017 (c) 
+*/
+
+html, body {
+    height: 100%;
+}
+
+body {
+    border: solid 2px #F4984E;
+    background-color: #E7EABD;
+}
+
+.bg {
+    background-image:url('../images/gauge/gauge.png')
+}

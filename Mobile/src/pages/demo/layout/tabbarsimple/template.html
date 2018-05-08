@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <group>
+            <cell is-link title="Tabbar" link="./tabbar.html"></cell>
+        </group>
+        <tabbar>
+            <tabbar-item>
+                <span slot="label">Wechat</span>
+            </tabbar-item>
+            <tabbar-item show-dot>
+                <span slot="label">Message</span>
+            </tabbar-item>
+            <tabbar-item selected link="../other/demo.html">
+                <span slot="label">Explore</span>
+            </tabbar-item>
+            <tabbar-item badge="2">
+                <span slot="label">News</span>
+            </tabbar-item>
+        </tabbar>
+    </div>
+</body>
+
+</html>

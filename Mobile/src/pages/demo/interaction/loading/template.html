@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <group title="loading">
+            <x-switch title="显示" v-model="show1" @on-change="show1change"></x-switch>
+            <div style="padding: 15px;">
+                <x-button @click.native="showLoading" type="primary">显示(2s后关闭)，插件调用</x-button>
+            </div>
+            <div v-transfer-dom>
+                <loading v-model="show1" :text="text1"></loading>
+            </div>
+        </group>
+        <group title="inline-loading">
+            <p style="text-align:center;">
+                <inline-loading></inline-loading>
+            </p>
+            <br>
+            <p style="text-align:center;">
+                <span style="vertical-align:middle;display:inline-block;font-size:14px;">加载中&nbsp;&nbsp;</span>
+                <inline-loading></inline-loading>
+            </p>
+            <br>
+            <p style="text-align:center;">
+                <inline-loading></inline-loading><span style="vertical-align:middle;display:inline-block;font-size:14px;">&nbsp;&nbsp;加载中</span>
+            </p>
+        </group>
+        <group title="load-more">
+            <load-more tip="正在加载"></load-more>
+            <load-more :show-loading="false" tip="暂无数据" background-color="#fbf9fe"></load-more>
+            <load-more :show-loading="false" background-color="#fbf9fe"></load-more>
+        </group>
+    </div>
+</body>
+
+</html>

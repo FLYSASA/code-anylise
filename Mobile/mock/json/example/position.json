@@ -1,0 +1,18 @@
+[
+    {
+        "PositionId": "4d299c0f-b150-4864-980d-270ed0400bae",
+        "PositionName": "vz",
+        "PositionNo": null,
+        "Grade": "zv",
+        "RowIndex": 10,
+        "Description": null
+    },
+    {
+        "PositionId": "c14cd93a-8e48-4e49-83a6-d13bad7bfcd3",
+        "PositionName": "测试职位",
+        "PositionNo": "测试职位",
+        "Grade": "测试职位",
+        "RowIndex": 20,
+        "Description": "测试职位"
+    }
+]

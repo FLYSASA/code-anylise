@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>系统登录</title>
+</head>
+
+<body ontouchstart="">
+    <div id="loginbox" class="body-box">
+        <div class="login-logo"></div>
+        <div class="group">
+            <div class="input-box" data-input="clear" style="border-width:0 0 1px 0;">
+                <input id="txtUser" name="username" type="text" placeholder="请输入账号" v-model="uname" ref="uname" />
+                <i class="icon icon-clear-fill color-placeholder"></i>
+            </div>
+            <div class="input-box" data-input="reveal">
+                <input id="txtPwd" name="password" type="password" placeholder="请输入密码" v-model="pwd" />
+                <i class="icon icon-eye-fill color-placeholder"></i>
+            </div>
+        </div>
+        <a class="button block" style="margin:20px 12px;" href="javascript:void(0)" @click="login">登录</a>
+        <footer style="padding:40px 0;">
+            <a class="float-left" style="margin-left:20px;">忘记密码？</a>
+            <a class="float-right" style="margin-right:20px;">注册</a>
+        </footer>
+    </div>
+</body>
+
+</html>

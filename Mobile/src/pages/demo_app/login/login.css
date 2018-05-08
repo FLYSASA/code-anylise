@@ -1,0 +1,25 @@
+#loginbox {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cce6f6), color-stop(100%, #f9fcf4));
+    min-height: 370px;
+}
+
+.login-logo {
+    width: 88px;
+    height: 88px;
+    border-radius: 100%;
+    background-color: #f8f8f8;
+    text-align: center;
+    background-image: url('../static/images/logo.png');
+    background-size: 70px 70px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 2px solid white;
+    margin: 30px auto 20px auto;
+}
+
+.login_btm {
+    position: absolute;
+    bottom: 30px;
+    width: 88%;
+    margin-left: 6%;
+}

@@ -1,0 +1,126 @@
+.station-select-dialog .dialog-box-body{
+	padding-top: 0;
+	margin-top: 0;
+}
+
+.station-set-box {
+	width: 100%;
+	height: 530px;
+	margin: 0 auto;
+	padding: 20px;
+	text-align: center;
+	overflow: hidden;
+}
+
+.station-set-box-left {
+	position: relative;
+	float: left;
+	width: 310px;
+	height: 425px;
+	text-align: left;
+}
+
+.station-set-box-middle {
+	float: left;
+	margin-left: 20px;
+	width: 270px;
+}
+
+.station-set-box-right {
+	float: left;
+	margin-left: 20px;
+	width: 320px;
+}
+
+.single-station.station-set-box-middle-right {
+	width: 590px;
+}
+
+.single-station.station-set-box-left {
+	width: 320px;
+}
+
+.single-station.station-set-box-middle-right .el-table__body tr.current-row>td {
+	background-color: #63c4ff;
+	color: #fff;
+}
+
+.station-set-box-map {
+	height: 28px;
+	margin-bottom: 10px;
+	line-height: 28px;
+	overflow: hidden;
+}
+
+.station-set-box-map>span {
+	display: inline-block;
+	max-width: calc(100% - 40px);
+	text-align: left;
+}
+
+.station-set-box-map-text {
+	display: block;
+	padding-right: 45px;
+}
+
+.station-set-box-map-count {
+	position: absolute;
+	width: 43px;
+	right: 0px;
+	top: 0px;
+	overflow: hidden;
+}
+
+.station-set-box-map-link {
+	color: #8ecefe;
+	text-decoration: underline;
+}
+
+.station-set-box-table {
+	border: 1px solid #eee;
+	text-align: left;
+}
+
+.station-set-box-table.table-no-border td,
+.el-table th.is-leaf {
+	border-bottom: 1px solid #f3f2f2;
+}
+
+.station-set-box-table .el-table thead>tr>th,
+.el-table__fixed thead>tr>th {
+	height: 38px;
+}
+
+.station-set-box-table-cursor tr {
+	cursor: pointer;
+}
+
+.delete-btn-icon {
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	line-height: 28px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	background: #f2f2f2;
+}
+
+.red-close-btn {
+	display: none;
+	width: 12px;
+	height: 20px;
+	cursor: pointer;
+	background: url(../images/red-close-btn.png) no-repeat center bottom;
+}
+
+.station-set-box-table-delete tr:hover .red-close-btn {
+	display: inline-block;
+}
+
+.station-set-box-map .lg-width .station-set-box-map-text{
+	padding-right: 55px;
+}
+
+.station-set-box-map .lg-width .station-set-box-map-count{
+	width: 53px;
+}

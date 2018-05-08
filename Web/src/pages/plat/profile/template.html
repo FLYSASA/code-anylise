@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+	</head>
+
+	<body>
+		<div class="body-image-filter"></div>
+		<div class="simple-loading"></div>
+		<div id="index">
+			<!--头部-->
+			<web-header ref="header" class="body-scale"></web-header>
+			<section class="index-body inner-body">
+				<!--菜单导航区-->
+				<div class="index-body-map"></div>
+				<div class="index-body-box">
+					<!--左边菜单区-->
+					<menu-aside class="index-body-box-menu"></menu-aside>
+					<!--嵌套页面区-->
+					<div class="index-body-box-content">
+						<router-view></router-view>
+					</div>
+				</div>
+			</section>
+		</div>
+		<% for (var i in htmlWebpackPlugin.options.js) { %>
+        <script type="text/javascript" src="<%= htmlWebpackPlugin.options.js[i] %>"></script>
+        <% } %>
+	</body>
+
+</html>

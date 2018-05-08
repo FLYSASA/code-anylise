@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="登录赛普EAP企业管理平台" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>登录赛普EAP企业管理平台</title>
+</head>
+
+<body id="login">
+    <script src="lib/jquery-1.11.3.min.js"></script>
+    <script src="lib/vue.min.js"></script>
+    <script src="config.js"></script>
+    <script src="scripts/common.js"></script>
+
+    <script type="text/javascript">
+        var username = $.getUrlParam("username");
+        var grant_type = $.getUrlParam("grant_type");
+        var tourl = $.getUrlParam("tourl");
+        $.ajax({
+            type: "POST",
+            url: webInit.apiHost + "/Authorize",
+            data: {
+                grant_type: grant_type,
+                username: username
+            },
+            dataType: 'json',
+            beforeSend: function(request) {
+                window.sessionStorage.clear();
+                request.setRequestHeader("Authorization", "Basic V2ViQXBwOnNhcGlAMTIzNA==");
+            },
+            success: function(result) {
+                var session = window.sessionStorage;
+                if (result) {
+                    for (var key in result) {
+                        var value = result[key];
+                        if (typeof value == "object") {
+                            value = JSON.stringify(value);
+                        }
+                        session.setItem(key, value);
+                    }
+                    if (tourl && tourl != "") {
+                        window.location.replace(tourl);
+                    } else {
+                        window.location.href = "index.html"
+                    }
+                } else {
+                    layer.msg("登录失败，请稍后再试或联系管理员")
+                }
+                // console.log(result.token_type + ' ' + result.access_token);
+
+            },
+            error: function(result) {
+                if (result.responseText != null && result.responseText != "") {
+                    var message = $.parseJSON(result.responseText).error_description;
+                    var testNameReg = /用户名/;
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+.station-set-box-left .sapi-tree .tree-node-text.active {
+	background-color: #63c4ff;
+	color: #fff;
+}
+
+.station-set-box-left .sapi-tree .tree-node-text.active .icon-arrow-right {
+	color: #fff;
+}
+
+.station-set-box-left .sapi-tree .tree-node-text:hover {
+	background-color: #ededed;
+	color: #000;
+}
+.station-set-box-left .sapi-tree .tree-node-text:hover .tree-node-icon{
+	color: #B8B8B8;
+}
+
+.station-set-box-left .sapi-tree .tree-node-text>.tree-node-icon{
+	margin-left: 10px;
+}
+.station-set-box-left .sapi-tree .tree-node-text>.tree-node-label{
+	width: calc(100% - 46px);
+}
+.station-set-box-left .sapi-tree .tree-node-no-child>.tree-node-text>.tree-node-label{
+	margin-left: 35px;
+}

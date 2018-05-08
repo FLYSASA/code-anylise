@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .popup0 {
+            padding-bottom: 15px;
+            height: 200px;
+        }
+
+        .popup1 {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <group>
+            <x-switch title="基本用法" v-model="show1"></x-switch>
+            <x-switch title="显示取消菜单" v-model="show2"></x-switch>
+            <x-switch title="显示提示文字" v-model="show3"></x-switch>
+            <x-switch title="使用数组定义菜单" v-model="show5"></x-switch>
+        </group>
+
+        <group title="点击遮罩区域不自动关闭">
+            <x-switch title="基本用法" v-model="show4"></x-switch>
+        </group>
+
+        <group title="安卓风格">
+            <x-switch title="基本用法" v-model="show6"></x-switch>
+        </group>
+
+        <actionsheet v-model="show4" :menus="menus1" :close-on-clicking-mask="false" show-cancel></actionsheet>
+
+        <actionsheet v-model="show1" :menus="menus1" @on-click-menu="click"></actionsheet>
+
+        <actionsheet v-model="show2" :menus="menus2" @on-click-menu="click" show-cancel></actionsheet>
+
+        <actionsheet v-model="show3" :menus="menus3" @on-click-menu="click" @on-click-menu-delete="onDelete" show-cancel></actionsheet>
+
+        <actionsheet v-model="show5" :menus="menus5" show-cancel @on-click-menu="click"></actionsheet>
+
+        <actionsheet v-model="show6" :menus="menus1" @on-click-menu="click" theme="android"></actionsheet>
+
+        <toast v-model="showSuccess">已经删除</toast>
+    </div>
+</body>
+
+</html>

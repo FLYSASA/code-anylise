@@ -1,0 +1,66 @@
+[
+    {
+        "MsgTypeId": "0972ED71-F418-4548-8F9E-6449DAAB90FC",
+        "MsgTypeName": "流程消息",
+        "ParentTypeId": null,
+        "ParentTypeName": null,
+        "Outline": "01",
+        "IsLeaf": false,
+        "MsgCount": 10,
+        "Children": [
+            {
+                "MsgTypeId": "msgTypeId1",
+                "MsgTypeName": "流程消息1",
+                "ParentTypeId": "0972ED71-F418-4548-8F9E-6449DAAB90FC",
+                "ParentTypeName": "流程消息",
+                "Outline": "02",
+                "IsLeaf": true,
+                "MsgCount": 10,
+                "Children": [
+                    {
+                        "MsgTypeId": "msgTypeId1_1",
+                        "MsgTypeName": "流程消息1_1",
+                        "ParentTypeId": "msgTypeId1",
+                        "ParentTypeName": "流程消息1",
+                        "Outline": "03",
+                        "IsLeaf": true,
+                        "MsgCount": 10,
+                        "Children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "MsgTypeId": "msgTypeId2",
+        "MsgTypeName": "流程消息2",
+        "ParentTypeId": null,
+        "ParentTypeName": null,
+        "Outline": "01",
+        "IsLeaf": false,
+        "MsgCount": 10,
+        "Children": [
+            {
+                "MsgTypeId": "msgTypeId2_1",
+                "MsgTypeName": "流程消息2_1",
+                "ParentTypeId": "msgTypeId2",
+                "ParentTypeName": "流程消息2",
+                "Outline": "02",
+                "IsLeaf": true,
+                "MsgCount": 10,
+                "Children": [
+                    {
+                        "MsgTypeId": "msgTypeId2_1_1",
+                        "MsgTypeName": "流程消息2_1_1",
+                        "ParentTypeId": "msgTypeId2_1",
+                        "ParentTypeName": "流程消息2_1",
+                        "Outline": "03",
+                        "IsLeaf": true,
+                        "MsgCount": 10,
+                        "Children": []
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <group>
+            <cell is-link title="Tabbar" link="./tabbar.html"></cell>
+        </group>
+        <tabbar>
+            <tabbar-item>
+                <img slot="icon" :src="url1">
+                <img slot="icon-active" :src="url2">
+                <span slot="label">one</span>
+            </tabbar-item>
+            <tabbar-item>
+                <img slot="icon" :src="url3">
+                <img slot="icon-active" :src="url4">
+                <span slot="label">two</span>
+            </tabbar-item>
+        </tabbar>
+    </div>
+</body>
+
+</html>

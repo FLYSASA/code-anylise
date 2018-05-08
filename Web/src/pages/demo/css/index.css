@@ -1,0 +1,131 @@
+body{
+	overflow: hidden;
+}
+
+.index-body {
+	position: absolute;
+	top: 50px;
+	width: 100%;
+	height: calc(100% - 50px);
+}
+
+.index-body-map {
+	height: 49px;
+	border-bottom: 1px solid #eee;
+}
+
+.index-body-box-menu {
+	position: absolute;
+	top: 49px;
+	left: 0;
+	overflow: auto;
+	width: 230px;
+	height: calc(100% - 49px);
+	text-align: left;
+	border-right: 1px solid #eee;
+}
+
+.index-body-box-menu>.el-tree{
+	border: none;
+}
+
+.index-body-box-content{
+	position: absolute;
+	top: 49px;
+	left: 230px;
+
+	width: calc(100% - 230px);
+	height: calc(100% - 49px);
+	text-align: left;
+}
+
+.main-search{
+	position: fixed;
+	top: 50px;
+	right: 40px;
+	height: 49px;
+	line-height: 45px;
+}
+
+.main-search-filter{
+	
+}
+
+.main-search-filter>p{
+	margin: 0;
+	padding: 0;
+	padding-left: 25px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+}
+
+.main-table{
+	
+}
+
+.main-table .el-table{
+	border: none;
+}
+/*.main-table .el-table::before{
+	height: 0;
+}*/
+.main-table .el-table::after{
+	width: 0;
+}
+
+.main-table .el-table thead>tr>th{
+	border: none;
+}
+
+.main-table .el-table--border td,.main-table .el-table--border th{
+	border: none;
+}
+
+.main-pager{
+	position: fixed;
+	z-index: 4;
+	bottom: 0px;
+	
+	height: 58px;
+	padding-top:15px;
+	background: #fff;
+	box-shadow:1px 0px 5px 5px #eee ;
+}
+
+.form-content{
+	width: 100%;
+	padding: 20px;
+	padding-bottom: 60px;
+}
+
+.form-content>.fullline{
+	clear: both;
+	width: 100%;
+	margin-bottom: 10px;
+	line-height: 28px;
+	vertical-align: top;
+}
+
+.fullline>span{
+	vertical-align: top;
+}
+
+.right-auto-box{
+	display: inline-block;
+	width: calc(100% - 70px);
+}
+
+.form-content+.footer{
+	position: absolute;
+	z-index: 5;
+	bottom: 0px;
+	width: 100%;
+	padding-bottom: 15px;
+	text-align: center;
+	line-height: 30px;
+	background: #fff;
+}
+
+
+

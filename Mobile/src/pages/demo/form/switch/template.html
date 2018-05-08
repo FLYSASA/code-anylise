@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <group title="基本用法">
+            <x-switch title="默认 false"></x-switch>
+            <x-switch title="默认 true" :inline-desc="value1 + ''" v-model="value1"></x-switch>
+        </group>
+        <group title="禁用">
+            <x-switch title="默认 false" disabled></x-switch>
+            <x-switch title="默认 true" :value="true" disabled></x-switch>
+        </group>
+        <group title="使用html设置title">
+            <x-switch disabled :title='`<span style="color:red">我是红色</span>`'></x-switch>
+        </group>
+    </div>
+</body>
+
+</html>

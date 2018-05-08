@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .error {
+            padding-left: 15px;
+            line-height: 28px;
+            color: #888;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <checklist title="基本用法" :label-position="labelPosition" required :options="commonList" v-model="checklist001" @on-change="change">
+        </checklist>
+        <div style="padding:15px;">
+            <x-button @click.native="labelPosition = labelPosition === 'left' ? '' : 'left'" type="primary">切换 label 位置</x-button>
+            <x-button @click.native="selectFirst" type="primary">选择第1个值</x-button>
+            <x-button @click.native="selectFirstTwo" type="primary">选择前两个值</x-button>
+            <x-button @click.native="selectLeft" type="primary">选择剩下值</x-button>
+        </div>
+
+        <checklist title="处理错误" required :options="commonList" show-error v-model="checklist0011" @on-change="change" @on-error="onError"
+            @on-clear-error="onNoError" name="demo1" :max="2">
+            <p slot="footer" v-show="error" class="error">{{error}}</p>
+        </checklist>
+
+        <checklist title="默认选中China和Japan" label-position="left" :options="commonList" v-model="checklist002" @on-change="change"></checklist>
+
+        <checklist title="最多可选中2个" :options="commonList" v-model="checklist003" :max=2 @on-change="change"></checklist>
+
+        <checklist title="打乱选项顺序" random-order :options="checklist005" v-model="checklist005Value" @on-change="change"></checklist>
+
+        <checklist title="使用Object类型的选项列表，key必须为字符串" :options="objectList" v-model="objectListValue" @on-change="change"></checklist>
+
+        <checklist title="异步选项列表" :max="3" :options="asyncList" v-model="asyncListValue" @on-change="change"></checklist>
+
+        <divider>Reference</divider>
+        <group title="See also">
+            <cell title="Checker" value="with which you can custom any style" is-link link="/component/checker"></cell>
+        </group>
+        <div style="padding:15px;">
+            <check-icon :value.sync="demo1">Do you agree? ({{ demo1 }})</check-icon>
+            <br>
+            <br>
+            <check-icon :value.sync="demo2" type="plain">Do you agree?({{ demo2 }})</check-icon>
+        </div>
+    </div>
+</body>
+
+</html>

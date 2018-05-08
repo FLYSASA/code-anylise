@@ -1,0 +1,75 @@
+/*可以在这里添加你自己的css*/
+table{
+	width:100%;
+	table-layout: fixed;
+}
+
+table td{
+	cursor: default;
+}
+
+.form-input{
+	display: inline-block;
+	max-width: calc(100% - 10px);
+	height:20px;
+	cursor: pointer;
+	border: dotted 1px #999;
+	overflow: hidden;
+}
+
+body.view{
+	padding: 5px 8px;
+	margin:0px;
+}
+
+body.view>p:last-child{
+	padding-bottom: 10px;
+}
+
+.tabs{
+	padding:5px;
+	border:1px solid #666;
+}
+
+.tabs-title{
+	display: inline-block;
+	text-align: left;
+	width: 100%;
+	padding-left: 10px;
+	font-weight: bold;
+	line-height: 24px;
+	cursor: pointer;
+}
+
+.tabs-item{
+	padding:5px;
+	min-height: 65px;
+	border:1px solid #999;
+}
+
+.tabs-item-table>tbody>tr>td{
+	margin:0;
+	padding: 5px 8px;
+	font-size: 12px;
+	
+}
+
+.tabs-item-table>tbody>tr>td:nth-of-type(2n+1){
+	width:100px;
+}
+
+.tabs-superaddition{
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	font-weight: bold;
+	line-height: 24px;
+	border:1px solid #ccc;
+	cursor: pointer;
+}
+
+.form-design-jsScript{
+	display: none;
+}
+
+

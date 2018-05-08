@@ -1,0 +1,54 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于</title>
+</head>
+
+<body>
+    <div id="app">
+        <a href="javascript:void(0)" @click="back">返回</a>
+        <div style="margin:30px 60px">关于</div>
+        <div style="margin:10px 60px">
+            <br />
+            <div>操作系统：{{os.name}}</div>
+            <br />
+            <div>操作系统版本：{{os.version}}</div>
+            <br />
+            <div>应用版本：{{os.appVersion}}</div>
+            <br />
+            <a href="javascript:void(0)" @click="showOs">显示操作系统</a>
+            <br />
+            <a href="javascript:void(0)" @click="showOsVersion">显示操作系统版本</a>
+            <br />
+            <a href="javascript:void(0)" @click="showAppVersion">显示应用版本</a>
+            <br />
+            <a href="javascript:void(0)" @click="showAppServerVersion">显示应用服务端版本</a>
+            <br />
+            <a href="javascript:void(0)" @click="showAppId">获取AppID</a>
+            <br />
+            <a href="javascript:void(0)" @click="showAppInfo">显示App信息</a>
+            <br />
+            <br />
+            <br />
+            <div>赛普爱德科技股份有限公司</div>
+            <br />
+            <br />
+            <a href="javascript:void(0)" @click="updateApp">更新App</a>
+            <br />
+            <a href="javascript:void(0)" @click="exitApp('确定关闭？')">关闭App（有提示）</a>
+            <br />
+            <a href="javascript:void(0)" @click="exitApp">关闭App（无提示）</a>
+            <br />
+            <a href="javascript:void(0)" @click="restartApp">重启App</a>
+            <br />
+            <a href="javascript:void(0)" @click="logoutApp">退出登录</a>
+        </div>
+    </div>
+</body>
+
+</html>

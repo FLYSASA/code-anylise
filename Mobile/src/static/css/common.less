@@ -1,0 +1,310 @@
+@import '~vux/src/styles/reset.less';
+@import '~vux/src/styles/1px.less';
+@import '~vux/src/styles/center';
+@import './variable.less';
+
+// 原子属性 padding/margin 0/5px/10px/15px/20px/25px
+.distancewhile(@count) when(@count < @maxCount) {
+    @dist: @count*5;
+    @val:@dist*1px;
+
+    .p-@{dist} {
+        padding:@val;
+    }
+    // 水平
+    .p-h-@{dist}{
+        padding-right:@val;
+        padding-left:@val;
+    }
+    // 垂直
+    .p-v-@{dist}{
+        padding-top:@val;
+        padding-bottom:@val;
+    }
+    .p-t-@{dist}{
+        padding-top:@val;
+    }
+    .p-r-@{dist}{
+        padding-right:@val;
+    }
+    .p-b-@{dist}{
+        padding-bottom:@val;
+    }
+    .p-l-@{dist}{
+        padding-left:@val;
+    }
+
+    .m-@{dist} {
+        margin:@val;
+    }
+    // 水平
+    .m-h-@{dist}{
+        margin-right:@val;
+        margin-left:@val;
+    }
+    // 垂直
+    .m-v-@{dist}{
+        margin-top:@val;
+        margin-bottom:@val;
+    }
+    .m-t-@{dist}{
+        margin-top:@val;
+    }
+    .m-r-@{dist}{
+        margin-right:@val;
+    }
+    .m-b-@{dist}{
+        margin-bottom:@val;
+    }
+    .m-l-@{dist}{
+        margin-left:@val;
+    }
+
+    .distancewhile(@count+1)
+}
+
+body {
+    /** gird 无边框 */
+    .grid-noborder:before,
+    .grid-noborder:after{
+        border: none;
+    }
+    .grid-noborder>.weui-grid:before,
+    .grid-noborder>.weui-grid:after {
+        border: none;
+    }
+
+    .distancewhile(0);
+
+    // 绝对定位x-header
+    .abs-header{
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 100;
+    }
+
+    // 标题栏磨砂样式
+    .header-frosted {
+        background: rgba(248,248,248,0.82);
+        box-shadow: inset 0 0 0 0 rgba(0,0,0,0.25);
+    }
+
+    // 底部tabbar磨砂样式
+    .tabbar-frosted{
+        background: rgba(250,250,250,0.90);
+        box-shadow: inset 0 0 0 0 rgba(0,0,0,0.25);
+    }
+
+    .header-backdrop{
+        z-index:1;
+    }
+
+    // 项目明细页面，具体信息字体大小
+    .weui-cells {
+        font-size:14px;
+    }
+    .weui-cell {
+        padding: 12px 15px;
+    }
+    .cell-width-limit .weui-cell__ft {
+        width:60%;
+    }
+    .weui-tabbar__icon {
+        width:24px;
+        height:24px;
+    }
+}
+
+/** 文本水平居中 */
+.text-center {
+    text-align: center;
+}
+
+/** 文本水平右对齐 */
+.text-right {
+    text-align: right;
+}
+
+/** 文本水平左对齐 */
+.text-left {
+    text-align: left;
+}
+
+/** 文本粗体 */
+.text-bold {
+    font-weight: bold;
+}
+
+/** 文本截取 */
+.text-nowrap {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.w-p-50{
+    width:50%;
+}
+
+.w-p-100{
+    width:100%;
+}
+
+/** 右浮动 */
+.pull-right {
+    float: right;
+}
+
+/** 左浮动 */
+.pull-left {
+    float: left;
+}
+
+/** 清除浮动 */
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  zoom: 1;
+}
+
+/** 显示成块元素 */
+.block{
+    display:block;
+}
+
+/** 显示inline-block元素 */
+.inline{
+    display:inline-block;
+}
+
+/** 隐藏 */
+.hide {
+    display: none;
+}
+
+
+.relative{
+    position:relative;
+}
+
+/** 后背景色，页面容器背景色 */
+.back-bg{
+    background-color:@back-bg-color;
+}
+
+/** 前背景色，内容组件背景色 */
+.front-bg{
+    background-color:@front-bg-color;
+}
+
+/** 设置group组件margin-top为0 */
+.group-no-m-t>.weui-cells{
+    margin-top:0;
+}
+
+/** 针对Cell组件value是图片时限定图片大小 */
+.weui-cell.cell-value-img {
+    padding: 5px 15px;
+
+    .weui-cell__ft{
+        height:35px;
+        img{
+            max-height:35px;
+        }
+    }
+}
+
+/** 针对Cell组件Icon图片设置大小 */
+.cell-icon-middle{
+    .weui-cell__hd{
+        width:@icon-middle-size;
+        height:@icon-middle-size;
+        margin-right:@icon-margin-right;
+        img{
+            max-width:100%;
+            max-height:100%;
+            vertical-align:middle;
+        }
+    }
+}
+
+/** 针对Switch组件title包含img处理 */
+.icon-switch {
+    .weui-label{
+        width:auto;
+        img{
+            width:@icon-small-size;
+            margin-right:@icon-margin-right;
+        }
+    }
+}
+
+/** 针对Cell组件icon图片处理，与icon-switch一致 */
+.icon-cell {
+    .weui-cell__hd{
+        img{
+            width:@icon-small-size;
+            margin-right:@icon-margin-right;
+        }
+    }
+}
+
+/** GridItem组件Icon显示大尺寸 */
+.grid-icon-large {
+    .weui-grid__icon {
+        width: @icon-large-size;
+        height: @icon-large-size;
+    }
+}
+
+.router-view {
+    width: 100%;
+}
+
+.vux-pop-out-enter-active,
+.vux-pop-out-leave-active,
+.vux-pop-in-enter-active,
+.vux-pop-in-leave-active {
+  will-change: transform;
+  transition: all 500ms;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+.vux-pop-out-enter {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+.vux-pop-out-leave-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+.vux-pop-in-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+.vux-pop-in-leave-active {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.icon {
+    width: 1em; 
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+// 内容组件包含标题
+.header-padding{
+    padding-top: @header-height;
+}

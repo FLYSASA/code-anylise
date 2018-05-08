@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <divider>动态数字</divider>
+        <number-roller :number="number" :width="6" class="vux-center-h"></number-roller>
+        <divider>width大于数字的字符个数</divider>
+        <number-roller :number="number1" :width="4" class="vux-center-h"></number-roller>
+        <divider>动态width（根据数字值计算字符个数）</divider>
+        <number-roller :number="number2" :width="length" class="vux-center-h"></number-roller>
+    </div>
+</body>
+
+</html>

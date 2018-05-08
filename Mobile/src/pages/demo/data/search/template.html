@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        p {
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" style="height:100%">
+        <view-box body-padding-top="46px">
+            <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">搜索框</x-header>
+            <div style="position:relative;top:46px">
+                <img :src="imgUrl" style="width: 100%">
+
+                <divider>获取焦点时提升到顶部</divider>
+                <search @result-click="resultClick" @on-change="onChange" :results="results" v-model="value" position="absolute" auto-scroll-to-top
+                    @on-focus="onFocus" @on-cancel="onCancel" @on-submit="onSubmit" ref="search"></search>
+
+                <div style="padding:15px;">
+                    <x-button @click.native="setFocus" type="primary">设置获取焦点</x-button>
+                </div>
+
+                <divider>静态搜索</divider>
+                <search @on-submit="onSubmit" :auto-fixed="autoFixed" @on-focus="onFocus" @on-cancel="onCancel"></search>
+
+                <divider>静态搜索（设置初始值）</divider>
+
+                <search @on-submit="onSubmit" :auto-fixed="false" v-model="value2" @on-focus="onFocus" @on-cancel="onCancel"></search>
+            </div>
+        </view-box>
+    </div>
+</body>
+
+</html>

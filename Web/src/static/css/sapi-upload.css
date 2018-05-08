@@ -1,0 +1,132 @@
+.sapi-upload {
+	display: inline-block;
+		width: 100%;
+		overflow: hidden;
+		vertical-align: middle;
+	}
+	
+	.sapi-upload-file {
+		float: right;
+		width: 80px;
+	}
+	
+	.sapi-upload-preview .sapi-upload-file {
+		display: none;
+	}
+	
+	.sapi-upload-file .el-upload {
+		width: 100%;
+	}
+	
+	.sapi-upload-file [disabled="disabled"].el-button {
+		color: #bfcbd9;
+		cursor: not-allowed;
+		background-image: none;
+		background-color: #eef1f6;
+		border-color: #d1dbe5;
+	}
+	
+	.sapi-upload-list {
+		float: left;
+		width: calc(100% - 85px);
+		padding: 0;
+		margin: 0;
+	}
+	
+	.sapi-upload-nolist {
+		height: 28px;
+		width: calc(100% - 85px);
+		border-radius: 4px;
+		border: 1px solid #ddd;
+		background: #fff;
+	}
+	
+	.sapi-upload-preview .sapi-upload-list {
+		width: 100%;
+		padding: 0;
+	}
+	
+	.sapi-upload-list>li {
+		height: 28px;
+		padding: 0px 5px;
+		border-top: 1px solid #fff;
+		border-radius: 2px;
+		background: #f6f6f6;
+		line-height: 28px;
+		list-style: none;
+	}
+	
+	.sapi-upload-list>li:first-child {
+		border: 1px solid #ddd;
+		background: #fff;
+	}
+	
+	.spai-upload-noborder.sapi-upload-list>li:first-child {
+		background: #f6f6f6;
+		border: 1px solid #fff;
+	}
+	
+	.sapi-upload-list>li:hover {
+		color: #1b9bd7;
+		background: #e9f8ff;
+	}
+	
+	.sapi-upload-list-left {
+		float: left;
+		width: calc(100% - 240px);
+		height: 28px;
+		line-height: 28px;
+	}
+	
+	.sapi-upload-list.subw-130>li>.sapi-upload-list-left{
+		width: calc(100% - 130px);
+	}
+	
+	.sapi-upload-list-left>* {
+		display: inline-block;
+		vertical-align: top;
+	}
+	
+	.sapi-upload-list-left>i {
+		width: 16px;
+		height: 28px;
+	}
+	
+	.sapi-upload-list .sapi-upload-list-title {
+		max-width: calc(100% - 20px);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	
+	.sapi-upload-preview .sapi-upload-list .sapi-upload-list-title {
+		max-width: 100%;
+	}
+	
+	.sapi-upload-list>li>p {
+		float: right;
+		max-width: 240px;
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+	}
+	
+	.sapi-upload-list>li>p>* {
+		padding: 0 3px;
+	}
+	
+	.sapi-upload-list a {
+		text-decoration: none;
+	}
+	
+	.sapi-upload-list>li.not-preview a.sapi-upload-list-title{
+		cursor: default;
+	}
+	
+	.sapi-upload-list .hover {
+		cursor: pointer;
+	}
+
+.sapi-upload-list .sapi-upload-list-icon {
+	vertical-align: text-top;
+}

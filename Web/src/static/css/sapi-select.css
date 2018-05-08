@@ -1,0 +1,168 @@
+.sapi-select-box {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 125;
+	display: none;
+}
+
+.sapi-select-box.active {
+	display: block;
+}
+
+.sapi-select-box-wrap {
+	position: relative;
+	z-index: 129;
+	min-width: 200px;
+}
+
+.sapi-select-box-list {
+	overflow-y: auto;
+  	overflow-x: hidden;
+	background-color: #fff;
+	-webkit-box-shadow: 0px 0px 3px #ccc;
+	-moz-box-shadow: 0px 0px 3px #ccc;
+	-ms-box-shadow: 0px 0px 3px #ccc;
+	box-shadow: 0px 0px 3px #ccc;
+}
+
+.sapi-select-box-list .tree-nav,
+.sapi-select-box-list .tree-nav-box {
+	position: static;
+}
+
+.sapi-select-box-list .tree-nav-box {
+	padding: 5px 0px;
+	border: 1px solid #dbe2e9;
+	border-radius: 3px;
+}
+
+.sapi-select {
+	position: relative;
+}
+.sapi-select .el-input__inner{
+	padding-right: 22px;
+}
+.sapi-select .el-input__inner[readonly] {
+	cursor: pointer;
+}
+
+.sapi-select>.input-wrap {
+	position: relative;
+}
+
+
+.sapi-select>.input-wrap>i {
+	position: absolute;
+	right: 2px;
+	top: 0;
+	font-size: 20px;
+	color: #CECECE;
+	
+}
+
+.sapi-select>.input-wrap>.icon-arrow-down{
+	top: 3px;
+	transition: transform 0.5s;
+	transform-origin: 50% 12px;
+}
+
+.sapi-select .sapi-tree .tree-node>.tree-node-text{
+	overflow: hidden;
+}
+
+.sapi-select>.input-wrap>.icon-arrow-down.active {
+	transform: rotate(180deg);
+}
+
+.sapi-select .sapi-tree .tree-node-text:hover {
+	background: #eef1f6;
+}
+
+.sapi-select .sapi-tree .tree-node-text.active,.sapi-select .sapi-tree .tree-node-text:active {
+	color: #20a0ff;
+	background: #fff;
+}
+
+/*.sapi-select .sapi-tree .tree-node-text.active .icon-arrow-right {
+	color: #fff;
+}*/
+
+.sapi-select-box-wrap-input {
+	position: relative;
+	clear: both;
+	height: 33px;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.sapi-select-box-list>ul>li {
+	padding: 0px 10px;
+	position: relative;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 36px;
+	line-height: 36px;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.sapi-select-box-list>ul>li:hover {
+	background-color: #e4e8f1;
+}
+
+.sapi-select-box-list>ul>li.active,.sapi-select-box-list>ul>li:active {
+	color: #20a0ff;
+}
+
+.sapi-select-box-list>ul>li.disabled {
+	color: #b4bccc;
+	cursor: not-allowed;
+}
+
+.sapi-select-box-list>ul>li.disabled:hover {
+	background-color: #fff;
+}
+
+.sapi-select.readonly .sapi-select-icon,
+.sapi-select.readonly .sapi-select-box {
+	display: none;
+}
+
+.sapi-select.readonly .el-input__inner[readonly] {
+	cursor: default;
+}
+
+.sapi-select .delete-icon{
+	line-height: 28px;
+}
+.sapi-select .delete-icon-extend>.icon-arrow-down,.sapi-select .delete-icon:hover>.icon-arrow-down{
+	display: none;
+}
+
+.sapi-select .icon-closer{
+	
+	width: 17px;
+	display: none;
+}
+
+.sapi-select .sapi-select-box-wrap-input-icon{
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 20px;
+	height: 28px;
+	cursor: pointer;
+}
+
+.sapi-select .delete-icon-extend>.icon-closer,.sapi-select .delete-icon:hover>.icon-closer{
+	font-size: 14px;
+	display: inline-block;
+	cursor: pointer;
+	
+}
+

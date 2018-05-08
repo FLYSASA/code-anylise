@@ -1,0 +1,169 @@
+.dialog {
+	display: none;
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.dialog>.dialog {
+	background: rgba(0, 0, 0, 0.2);
+}
+
+.dialog.active {
+	display: block;
+}
+
+.dialog.current-dialog {
+	z-index: 105;
+}
+
+.dialog-move-box{
+	display: none;
+	position: absolute;
+	min-width: 180px;
+	min-height: 49px;
+	left: 0;
+	top: 0;
+	z-index: 1000;
+	border: 3px solid #ddd;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.07);
+	cursor: move;
+}
+
+.dialog-move-box.active{
+	display: block;
+}
+
+.dialog-box {
+	position: relative;
+	min-width: 180px;
+	min-height: 49px;
+	left: 0;
+	top: 0;
+	overflow: hidden;
+	border-radius: 5px;
+	background: #fff;
+	box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.07);
+}
+
+.dialog-box-header {
+	position: relative;
+	z-index: 100;
+	height: 49px;
+	line-height: 49px;
+	text-align: center;
+	overflow: hidden;
+	border-bottom: 1px solid #ddd;
+	background: #fff;
+	-ms-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+.dialog-box-header-btns {
+	position: absolute;
+	z-index: 3;
+	left: 0;
+	height: 49px;
+}
+
+.dialog-box-header-close {
+	margin-left: 10px;
+	margin-right: 18px;
+}
+
+.dialog-box-header-close>span {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.dialog-box-header-close>span:hover {
+	background-color: #f1f1f1;
+}
+
+.dialog-btns-min {
+	background: url(../images/min-btn.png) no-repeat center;
+}
+
+.dialog-btns-reset {
+	background: url(../images/reset-dialog-btn.png) no-repeat center;
+}
+
+.dialog-btns-max {
+	background: url(../images/max-btn.png) no-repeat center;
+}
+
+.dialog-btns-close {
+	background: url(../images/close-btn.png) no-repeat center;
+}
+
+.dialog-box-header-title {
+	float: left;
+	width: calc(100% - 90px);
+	height: 49px;
+	margin: auto;
+	padding-left: 90px;
+	font-size: 14px;
+	text-align: center;
+	overflow: hidden;
+	line-height: 49px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: move;
+}
+
+.dialog-box-header-title.nomove {
+	cursor: default;
+}
+
+.dialog-box-body {
+	margin-top: -30px;
+	padding-top: 30px;
+	height: calc(100% - 50px);
+	overflow: auto;
+}
+
+.max-class.dialog-box-body {
+	max-height: calc(100% - 50px)!important;
+}
+
+.dialog-min {
+	position: fixed;
+	z-index: 1003;
+	bottom: 10px;
+	/*width: calc(100% - 50px);*/
+	min-height: 49px;
+	margin: 0px 15px;
+	overflow: hidden;
+	overflow-x: auto;
+}
+
+.dialog-min-box {
+	min-width: calc(100% - 50px);
+}
+
+.dialog-min-box>.dialog-min-box-item {
+	float: left;
+	margin-top: 5px;
+	width: 180px;
+	height: 49px;
+	margin-right: 5px;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	background: #fff;
+}
+
+.dialog-min-box .dialog-box-header-title {
+	width: calc(100% - 80px);
+	padding-left: 16px;
+	cursor: default;
+	text-align: left;
+}

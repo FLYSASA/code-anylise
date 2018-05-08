@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .align-middle {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <divider>
+            基本用法</divider>
+        <marquee>
+            <marquee-item v-for="i in 5" :key="i" @click.native="onClick(i)" class="align-middle">hello world {{i}}</marquee-item>
+        </marquee>
+        <br>
+        <divider>在 cell 中使用</divider>
+        <group>
+            <cell title="公告">
+                <marquee>
+                    <marquee-item v-for="i in 5" :key="i" @click.native="onClick(i)">JavaScript is the best language {{i}}</marquee-item>
+                </marquee>
+            </cell>
+        </group>
+        <br>
+        <divider>异步数据</divider>
+        <marquee>
+            <marquee-item v-for="i in asyncCount" :key="i" @click.native="onClick(i)" class="align-middle">hello world {{i}}</marquee-item>
+        </marquee>
+    </div>
+</body>
+
+</html>

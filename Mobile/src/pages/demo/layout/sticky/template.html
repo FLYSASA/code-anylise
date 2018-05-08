@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app" style="height:100%">
+        <view-box body-padding-top="46px" body-padding-bottom="55px">
+            <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">试试往下滚动内容</x-header>
+            <p>影院名称：星河COCO Park博纳国际影城</p>
+            <p>类型：体育休闲服务,影剧院,电影院</p>
+            <p>地址：黄阁南路与深惠路交叉口</p>
+            <p>公告：
+                <br/>1、需提前进场；
+                <br/>2、正片开始前有广告播放。</p>
+            <div style="height:44px;">
+                <sticky scroll-box="vux_view_box_body" :offset="46" :check-sticky-support="false">
+                    <tab :line-width="1">
+                        <tab-item selected>正在正映</tab-item>
+                        <tab-item>即将上映</tab-item>
+                    </tab>
+                </sticky>
+            </div>
+            <p v-for="i in 100">{{i}}<br/></p>
+            <tabbar slot="bottom">
+                <tabbar-item>
+                    <span slot="label">工具1</span>
+                </tabbar-item>
+                <tabbar-item>
+                    <span slot="label">工具2</span>
+                </tabbar-item>
+            </tabbar>
+        </view-box>
+    </div>
+</body>
+
+</html>

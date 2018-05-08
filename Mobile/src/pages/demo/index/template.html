@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo</title>
+</head>
+
+<body>
+    <div id="app">
+        <template v-for="demo in demos">
+            <span :class="cssTitle">{{demo.name}}</span>
+            <div :class="cssContent">
+                <ul>
+                    <li v-for="item in demo.data"><a :href="'./demo/'+demo.dir+'/'+item.key+'.html'" target="_blank">{{item.name||item.key}}</a></li>
+                </ul>
+            </div>
+        </template>
+    </div>
+</body>
+
+</html>

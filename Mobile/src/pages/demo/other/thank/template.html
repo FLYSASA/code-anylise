@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <group title="Thx" title-color="#04be02">
+            <cell title="Router" link="https://github.com/vuejs/vue-router">
+                <span class="demo-icon" slot="icon">&#xe636;</span>
+                <span slot="value"><img :src="url1" width="20" style="vertical-align: middle;padding-right: 5px;">Powered by Vue-router</span>
+            </cell>
+            <cell title="Style" link="https://github.com/weui/weui">
+                <span class="demo-icon" slot="icon">&#xe638;</span>
+                <span slot="value"><span class="demo-icon">&#xe600</span>Based on Weui</span>
+            </cell>
+            <cell title="Dev && Build" link="https://github.com/webpack/webpack">
+                <span class="demo-icon" slot="icon" style="color: #000;">&#xe639;</span>
+                <span slot="value"><img :src="url2" width="20" style="vertical-align: middle;padding-right: 5px;">Webpack</span>
+            </cell>
+            <cell title="Demo Icon" link="http://iconfont.cn/">
+                <span class="demo-icon" slot="icon">&#xe619;</span>
+                <span slot="value"><img :src="url3" width="20" style="vertical-align: middle;padding-right: 5px;">Iconfont</span>
+            </cell>
+        </group>
+    </div>
+</body>
+
+</html>

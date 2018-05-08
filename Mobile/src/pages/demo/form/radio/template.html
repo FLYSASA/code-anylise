@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <group title="default">
+            <radio :options="radio001" @on-change="change"></radio>
+        </group>
+
+        <group title="preselect 'China'">
+            <radio :options="radio001" value="China"></radio>
+        </group>
+
+        <group :title="'fill mode value is '+radio001Value">
+            <radio fill-mode :options="radio001" v-model="radio001Value" @on-change="change"></radio>
+        </group>
+
+        <group title="fill mode with custom placeholder and label">
+            <radio fill-mode fill-label="Other" fill-placeholder="填写其他的哦" :options="radio001" @on-change="change"></radio>
+        </group>
+
+        <group title="object options">
+            <radio fill-mode fill-label="Other" fill-placeholder="other" :options="radio003" @on-change="change"></radio>
+        </group>
+
+        <group title="popup-radio">
+            <popup-radio title="options" :options="options1" v-model="option1"></popup-radio>
+        </group>
+
+        <group title="popup-radio">
+            <popup-radio title="options" :options="options2" v-model="option2"></popup-radio>
+        </group>
+    </div>
+</body>
+
+</html>

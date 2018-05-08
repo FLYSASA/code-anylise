@@ -1,0 +1,138 @@
+[
+    {
+        "StruId": "154e76906a4166ceec8d94d42d7abcdf",
+        "StruName": "中南集团",
+        "ParentStruId": null,
+        "IconPath": "",
+        "StruType": 0,
+        "ParentStruName": null
+    },
+    {
+        "StruId": "154e76782582f51cadf7e0c4457b1aa0",
+        "StruName": "房地产业集团",
+        "ParentStruId": "154e76906a4166ceec8d94d42d7abcdf",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "中南集团"
+    },
+    {
+        "StruId": "154e76768e0ae290ad6cf4a424b94904",
+        "StruName": "武汉城市公司",
+        "ParentStruId": "154e76782582f51cadf7e0c4457b1aa0",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "房地产业集团"
+    },
+    {
+        "StruId": "1593b00c11c035b07091115430bb96c7",
+        "StruName": "武汉城市公司·本部",
+        "ParentStruId": "154e76768e0ae290ad6cf4a424b94904",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "武汉城市公司"
+    },
+    {
+        "StruId": "154e7676a08d4939eacbbe44afb8b714",
+        "StruName": "安庆城市公司",
+        "ParentStruId": "154e76782582f51cadf7e0c4457b1aa0",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "房地产业集团"
+    },
+    {
+        "StruId": "154e7676a27d6b4cbcab4e44471a380f",
+        "StruName": "安庆房地产公司·物业管理部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768bd93563b223e884949a888e91",
+        "StruName": "安庆房地产公司·经理层",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768bdd20865fc602e8b436ba7350",
+        "StruName": "安庆房地产公司·财务管理部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768be01fca5fa3aab3e478b8838c",
+        "StruName": "安庆房地产公司·综合人力部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768be3ff20b167eaa594cd1bb240",
+        "StruName": "安庆房地产公司·行政人事部·驾驶员",
+        "ParentStruId": "154e768be01fca5fa3aab3e478b8838c",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆房地产公司·综合人力部"
+    },
+    {
+        "StruId": "154e768be6e562c5eaba0bb491cb8e42",
+        "StruName": "安庆房地产公司·综合运营部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768beac9674d165a00449c4ae470",
+        "StruName": "安庆房地产公司·前期发展部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768bedbafd731620d9c4a70906c4",
+        "StruName": "安庆房地产公司·设计管理部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768bf0a0f3b4a74b5f645f7932e0",
+        "StruName": "安庆房地产公司·工程管理部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768bf39f439169a605c49729bc44",
+        "StruName": "安庆房地产公司·成本核算部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768bf8718cf749631c24a06a136f",
+        "StruName": "安庆房地产公司·营销管理部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    },
+    {
+        "StruId": "154e768c5031b78de3e4c8f41e4a8b2e",
+        "StruName": "安庆房地产公司·招标采购部",
+        "ParentStruId": "154e7676a08d4939eacbbe44afb8b714",
+        "IconPath": "",
+        "StruType": 1,
+        "ParentStruName": "安庆城市公司"
+    }
+]

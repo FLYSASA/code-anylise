@@ -1,0 +1,12 @@
+{
+    "env": {
+        "jasmine": true
+    },
+    "plugins": [
+        "jasmine"
+    ],
+    //"extends": "plugin:jasmine/recommended",
+    "rules": {
+        "jasmine/no-focused-tests": 2
+    }
+}

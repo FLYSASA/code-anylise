@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <group :title="'no placeholder, the current value is : ' + defaultValue">
+            <selector title="省份" :options="list" v-model="defaultValue"></selector>
+        </group>
+
+        <group title="with placeholder">
+            <selector placeholder="请选择省份" v-model="demo01" title="省份" name="district" :options="list" direction="rtl" @on-change="onChange"></selector>
+        </group>
+
+        <group title="without title">
+            <selector placeholder="请选择省份" v-model="demo02" :options="list"></selector>
+        </group>
+
+        <group title="set value=广西">
+            <selector v-model="value1" title="省份" :options="plainList" @on-change="onChange"></selector>
+        </group>
+
+        <group title="readonly, displays just like a cell">
+            <selector value="gd" readonly title="省份" :options="list"></selector>
+        </group>
+
+        <group title="use plain options">
+            <selector value="C" title="Selector" :options="list1" @on-change="onChange"></selector>
+        </group>
+
+        <group title='multi selector'>
+            <selector placeholder="请选择省份" title="省份" :options="list"></selector>
+            <selector v-model="value2" title="省份" :options="list"></selector>
+        </group>
+
+        <group :title="'boolean selector: ' + value3">
+            <selector v-model="value3" title="Vux Is Cool" :options="list2"></selector>
+        </group>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style type="text/css">
+        body {
+            background: #E9E9E9;
+            color: #333;
+            font: 1em/1.3em "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+            /* 16px / 21px */
+            text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Shake to Undo</h1>
+        <h2>for your mobile web app</h2>
+
+        <p>Shake your iPhone/iPad to see a custom action.</p>
+        <p>Works on iOS 4.2.1+, Android 4.0.3 (default browser), Chrome 41+ for Android, Opera Mobile (Android), BlackBerry
+            PlayBook 2.0, Firefox for Android, FirefoxOS Devices</p>
+
+        <p><a href="http://dev.w3.org/geo/api/spec-source-orientation">W3C DeviceOrientation Event Specification</a></p>
+
+        <shake @on-shake="shakeDevice" :threshold="threshold"></shake>
+    </div>
+</body>
+
+</html>

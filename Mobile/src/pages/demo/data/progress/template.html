@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <br>
+        <x-progress :percent="percent1"></x-progress>
+        <br>
+        <box gap="10px">
+            <x-progress :percent="percent2" :show-cancel="false"></x-progress>
+        </box>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+
+* {
+    font-family: 微软雅黑, Josefin Sans, sans-serif;
+}
+
+th {
+    white-space: nowrap;
+}
+
+.docute-button.docute-button-qrcode {
+    border-color: #c7b3e6;
+    color: #c7b3e6
+}
+
+.docute-button.docute-button-qrcode:hover {
+    color: #fff;
+    background-color: #c7b3e6
+}
+
+.prop-key {
+    font-family: Consolas, Liberation Mono, Menlo, Courier, monospace;
+    font-size: 16px;
+}
+
+.type {
+    height: 18px;
+    font-size: 12px;
+    width: 60px;
+    color: #fff;
+    border-radius: 2px;
+    text-align: center;
+    display: inline-block;
+    padding: 0 3px;
+}
+
+.type-object {
+    background-color: #33ab70;
+}
+
+.type-string {
+    background-color: #27394c;
+}
+
+.type-boolean {
+    background-color: #d95353;
+}
+
+.type-function {
+    background-color: #f4a358;
+}
+
+.type-number {
+    background-color: #288af0;
+}
+
+.type-array {
+    background-color: #eb1ac1;
+}
+
+a.docute-button:hover {
+    text-decoration: none;
+}
+
+.vux-component-name {
+    font-family: Josefin Sans, sans-serif;
+    font-size: 1.1em;
+    font-weight: normal;
+    color: #d95353;
+}
+
+.vux-qa {
+    background-color: #33ab70;
+    color: #fff;
+    padding: 2px 5px;
+    display: inline;
+}
+
+li code,
+td code,
+.markdown-body code {
+    color: #e96900;
+    background-color: transparent!important;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .ximg-demo {
+            width: 100%;
+            height: auto;
+        }
+
+        .ximg-error {
+            background-color: yellow;
+        }
+
+        .ximg-error:after {
+            content: '加载失败';
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <scroller lock-x scrollbar-y height="600px" ref="scroller" style="border-bottom:1px solid green">
+            <div>
+                <div v-for="src in list" style="background-color:yellow;text-align:center;">
+                    <span style="font-size:20px;">Loading</span>
+                    <x-img style="min-height:100px;" :src="src" v-if="render" :scroller="$refs.scroller" @on-success="success" @on-error="error"
+                        class="ximg-demo" error-class="ximg-error" :offset="300"></x-img>
+                </div>
+            </div>
+        </scroller>
+    </div>
+</body>
+
+</html>

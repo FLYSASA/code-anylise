@@ -1,0 +1,15 @@
+.dialog-no-header.dialog-box{
+	border-radius: 0px;
+}
+.dialog-no-header.dialog-box>.dialog-box-header{
+	display: none;
+}
+
+.dialog-no-header.dialog-box .form-content{
+	margin-top:0px;
+	padding-top:36px;
+}
+
+.dialog-visibility{
+	visibility: hidden;
+}

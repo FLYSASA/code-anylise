@@ -1,0 +1,250 @@
+.login {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-position: center;
+	/*background: url(../../../static/images/login-bg6.jpg) no-repeat center;*/
+	background-size: cover;
+}
+
+.login-pc-wx-img {
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	right: 0;
+	width: 78px;
+	height: 77px;
+}
+
+.login-pc-img,
+.login-wx-img {
+	width: 78px;
+	height: 77px;
+	cursor: pointer;
+}
+
+.login-pc-img {
+	background: url(../../../static/images/login-pc-bg.png) no-repeat top right;
+}
+
+.login-pc-img:hover {
+	background: url(../../../static/images/login-pc-active-bg.png) no-repeat top right;
+}
+
+.login-wx-img {
+	background: url(../../../static/images/login-wx-bg.png) no-repeat top right;
+}
+
+.login-wx-img:hover {
+	background: url(../../../static/images/login-wx-active-bg.png) no-repeat top right;
+}
+
+.login-box-content.login-wx {
+	height: 387px;
+}
+
+.login-wx+.login-box-btn {
+	display: none;
+}
+
+.login-wx-content-code {
+	position: relative;
+	width: 100%;
+	height: 188px;
+	margin-bottom: 30px;
+}
+
+.login-wx-content-code>span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: block;
+	width: 100%;
+	height: 188px;
+	margin: 0 auto;
+}
+
+.login-wx-content-code>span:first-child {
+	opacity: 1;
+	background: url(../../../static/images/login-wx-code.png) no-repeat top center;
+}
+
+.login-wx-content-code>span:last-child {
+	opacity: 0;
+	background: url(../../../static/images/login-scan-img.png) no-repeat top center;
+}
+
+.login-wx-content-code:hover>span:first-child {
+	opacity: 0;
+	transition: all 1s;
+}
+
+.login-wx-content-code:hover>span:last-child {
+	opacity: 1;
+	transition: all 1s 0.5s;
+}
+
+.login-wx-content-text-bg {
+	display: inline-block;
+	width: 26px;
+	height: 26px;
+	background: url(../../../static/images/login-wx-scan.png) no-repeat center;
+}
+
+.login-wx-content-text-bg+div {
+	display: inline-block;
+	color: #0a5089;
+}
+
+.login-wx-content-text-bg+div>p {
+	padding: 0;
+	margin: 0;
+	margin-left: 16px;
+	line-height: 17px;
+}
+
+.login-wx-content-text font {
+	color: #20a23a;
+}
+
+
+/*.login-mask {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: calc(40% - 193px);
+	margin: auto;
+	width: 362px;
+	height: 387px;
+	background: rgba(255, 255, 255, 0.5);
+	-webkit-filter: blur(30px);
+	filter: blur(30px);
+}
+
+.login-mask-btn {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 88px;
+}*/
+
+.login-box {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: calc(40% - 193px);
+	margin: auto;
+	width: 362px;
+	height: 387px;
+}
+
+.login-box-content {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 299px;
+	margin: 0px auto;
+	padding: 0px 36px;
+	background: rgba(255, 255, 255, 0.9);
+}
+
+.login-box-logo {
+	height: 110px;
+	background-repeat: no-repeat;
+	background-position: center;
+	/*background: url(../../../static/images/login-logo.png) no-repeat center;*/
+}
+
+.login-box-waring-info{
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	top: 30px;
+	width: 100%;
+}
+
+.login-box-content-user,
+.login-box-content-pass,
+.login-box-content-checked {
+	clear: both;
+	position: relative;
+	left: 0;
+	top: 0;
+	margin-top: 18px;
+}
+
+.login-box-content .login-box-content-user {
+	margin-top: 8px;
+}
+
+.login-box-content .el-input__inner {
+	height: 42px;
+}
+
+.login-box-content-user>span,
+.login-box-content-pass>span {
+	position: absolute;
+	left: 260px;
+	top: 12px;
+	display: inline-block;
+	width: 18px;
+}
+
+.login-box-content-user-icons {
+	height: 17px;
+	background: url(../../../static/images/login-user.png) no-repeat center;
+}
+
+.login-box-content-pass-icons {
+	height: 19px;
+	background: url(../../../static/images/login-password.png) no-repeat center;
+}
+
+.login-box-content-delete-icons {
+	height: 18px;
+	cursor: pointer;
+	background: url(../../../static/images/login-delete-btn.png) no-repeat center;
+}
+
+.login-box-btn {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 88px;
+	line-height: 88px;
+	color: #fff;
+	font-size: 18px;
+	cursor: pointer;
+	background: rgba(88, 88, 88, 0.9);
+}
+
+.login-box-btn.disabled {
+	color: #aaa;
+	background: rgba(29,58,72,0.86);
+	cursor: default;
+}
+
+.login-box-btn:hover{
+	background: rgba(29,58,72,0.86);
+}
+
+.login-box-content-checked span {
+	color: #b0b0b0;
+}
+
+.login-box-content-checked .el-checkbox__label {
+	vertical-align: middle;
+}
+
+.copyright {
+	position: absolute;
+	bottom: 30px;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	text-align: center;
+}

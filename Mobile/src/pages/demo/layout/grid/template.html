@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .grid-center {
+            display: block;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <group-title>rows = 2， 2个grid-item</group-title>
+        <grid :rows="2">
+            <grid-item label="九宫格" v-for="i in 2" :key="i">
+                <img slot="icon" :src="icon">
+            </grid-item>
+        </grid>
+        <group-title>rows = 3， 3个grid-item</group-title>
+        <grid>
+            <grid-item link="../data/cell.html" label="跳转到Cell">
+                <img slot="icon" :src="icon">
+            </grid-item>
+            <grid-item :link="{ path: '../data/cell.html'}" label="跳转到Cell">
+                <img slot="icon" :src="icon">
+            </grid-item>
+            <grid-item link="../data/cell.html" @on-item-click="onItemClick">
+                <img slot="icon" :src="icon">
+                <span slot="label">跳转到Cell</span>
+            </grid-item>
+        </grid>
+        <group-title>rows = 4， 12个grid-item</group-title>
+        <grid :rows="4">
+            <grid-item label="九宫格" v-for="i in 12" :key="i">
+                <img slot="icon" :src="icon">
+            </grid-item>
+        </grid>
+        <group-title>custom content</group-title>
+        <grid :rows="5">
+            <grid-item v-for="i in 5" :key="i">
+                <span class="grid-center">{{i}}</span>
+            </grid-item>
+        </grid>
+    </div>
+</body>
+
+</html>

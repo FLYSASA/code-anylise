@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .center {
+            padding-top: 10px;
+            padding-left: 15px;
+            color: green;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <group title="默认格式：YYYY-MM-DD">
+            <datetime v-model="value1" @on-change="change" title="生日"></datetime>
+        </group>
+
+        <group title="格式化显示">
+            <datetime v-model="formatValue" :display-format="formatValueFunction" @on-change="change" title="生日"></datetime>
+        </group>
+
+        <div style="padding:15px;">
+            <x-button type="primary" @click.native="formatValue = '2017-11-11'">设置时间为 2017-11-11</x-button>
+        </div>
+
+        <group title="限定小时范围">
+            <datetime v-model="limitHourValue" format="YYYY-MM-DD HH:mm" :min-hour=9 :max-hour=18 @on-change="change" title="限定小时范围"
+                inline-desc="工作时间 09-18"></datetime>
+        </group>
+
+        <group title="设置开始时间和结束日期 2015-11-11 ~ 2017-10-11">
+            <datetime v-model="limitHourValue" :start-date="startDate" :end-date="endDate" format="YYYY-MM-DD HH:mm" @on-change="change"
+                title="开始时间"></datetime>
+        </group>
+
+        <div style="padding:15px;">
+            <x-button @click.native="reRender" type="primary">2016-11-11 ~ 2018-10-11</x-button>
+        </div>
+
+        <group :title="'格式' + format">
+            <datetime v-model="value2" :format="format" @on-change="change" title="开始时间"></datetime>
+        </group>
+
+        <div style="padding:15px;">
+            <x-button type="primary" @click.native="toggleFormat">改变格式</x-button>
+        </div>
+
+        <group title="提示文字">
+            <datetime v-model="value3" format="YYYY-MM-DD" placeholder="请选择" @on-change="change" title="开始时间"></datetime>
+        </group>
+
+        <group title="设置开始和结束年份">
+            <datetime v-model="value4" placeholder="请选择" :min-year=2000 :max-year=2016 format="YYYY-MM-DD HH:mm" @on-change="change"
+                title="2000年以后时间"></datetime>
+        </group>
+
+        <group title="自定义中文显示模板">
+            <datetime v-model="value5" placeholder="请选择" :min-year=2000 :max-year=2016 format="YYYY-MM-DD HH:mm" @on-change="change"
+                title="中文" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分"
+                confirm-text="完成" cancel-text="取消"></datetime>
+        </group>
+
+        <group title="显示中间的清除按钮">
+            <datetime v-model="value6" @on-change="change" title="生日" clear-text="clear" @on-clear="clearValue"></datetime>
+        </group>
+
+        <group title="显示中间的设置日期为今天的按钮">
+            <datetime v-model="value7" @on-change="change" title="生日" clear-text="today" @on-clear="setToday"></datetime>
+        </group>
+
+        <group title="自定义触发内容">
+            <datetime v-model="value7" @on-change="change" title="生日" clear-text="today" @on-clear="setToday">
+                <x-button>点我</x-button>
+            </datetime>
+        </group>
+        <group title="必填">
+            <datetime v-model="value8" title="必填" clear-text="clear" @on-clear="clearValue8" :required="true"></datetime>
+        </group>
+        <group :title="'datatime-range：' + value + ''">
+            <datetime-range title="选择" start-date="2017-01-01" end-date="2017-02-02" format="YYYY年MM月DD日" v-model="value" @on-change="onChange"></datetime-range>
+        </group>
+    </div>
+</body>
+
+</html>

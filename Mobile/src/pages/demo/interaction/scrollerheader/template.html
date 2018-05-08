@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="vux-scroller-header-box">
+            <div style="height:46px;">
+                <x-header class="vux-scroller-header">I'm header</x-header>
+            </div>
+            <scroller lock-x ref="scroller" height="-46">
+                <div class="box2">
+                    <p v-for="i in 80">placeholder {{i}}</p>
+                </div>
+            </scroller>
+        </div>
+    </div>
+</body>
+
+</html>

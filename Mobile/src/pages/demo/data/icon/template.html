@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .vux-x-icon {
+            fill: #F70968;
+        }
+
+        .cell-x-icon {
+            display: block;
+            fill: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <divider>Ionic svg图标</divider>
+        <x-icon-demo @show-hello="sayHello"></x-icon-demo>
+
+        <divider>常用微信字体图标</divider>
+        <box gap="10px 10px">
+            <icon type="success"></icon>
+            <icon type="info"></icon>
+            <icon type="info-circle"></icon>
+            <icon type="warn"></icon>
+            <icon type="waiting"></icon>
+            <icon type="waiting-circle"></icon>
+            <icon type="safe-success"></icon>
+            <icon type="safe_warn"></icon>
+            <icon type="success-circle"></icon>
+            <icon type="success-no-circle"></icon>
+            <icon type="circle"></icon>
+            <icon type="download"></icon>
+            <icon type="cancel"></icon>
+            <icon type="search"></icon>
+            <icon type="clear"></icon>
+            <br/>
+            <icon type="success" is-msg></icon>
+            <icon type="info" is-msg></icon>
+            <icon type="warn" is-msg></icon>
+            <icon type="waiting" is-msg></icon>
+            <icon type="safe_success" is-msg></icon>
+            <icon type="safe_warn" is-msg></icon>
+        </box>
+
+        <divider>微信表情列表</divider>
+        <div v-for="item in list" class="vux-center-h">
+            <emotion>{{item}}</emotion>
+            <emotion is-gif>{{item}}</emotion>
+        </div>
+    </div>
+</body>
+
+</html>

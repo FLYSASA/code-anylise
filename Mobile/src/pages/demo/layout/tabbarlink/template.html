@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app" class="weui-tab" style="height:100%">
+        <div class="weui-tab__panel">
+            <p v-for="i in 100">{{i}}</p>
+        </div>
+        <tabbar>
+            <!-- use v-link -->
+            <tabbar-item v-link="{path:'../data/cell.html'}">
+                <img slot="icon" :src="img1">
+                <span slot="label">Wechat</span>
+            </tabbar-item>
+            <!-- use http link -->
+            <tabbar-item show-dot link="../data/cell.html">
+                <img slot="icon" :src="img2">
+                <span slot="label">Message</span>
+            </tabbar-item>
+            <!-- use vue-router link -->
+            <tabbar-item selected link="../data/cell.html">
+                <img slot="icon" :src="img3">
+                <span slot="label">Explore</span>
+            </tabbar-item>
+            <!-- use vue-router object link -->
+            <tabbar-item :link="{path:'../data/cell.html'}">
+                <img slot="icon" :src="img4">
+                <span slot="label">News</span>
+            </tabbar-item>
+        </tabbar>
+    </div>
+</body>
+
+</html>

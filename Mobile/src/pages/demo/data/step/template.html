@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .btn_wrap {
+            padding: 0 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div style="width: 95%;margin: 0 auto;">
+            <br>
+            <div>
+                <step v-model="step1" background-color='#fbf9fe'>
+                    <step-item title="步骤1" description="step 1"></step-item>
+                    <step-item title="步骤2" description="step 2"></step-item>
+                    <step-item title="步骤3" description="step 3"></step-item>
+                </step>
+            </div>
+            <x-hr></x-hr>
+            <div>
+                <step v-model="step2" background-color='#fbf9fe' gutter="20px">
+                    <step-item title="已完成"></step-item>
+                    <step-item title="进行中"></step-item>
+                    <step-item title="结束"></step-item>
+                </step>
+                <step v-model="step2" background-color='#fbf9fe' gutter="30px">
+                    <step-item title="已完成"></step-item>
+                    <step-item title="进行中"></step-item>
+                    <step-item title="结束"></step-item>
+                </step>
+                <div class="btn_wrap">
+                    <x-button type="primary" @click.native="nextStep">下一步</x-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

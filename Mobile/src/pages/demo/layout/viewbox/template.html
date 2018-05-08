@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app" style="height:100%">
+        <view-box body-padding-top="46px" body-padding-bottom="55px">
+            <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">标题栏（容器header插槽）</x-header>
+            <div>
+                <span>容器内容区（默认插槽）</span>
+                <p v-for="i in 100">{{i}}</p>
+            </div>
+            <tabbar slot="bottom">
+                <tabbar-item>
+                    <span slot="label">工具1（bottom插槽）</span>
+                </tabbar-item>
+                <tabbar-item>
+                    <span slot="label">工具2</span>
+                </tabbar-item>
+            </tabbar>
+        </view-box>
+    </div>
+</body>
+
+</html>

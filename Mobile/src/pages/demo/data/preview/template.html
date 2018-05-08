@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <img class="previewer-demo-img" v-for="(item, index) in list" :src="item.mini" width="100" @click="show(index)">
+        <div v-transfer-dom>
+            <previewer :list="list" ref="previewer" :options="options"></previewer>
+        </div>
+    </div>
+</body>
+
+</html>

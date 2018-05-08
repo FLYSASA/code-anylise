@@ -1,0 +1,13 @@
+.el-table .hidden-columns,.el-table .resize-triggers{
+	display: none;
+}
+
+/*分割模块进行分页*/
+.table-page{
+	page-break-after:always
+}
+
+/*隐藏表格滚动条*/
+.table-page .el-table__body-wrapper{
+	overflow-x: hidden;
+} 

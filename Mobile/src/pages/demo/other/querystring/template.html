@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <div id="app">
+        <div>对象转字符串： {{ query1 | stringify }}</div>
+        <div>字符串转对象： {{ query2 | parse }}</div>
+        <div>编码： {{ query3 | escape }}</div>
+        <div>解码： {{ query4 | unescape }}</div>
+    </div>
+</body>
+
+</html>

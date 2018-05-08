@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .demo-content {
+            padding: 10px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="vux-1px-t">
+
+            <swipeout>
+
+                <swipeout-item @on-close="handleEvents('on-close')" @on-open="handleEvents('on-open')" transition-mode="follow">
+                    <div slot="right-menu">
+                        <swipeout-button @click.native="onButtonClick('fav')" type="primary">是的</swipeout-button>
+                        <swipeout-button @click.native="onButtonClick('delete')" type="warn">正确</swipeout-button>
+                    </div>
+                    <div slot="content" class="demo-content vux-1px-t">
+                        JavaScript 是最好的语言
+                    </div>
+                </swipeout-item>
+
+                <swipeout-item :threshold=".5" underlay-color="#ccc">
+                    <div slot="right-menu">
+                        <swipeout-button @click.native="onButtonClick('fav')" background-color="#336DD6">收藏</swipeout-button>
+                        <swipeout-button @click.native="onButtonClick('delete')" background-color="#D23934">删除</swipeout-button>
+                    </div>
+                    <div slot="content" class="demo-content vux-1px-tb">
+                        设置滑动阙值为 0.5（菜单显示一半）
+                    </div>
+                </swipeout-item>
+
+                <swipeout-item :disabled="disabled" ref="swipeoutItem" :right-menu-width="210" :sensitivity="15">
+                    <div slot="right-menu">
+                        <swipeout-button @click.native="onButtonClick('fav')" type="primary" :width="70">收藏</swipeout-button>
+                        <swipeout-button @click.native="onButtonClick('delete')" type="warn" :width="70">删除</swipeout-button>
+                        <swipeout-button @click.native="onButtonClick('ignore')" type="default" :width="70">忽略</swipeout-button>
+                    </div>
+
+                    <div slot="left-menu">
+                        <swipeout-button @click.native="onButtonClick('fav')" type="primary">收藏</swipeout-button>
+                        <swipeout-button @click.native="onButtonClick('delete')" type="warn">删除</swipeout-button>
+                    </div>
+
+                    <div slot="content" class="demo-content vux-1px-b">
+                        {{disabled?'当前不可操作':'当前可操作'}}
+                    </div>
+                </swipeout-item>
+
+            </swipeout>
+        </div>
+
+        <div style="padding:15px;">
+            <x-button @click.native="disabled = false" type="primary" :disabled="!disabled">设置可操作</x-button>
+            <x-button @click.native="disabled = true" type="warn" :disabled="disabled">设置不可操作</x-button>
+            <x-button @click.native="$refs.swipeoutItem.open('left')" type="primary">打开左菜单</x-button>
+            <x-button @click.native="$refs.swipeoutItem.open('right')" type="primary">打开右菜单</x-button>
+            <x-button @click.native="$refs.swipeoutItem.close()" type="warn">关闭菜单</x-button>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .box1 {
+            height: 100px;
+            position: relative;
+            width: 1490px;
+        }
+
+        .box1-item {
+            width: 200px;
+            height: 100px;
+            background-color: #ccc;
+            display: inline-block;
+            margin-left: 15px;
+            float: left;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        .box1-item:first-child {
+            margin-left: 0;
+        }
+
+        .box2-wrap {
+            height: 300px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <group>
+            <cell is-link title="pullup" link="./pullup.html">上拉加载更多</cell>
+            <cell is-link title="pulldown" link="./pulldown.html">下拉刷新</cell>
+            <cell is-link title="pulldownpullup" link="./pulldownpullup.html">下拉刷新和上拉加载更多组合</cell>
+        </group>
+
+        <divider>不带滚动条的水平 scroller</divider>
+        <scroller lock-y :scrollbar-x="false">
+            <div class="box1">
+                <div class="box1-item" v-for="i in 7"><span>{{' ' + i + ' '}}</span></div>
+            </div>
+        </scroller>
+
+        <divider>显示滚动条的水平 scroller</divider>
+        <scroller lock-y scrollbar-x>
+            <div class="box1">
+                <div class="box1-item" v-for="i in 7"><span>{{' ' + i + ' '}}</span></div>
+            </div>
+        </scroller>
+
+        <divider>没有边缘回弹效果的水平 scroller</divider>
+        <scroller lock-y scrollbar-x :bounce="false">
+            <div class="box1">
+                <div class="box1-item" v-for="i in 7"><span>{{' ' + i + ' '}}</span></div>
+            </div>
+        </scroller>
+
+        <divider>竖向 scroller scrollTop: {{scrollTop}}</divider>
+        <scroller lock-x height="200px" @on-scroll="onScroll" ref="scrollerEvent">
+            <div class="box2">
+                <p v-for="i in 80">placeholder {{i}}</p>
+            </div>
+        </scroller>
+
+        <x-button type="primary" @click.native="$refs.scrollerEvent.reset({top:0});scrollTop=0;">reset</x-button>
+
+        <divider>检查是否滚动到底部（未启用上拉，自定义滚动模板） </divider>
+        <scroller lock-x height="200px" @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offset="200">
+            <div class="box2">
+                <p v-for="i in bottomCount">placeholder {{i}}</p>
+                <load-more tip="loading"></load-more>
+            </div>
+        </scroller>
+
+        <divider>显示滚动条的竖向 scroller</divider>
+        <scroller lock-x scrollbar-y height="200px" ref="scroller">
+            <div class="box2">
+                <p v-for="i in 20" v-if="showList1">placeholder {{ i + '' + i }}</p>
+                <p v-for="i in 10" v-if="!showList1">placeholder {{ i }}</p>
+                <x-button style="margin:10px 0;" type="primary" @click.native="onClickButton">按钮</x-button>
+                <group>
+                    <cell @click.native="onCellClick" title="Title" value="Value"></cell>
+                </group>
+            </div>
+        </scroller>
+        <x-button @click.native="changeList" type="primary">改变显示的内容</x-button>
+    </div>
+</body>
+
+</html>

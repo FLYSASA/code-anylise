@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta http-equiv="X-UA-Compatible" content="edge" />
+	</head>
+	<body>
+		<!--<div class="simple-loading"></div>-->
+		<div id="index">
+			<!--头部-->
+			<web-header ref="header" class="body-scale"></web-header>
+			<section class="index-body">
+				<!--内容区域-->
+				<div class="index-body-box">
+					<!--左边菜单区-->
+					<menu-aside ref="left-menu-aside" class="index-body-box-menu"></menu-aside>
+					
+					<!--路由页面区-->
+					<div class="index-body-box-content">
+						<router-view></router-view>
+					</div>
+					
+					<!--拖曳区-->
+					<div class="index-body-box-drag drag-element-left"></div>
+				</div>
+			</section>
+		</div>
+		<% for (var i in htmlWebpackPlugin.options.js) { %>
+        <script type="text/javascript" src="<%= htmlWebpackPlugin.options.js[i]%>"></script>
+        <% } %>
+	</body>
+</html>
