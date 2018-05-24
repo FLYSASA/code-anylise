@@ -3,17 +3,54 @@ export default {
 		//oper
 
 		//model
-		employeeName: "员工名称",
-		employeeNo: "员工编号",
-		userName: "用户帐号",
-		defaultStationName: "默认岗位",
-		positionName: "职位名称",
-		corpName: "公司名称",
-		deptName: "部门名称",
-		
-		sex: "性别",
-		birthday: "生日",
-		originPlace: "籍贯",
+		// employeeName: "员工名称",
+		// employeeNo: "员工编号",
+		// userName: "用户帐号",
+		// defaultStationName: "默认岗位",
+		// positionName: "职位名称",
+		// corpName: "公司名称",
+		// deptName: "部门名称",
+
+		// sex: "性别",
+		// birthday: "生日",
+		// originPlace: "籍贯",
+		// entryDate: "入职日期",
+		// address: "地址",
+		// mobileTelephone: "移动电话",
+		// officePhone: "办公电话",
+		// weChat: "微信",
+		// microBlog: "新浪微博",
+		// stationName: "岗位名称",
+		// stationNo: "岗位编号",
+		// stationCorpName: "所属公司",
+		// stationDeptName: "所属部门",
+
+		// supplier	一览	
+		SupName: "供方名称",
+		SupNo: "供方编号",
+		TaxPayerId: "纳税类型",
+		EnterpriseForm: "企业类型",
+		RegisteredCapital: "注册资本",
+		Remark: "备注",
+				
+		ProvinceName: "省份",
+		CityName: "城市",
+		AreaName: "区域",
+		SupId: "信用代码",
+		supplierClasses: "供方类别",
+		EnterpriseForm: "企业类型",
+		LegalRepresentative: "法人代表",
+		RegisteredCapital: "注册资本",
+		PostalCode: "邮政编码",
+		OfficePhone: "公司电话",
+		FaxNumber: "公司传真",
+		Email: "电子邮箱",
+
+
+
+
+
+
 		entryDate: "入职日期",
 		address: "地址",
 		mobileTelephone: "移动电话",
@@ -26,19 +63,34 @@ export default {
 		stationDeptName: "所属部门",
 
 		//msg
-		addEmployeeTitle: "新增员工",
-		editEmployeeTitle: "修改员工",
-		browseEmployeeTitle: "查看员工",
-		importEmployeeTitle: "导入企业员工",
-		exportEmployeeTitle: "导出企业员工",
-		addEmployeeSuccess: "新增员工成功",
-		editEmployeeSuccess: "修改员工成功",
-		delEmployeeSuccess: "删除员工成功",
+		// addEmployeeTitle: "新增员工",
+		// editEmployeeTitle: "修改员工",
+		// browseEmployeeTitle: "查看员工",
+		// importEmployeeTitle: "导入企业员工",
+		// exportEmployeeTitle: "导出企业员工",
+		// addEmployeeSuccess: "新增员工成功",
+		// editEmployeeSuccess: "修改员工成功",
+		// delEmployeeSuccess: "删除员工成功",
+		// setStation: "设置岗位",
+		// employeeNameNotBeEmpty: "员工名称不能为空",
+		// station: "岗位",
+
+		// search: "按员工名称、员工编号、用户帐号、公司名称、部门名称进行搜索",
+
+		// supplier msg
+		addEmployeeTitle: "新增供方",
+		editEmployeeTitle: "修改供方",
+		browseEmployeeTitle: "查看供方",
+		importEmployeeTitle: "导入供方",
+		exportEmployeeTitle: "导出供方",
+		addEmployeeSuccess: "新增供方成功",
+		editEmployeeSuccess: "修改供方成功",
+		delEmployeeSuccess: "删除供方成功",
 		setStation: "设置岗位",
-		employeeNameNotBeEmpty: "员工名称不能为空",
+		employeeNameNotBeEmpty: "供方名称不能为空",
 		station: "岗位",
 
-		search: "按员工名称、员工编号、用户帐号、公司名称、部门名称进行搜索",
+		search: "按供方名称、供方编号、用户帐号、公司名称、部门名称进行搜索",
 
 		//data
 		sexData: {

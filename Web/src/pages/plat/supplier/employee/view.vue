@@ -4,104 +4,146 @@
 		<div class="form-content no-footer">
 			<div class="fullline">
 				<div class="wp-50">
-					<span class="w-65" v-text="$t('employee.employeeName')"></span>
+					<span class="w-65" v-text="$t('employee.SupName')"></span>
 					<div class="right-auto-box">
-						<el-input id="RoleName" v-model.trim="viewModel.EmployeeName" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.SupName" readonly></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.employeeNo')"></span>
+					<span class="w-65" v-text="$t('employee.SupNo')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.EmployeeNo" readonly></el-input>
+						<el-input v-model.trim="viewModel.SupNo" readonly></el-input>
 					</div>
 				</div>
 			</div>
 			<div class="fullline">
 				<div class="wp-50">
-					<span class="w-65" v-text="$t('employee.sex')"></span>
+					<span class="w-65" v-text="$t('employee.ProvinceName')"></span>
 					<div class="right-auto-box">
-						<el-input :value="viewModel.Sex == 0 ? $t('employee.sexData.man'):$t('employee.sexData.woman')" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.ProvinceName" readonly></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.birthday')"></span>
+					<span class="w-65" v-text="$t('employee.CityName')"></span>
 					<div class="right-auto-box">
-						<el-date-picker v-model="viewModel.Birthday" type="date" readonly>
-						</el-date-picker>
+						<el-input v-model.trim="viewModel.CityName" readonly></el-input>
 					</div>
 				</div>
 			</div>
 			<div class="fullline">
 				<div class="wp-50">
-					<span class="w-65" v-text="$t('employee.originPlace')"></span>
+					<span class="w-65" v-text="$t('employee.AreaName')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.OriginPlace" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.AreaName" readonly></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.entryDate')"></span>
+					<span class="w-65" v-text="$t('employee.SupId')"></span>
 					<div class="right-auto-box">
-						<el-date-picker v-model="viewModel.EntryDate" type="date" readonly>
-						</el-date-picker>
+						<el-input v-model.trim="viewModel.SupId" readonly></el-input>
 					</div>
 				</div>
 			</div>
+
 			<div class="fullline">
-				<span class="w-65" v-text="$t('employee.address')"></span>
-				<div class="right-auto-box">
-					<el-input v-model.trim="viewModel.Address" readonly></el-input>
-				</div>
+				<div class="wp-100">
+					<span class="w-65" v-text="$t('供方分类')"></span>
+					<div class="right-auto-box">
+						<el-input id="RoleName" v-model.trim="viewModel.supplierClasses" readonly></el-input>
+					</div>
+				</div>		
 			</div>
+
 			<div class="fullline">
-				<div class="wp-50">
-					<span class="w-65" v-text="$t('employee.mobileTelephone')"></span>
+				<div class="wp-100">
+					<span class="w-65" v-text="$t('营业执照')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.MobileTelephone" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.supplierClasses" readonly></el-input>
 					</div>
-				</div>
-				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.officePhone')"></span>
-					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.OfficePhone" readonly></el-input>
-					</div>
-				</div>
+				</div>		
 			</div>
+
 			<div class="fullline">
 				<div class="wp-50">
-					<span class="w-65">Email</span>
+					<span class="w-65" v-text="$t('employee.EnterpriseForm')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.Email" readonly></el-input>
-					</div>					
+						<el-input id="RoleName" v-model.trim="viewModel.EnterpriseForm" readonly></el-input>
+					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.weChat')"></span>
+					<span class="w-65" v-text="$t('纳税人类型')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.WeChat" readonly></el-input>
+						<el-input v-model.trim="viewModel.SupId" readonly></el-input>
 					</div>
 				</div>
 			</div>
 			<div class="fullline">
 				<div class="wp-50">
-					<span class="w-65" v-text="$t('employee.microBlog')"></span>
+					<span class="w-65" v-text="$t('employee.LegalRepresentative')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.MicroBlog" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.LegalRepresentative" readonly></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65">QQ</span>
+					<span class="w-65" v-text="$t('employee.RegisteredCapital')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.QQ" readonly></el-input>
+						<el-input v-model.trim="viewModel.RegisteredCapital" readonly></el-input>
 					</div>
 				</div>
 			</div>
 			<div class="fullline">
 				<div class="wp-50">
-					<span class="w-65" v-text="$t('rowIndex')"></span>
+					<span class="w-65" v-text="$t('公司地址')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.RowIndex" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.CityName" readonly></el-input>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65" v-text="$t('employee.PostalCode')"></span>
+					<div class="right-auto-box">
+						<el-input v-model.trim="viewModel.PostalCode" readonly></el-input>
 					</div>
 				</div>
 			</div>
+			<div class="fullline">
+				<div class="wp-50">
+					<span class="w-65" v-text="$t('employee.OfficePhone')"></span>
+					<div class="right-auto-box">
+						<el-input id="RoleName" v-model.trim="viewModel.OfficePhone" readonly></el-input>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65" v-text="$t('employee.FaxNumber')"></span>
+					<div class="right-auto-box">
+						<el-input v-model.trim="viewModel.FaxNumber" readonly></el-input>
+					</div>
+				</div>
+			</div>
+			<div class="fullline">
+				<div class="wp-50">
+					<span class="w-65" v-text="$t('employee.Email')"></span>
+					<div class="right-auto-box">
+						<el-input id="RoleName" v-model.trim="viewModel.Email" readonly></el-input>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65" v-text="$t('公司网页')"></span>
+					<div class="right-auto-box">
+						<el-input v-model.trim="viewModel.FaxNumber" readonly></el-input>
+					</div>
+				</div>
+			</div>
+
+			<div class="fullline">
+				<div class="wp-100">
+					<span class="w-65" v-text="$t('employee.Remark')"></span>
+					<div class="right-auto-box">
+						<el-input id="RoleName" v-model.trim="viewModel.Remark" readonly></el-input>
+					</div>
+				</div>
+			</div>
+
+			
 			<div class="fullline">
 				<span class="w-65" v-text="$t('employee.station')"></span>
 				<!--岗位列表-->
@@ -166,7 +208,8 @@
 				this.getData();
 			},
 			getData() {
-				this.$get("/api/plat/employees/" + this.option.EmployeeId, function(res) {
+				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {
+					
 					this.viewModel = res;
 					this.viewModel.Birthday = this.$dateFormat('yyyy-MM-dd', this.viewModel.Birthday);
 					this.viewModel.EntryDate = this.$dateFormat('yyyy-MM-dd', this.viewModel.EntryDate);
@@ -178,6 +221,7 @@
 		},
 		mounted() {
 			this.visible = this.value;
+			console.log(this.option)
 		},
 		watch: {
 			value(val) {

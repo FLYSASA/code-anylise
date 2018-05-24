@@ -17,23 +17,22 @@
 			<el-table border :data="tableData" ref="bodyTable" @sort-change="sortChange" @selection-change="rowSelect" :height="maxBodyHeight">
 				<el-table-column v-if="permissions.Delete" type="selection" width="45">
 				</el-table-column>
-				<el-table-column prop="EmployeeName" :label="$t('employee.employeeName')" width="120" show-overflow-tooltip sortable>
+				<el-table-column prop="SupName" :label="$t('employee.SupName')" width="120" show-overflow-tooltip sortable>
 					<template slot-scope="props">
-						<a href="javascript:void(0)" @click="openViewDialog(props.row)">{{props.row.EmployeeName}}</a>
+						<a href="javascript:void(0)" @click="openViewDialog(props.row)">{{props.row.SupName}}</a>
 					</template>
 				</el-table-column>
-				<el-table-column prop="EmployeeNo" :label="$t('employee.employeeNo')" width="120" sortable show-overflow-tooltip>
+				<el-table-column prop="SupNo" :label="$t('employee.SupNo')" width="120" sortable show-overflow-tooltip>
 				</el-table-column>
-				<el-table-column prop="UserName" :label="$t('employee.userName')" show-overflow-tooltip>
+				<el-table-column prop="TaxPayerId" :label="$t('employee.TaxPayerId')" show-overflow-tooltip>
 				</el-table-column>
-				<el-table-column prop="DefaultStationName" :label="$t('employee.defaultStationName')" show-overflow-tooltip>
+				<el-table-column prop="EnterpriseForm" :label="$t('employee.EnterpriseForm')" show-overflow-tooltip>
 				</el-table-column>
-				<el-table-column prop="PositionName" :label="$t('employee.positionName')" show-overflow-tooltip>
+				<el-table-column prop="RegisteredCapital" :label="$t('employee.RegisteredCapital')" show-overflow-tooltip>
 				</el-table-column>
-				<el-table-column prop="CorpName" :label="$t('employee.corpName')" show-overflow-tooltip>
+				<el-table-column prop="Remark" :label="$t('employee.Remark')" show-overflow-tooltip>
 				</el-table-column>
-				<el-table-column prop="DeptName" :label="$t('employee.deptName')" show-overflow-tooltip>
-				</el-table-column>
+
 				<el-table-column prop="RowIndex" :label="$t('rowIndex')" width="100">
 				</el-table-column>
 				<el-table-column :label="$t('handle')" fixed="right" width="100" v-if="permissions.Edit || permissions.Delete">
@@ -103,7 +102,7 @@
 			loadData() {
 				var params = this.params;
 				this.$loadingOpen();
-				this.$get("/api/plat/employees/", params, function(res) {
+				this.$get("/api/plat/suppliers/", params, function(res) {
 					this.tableData = res.Rows;
 					this.pageTotal = res.Total;
 				});
