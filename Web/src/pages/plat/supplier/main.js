@@ -6,10 +6,10 @@ import initImport from "@/static/js/mainBaseImport.js";
 
 var lang={
 	"zh-cn":function (){
-		return import("@/static/i18n/plat/zh-cn/infrastructure.js");
+		return import("@/static/i18n/plat/zh-cn/supplier.js");
 	},
 	"zh-tw":function(){
-		return import("@/static/i18n/plat/zh-tw/infrastructure.js");
+		return import("@/static/i18n/plat/zh-tw/supplier.js");
 	}
 }
 
