@@ -5,9 +5,9 @@
 		<div class="form-content">
 			<div class="fullline">
 				<div class="wp-50">
-					<span class="w-65 must-star" v-text="$t('employee.employeeName')"></span>
+					<span class="w-65 must-star" v-text="$t('employee.SupName')"></span>
 					<div class="right-auto-box">
-						<el-input id="EmployeeName" v-model.trim="editModel.EmployeeName" :maxlength="100"></el-input>
+						<el-input id="EmployeeName" v-model.trim="editModel.SupName" :maxlength="100"></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
@@ -188,6 +188,7 @@
 			},
 			open() {
 				this.getData();
+				console.log(this.editModel)
 			},
 			submit() {
 				if(!this.validate()) {
@@ -240,7 +241,7 @@
 				this.editModel.DefaultStationId = row.StationId;
 			},
 			getData() {
-				this.$get("/api/plat/employees/" + this.option.EmployeeId, function(res) {
+				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {
 					this.editModel = res;
 					this.editModel.Birthday = this.$dateFormat('yyyy-MM-dd', this.editModel.Birthday);
 					this.editModel.EntryDate = this.$dateFormat('yyyy-MM-dd', this.editModel.EntryDate);
@@ -311,6 +312,7 @@
 		},
 		mounted() {
 			this.visible = this.value;
+			console.log(this.editModel)			
 		},
 		watch: {
 			value(val) {

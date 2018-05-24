@@ -47,20 +47,26 @@ export default {
 		Email: "电子邮箱",
 
 
+		contactName: "姓名",
+		contactStation: "职级",
+		contactSex: "性别",
+		contactPhone: "公司电话",
+		contactMobile: "手机号码",
+		contactMail: "电子邮箱",
+		
 
 
 
-
-		entryDate: "入职日期",
-		address: "地址",
-		mobileTelephone: "移动电话",
-		officePhone: "办公电话",
-		weChat: "微信",
-		microBlog: "新浪微博",
-		stationName: "岗位名称",
-		stationNo: "岗位编号",
-		stationCorpName: "所属公司",
-		stationDeptName: "所属部门",
+		// entryDate: "入职日期",
+		// address: "地址",
+		// mobileTelephone: "移动电话",
+		// officePhone: "办公电话",
+		// weChat: "微信",
+		// microBlog: "新浪微博",
+		// stationName: "岗位名称",
+		// stationNo: "岗位编号",
+		// stationCorpName: "所属公司",
+		// stationDeptName: "所属部门",
 
 		//msg
 		// addEmployeeTitle: "新增员工",

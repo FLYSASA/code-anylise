@@ -36,7 +36,7 @@
 				<el-table-column prop="RowIndex" :label="$t('rowIndex')" width="100">
 				</el-table-column>
 				<el-table-column :label="$t('handle')" fixed="right" width="100" v-if="permissions.Edit || permissions.Delete">
-					<template slot-scope="props">
+					<template slot-scope="props">   <!-- slot-cope="props" 的props即传入的:data="tableData" prop是props的某一项,用于定义展示内容-->
                         <a v-if="permissions.Edit" class="table-btn" href="javascript:void(0)" @click.stop="openEditDialog(props.row,props.$index)" v-text="operateText.edit"></a>
                         <a v-if="permissions.Delete" class="table-btn" href="javascript:void(0)" @click.stop="deleteItem(props.row,props.$index)" v-text="operateText.delete"></a>
                     </template>

@@ -145,19 +145,19 @@
 
 			
 			<div class="fullline">
-				<span class="w-65" v-text="$t('employee.station')"></span>
+				<span class="w-65" v-text="$t('联系人信息')"></span>
 				<!--岗位列表-->
 				<div class="right-auto-box common-table width-p100">
-					<el-table :data="viewModel.Stations" >
+					<el-table :data="viewModel.Stations" border>  <!-- viewModer是通过具体SupId得到的数据 res -->
 						<el-table-column v-for="item in stationHeaderData" :key="item.id" :prop="item.prop" :label="item.label" show-overflow-tooltip width="width" :sortable="item.sortable">
 						</el-table-column>
-						<el-table-column :label="$t('employee.defaultStationName')" width="100">
+						<!-- <el-table-column :label="$t('employee.defaultStationName')" width="100">
 							<template slot-scope="props">
 								<span>
 									<el-radio class="radio" v-model="viewModel.DefaultStationId" :label="props.row.StationId" disabled>&nbsp;</el-radio>
 								</span>
 							</template>							
-						</el-table-column>
+						</el-table-column> -->
 					</el-table>
 				</div>
 			</div>
@@ -181,24 +181,32 @@
 				stationHeaderData: //员工查看页岗位表头
 					[{
 						prop: "StationName",
-						label: this.$t('employee.stationName'),
+						label: this.$t('employee.contactName'),
 						sortable: false
 					}, {
 						prop: "StationNo",
-						label: this.$t('employee.stationNo'),
+						label: this.$t('employee.contactStation'),
 						sortable: false
 					}, {
 						prop: "CorpName",
-						label: this.$t('employee.stationCorpName'),
+						label: this.$t('employee.contactSex'),
 						sortable: false
 					}, {
 						prop: "DeptName",
-						label: this.$t('employee.stationDeptName'),
+						label: this.$t('employee.contactPhone'),
+						sortable: false
+					}, {
+						prop: "DeptName",
+						label: this.$t('employee.contactMobile'),
+						sortable: false
+					}, {
+						prop: "DeptName",
+						label: this.$t('employee.contactMail'),
 						sortable: false
 					}]
 			}
 		},
-		props: ["option", "value"],
+		props: ["option", "value"],  // option 是list父组件传过来的props.row
 		methods: {
 			close() {
 				this.$emit("input", false);
@@ -208,11 +216,10 @@
 				this.getData();
 			},
 			getData() {
-				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {
-					
+				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {			
 					this.viewModel = res;
-					this.viewModel.Birthday = this.$dateFormat('yyyy-MM-dd', this.viewModel.Birthday);
-					this.viewModel.EntryDate = this.$dateFormat('yyyy-MM-dd', this.viewModel.EntryDate);
+					// this.viewModel.Birthday = this.$dateFormat('yyyy-MM-dd', this.viewModel.Birthday);
+					// this.viewModel.EntryDate = this.$dateFormat('yyyy-MM-dd', this.viewModel.EntryDate);
 				});
 			}
 		},
@@ -221,12 +228,14 @@
 		},
 		mounted() {
 			this.visible = this.value;
-			console.log(this.option)
+			
 		},
 		watch: {
 			value(val) {
 				this.visible = val;
+				console.log(this.viewModel)
 			}
+			
 		}
 	}
 </script>
