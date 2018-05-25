@@ -37,14 +37,18 @@ export default {
 		CityName: "城市",
 		AreaName: "区域",
 		SupId: "信用代码",
-		supplierClasses: "供方类别",
+		supplierClasses: "供方分类",
+		BusinessLicence: "营业执照",
+
 		EnterpriseForm: "企业类型",
 		LegalRepresentative: "法人代表",
 		RegisteredCapital: "注册资本",
+		Address: "公司地址",
 		PostalCode: "邮政编码",
 		OfficePhone: "公司电话",
 		FaxNumber: "公司传真",
 		Email: "电子邮箱",
+		OfficialWebsite: "公司网页",
 
 
 		contactName: "姓名",
@@ -53,6 +57,7 @@ export default {
 		contactPhone: "公司电话",
 		contactMobile: "手机号码",
 		contactMail: "电子邮箱",
+		contactMsg: "联系人信息",
 		
 
 
@@ -93,7 +98,14 @@ export default {
 		editEmployeeSuccess: "修改供方成功",
 		delEmployeeSuccess: "删除供方成功",
 		setStation: "设置岗位",
+
 		employeeNameNotBeEmpty: "供方名称不能为空",
+		supNoNotBeEmpty: "请填写供方编号",
+        selectProvinceName: "请选择省份",
+        selectCityName: "请选择城市",
+        landAddressNotBeEmpty: "请填写地址",
+        landMapPositionCheckedASCII: "地块地图位置可由字母、数字、英文标点及常用特殊字符(@#等)组成",
+        selectIsBidInvitationPlease: "请选择获取方式",
 		station: "岗位",
 
 		search: "按供方名称、供方编号、用户帐号、公司名称、部门名称进行搜索",

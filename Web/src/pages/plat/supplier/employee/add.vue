@@ -5,19 +5,150 @@
 		<div class="form-content">
 			<div class="fullline">
 				<div class="wp-50">
-					<span class="w-65 must-star" v-text="$t('employee.employeeName')"></span>
+					<span class="w-65 must-star" v-text="$t('employee.SupName')"></span>
 					<div class="right-auto-box">
-						<el-input id="addEmployeeName" v-model.trim="createModel.EmployeeName" :maxlength="100"></el-input>
+						<el-input id="addEmployeeName" v-model.trim="createModel.SupName" :maxlength="100"></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.employeeNo')"></span>
+					<span class="w-65" v-text="$t('employee.SupNo')"></span>
 					<div class="right-auto-box">
-						<el-input disabled="disabled" v-model.trim="createModel.EmployeeNo" :maxlength="100"></el-input>
+						<el-input v-model.trim="createModel.SupNo" :maxlength="100"></el-input>
+					</div>
+				</div>
+			</div>
+
+			<div class="fullline">
+				<div class="wp-50">
+					<span class="w-65 must-star" v-text="$t('employee.ProvinceName')"></span>
+					<div class="right-auto-box">
+						<sapi-select v-model="createModel.ProvinceId" :data="provinces" :props="{label:'Name',value:'Id'}" @change="provinceChange"></sapi-select>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65 must-star" v-text="$t('employee.CityName')"></span>
+					<div class="right-auto-box">
+						<sapi-select v-model="createModel.CityId" :data="citys" :props="{label:'Name',value:'Id'}" @change="cityChange"></sapi-select>
 					</div>
 				</div>
 			</div>
 			<div class="fullline">
+				<div class="wp-50">
+					<span class="w-65 must-star" v-text="$t('employee.AreaName')"></span>
+					<div class="right-auto-box">
+						<sapi-select v-model="createModel.AreaId" :data="areas" :props="{label:'Name',value:'Id'}" @change="areaChange"></sapi-select>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65 must-star" v-text="$t('employee.SupId')"></span>
+					<div class="right-auto-box">
+						<el-input v-model.trim="createModel.SupId" :maxlength="100"></el-input>
+					</div>
+				</div>
+			</div>	
+			<!-- 供方分类 -->
+			<div class="fullline">
+				<div class="wp-100">
+					<span class="w-65 must-star" v-text="$t('供方分类')"></span>
+					<div class="right-auto-box">
+						<el-input id="RoleName" v-model.trim="createModel.supplierClasses" :maxlength="100"></el-input>
+					</div>
+				</div>
+			</div>
+			<!-- 营业执照 -->
+			<div class="fullline">
+				<div class="wp-100">
+					<span class="w-65 must-star" v-text="$t('employee.BusinessLicence')"></span>
+					<div class="right-auto-box">
+						<el-input id="RoleName" v-model.trim="createModel.BusinessLicence" :maxlength="100"></el-input>
+					</div>
+				</div>
+			</div>
+			<!-- 企业类型纳税人类型 -->
+			<div class="fullline">
+				<div class="wp-50">
+					<span class="w-65" v-text="$t('employee.EnterpriseForm')"></span>
+					<div class="right-auto-box">
+						<el-input id="RoleName" v-model.trim="createModel.EnterpriseForm" :maxlength="100"></el-input>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65" v-text="$t('纳税类型')"></span>
+					<div class="right-auto-box">
+						<el-input v-model.trim="createModel.SupId" :maxlength="100"></el-input>
+					</div>
+				</div>
+			</div>
+
+			<div class="fullline">
+				<div class="wp-50">
+					<span class="w-65" v-text="$t('employee.LegalRepresentative')"></span>
+					<div class="right-auto-box">
+						<el-input id="RoleName" v-model.trim="createModel.LegalRepresentative" :maxlength="100"></el-input>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65" v-text="$t('employee.RegisteredCapital')"></span>
+					<div class="right-auto-box">
+						<el-input v-model.trim="createModel.RegisteredCapital" :maxlength="100"></el-input>
+					</div>
+				</div>
+			</div>
+		
+			<div class="fullline">
+				<div class="wp-50">
+					<span class="w-65" v-text="$t('employee.Address')"></span>
+					<div class="right-auto-box">
+						<el-input v-model.trim="createModel.Address" :maxlength="500"></el-input>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65" v-text="$t('employee.PostalCode')"></span>
+					<div class="right-auto-box">
+						<el-input v-model.trim="createModel.PostalCode" :maxlength="100"></el-input>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="fullline">
+				<div class="wp-50">
+					<span class="w-65" v-text="$t('employee.OfficePhone')"></span>
+					<div class="right-auto-box">
+						<el-input id="txtMobileTelephone" v-model.trim="createModel.OfficePhone" :maxlength="100"></el-input>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65" v-text="$t('employee.FaxNumber')"></span>
+					<div class="right-auto-box">
+						<el-input id="txtOfficePhone" v-model.trim="createModel.FaxNumber" :maxlength="100"></el-input>
+					</div>
+				</div>
+			</div>	
+
+			<div class="fullline">
+				<div class="wp-50">
+					<span class="w-65" v-text="$t('employee.Email')"></span>
+					<div class="right-auto-box">
+						<el-input id="txtMobileTelephone" v-model.trim="createModel.Email" :maxlength="100"></el-input>
+					</div>
+				</div>
+				<div class="wp-50 float-right">
+					<span class="w-65" v-text="$t('employee.OfficialWebsite')"></span>
+					<div class="right-auto-box">
+						<el-input id="txtOfficePhone" v-model.trim="createModel.OfficialWebsite" :maxlength="100"></el-input>
+					</div>
+				</div>
+			</div>	
+			<div class="fullline">
+				<div class="wp-100">
+					<span class="w-65" v-text="$t('employee.Remark')"></span>
+					<div class="right-auto-box">
+						<el-input id="RoleName" v-model.trim="createModel.Remark" :maxlength="500"></el-input>
+					</div>
+				</div>
+			</div>					
+			<!-- 性别选择 备用 -->
+			<!-- <div class="fullline">
 				<div class="wp-50">
 					<span class="w-65" v-text="$t('employee.sex')"></span>
 					<el-radio-group v-model="createModel.Sex">
@@ -32,80 +163,10 @@
 						</el-date-picker>
 					</div>
 				</div>
-			</div>
+			</div> -->
+			
 			<div class="fullline">
-				<div class="wp-50">
-					<span class="w-65" v-text="$t('employee.originPlace')"></span>
-					<div class="right-auto-box">
-						<el-input v-model.trim="createModel.OriginPlace" :maxlength="50"></el-input>
-					</div>
-				</div>
-				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.entryDate')"></span>
-					<div class="right-auto-box" style="position: relative;">
-						<el-date-picker style="width: 100%;" v-model="createModel.EntryDate" type="date" :placeholder="$t('selectDate')">
-						</el-date-picker>
-					</div>
-				</div>
-			</div>
-			<div class="fullline">
-				<span class="w-65" v-text="$t('employee.address')"></span>
-				<div class="right-auto-box">
-					<el-input v-model.trim="createModel.Address" :maxlength="500"></el-input>
-				</div>
-			</div>
-			<div class="fullline">
-				<div class="wp-50">
-					<span class="w-65" v-text="$t('employee.mobileTelephone')"></span>
-					<div class="right-auto-box">
-						<el-input id="txtMobileTelephone" v-model.trim="createModel.MobileTelephone" :maxlength="100"></el-input>
-					</div>
-				</div>
-				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.officePhone')"></span>
-					<div class="right-auto-box">
-						<el-input id="txtOfficePhone" v-model.trim="createModel.OfficePhone" :maxlength="100"></el-input>
-					</div>
-				</div>
-			</div>
-			<div class="fullline">
-				<div class="wp-50">
-					<span class="w-65">Email</span>
-					<div class="right-auto-box">
-						<el-input id="txtEmail" v-model.trim="createModel.Email" :maxlength="100"></el-input>
-					</div>
-				</div>
-				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.weChat')"></span>
-					<div class="right-auto-box">
-						<el-input id="txtWeChat" v-model.trim="createModel.WeChat" :maxlength="100"></el-input>
-					</div>
-				</div>
-			</div>
-			<div class="fullline">
-				<div class="wp-50">
-					<span class="w-65" v-text="$t('employee.microBlog')"></span>
-					<div class="right-auto-box">
-						<el-input id="txtMicroBlog" v-model.trim="createModel.MicroBlog" :maxlength="100"></el-input>
-					</div>
-				</div>
-				<div class="wp-50 float-right">
-					<span class="w-65">QQ</span>
-					<div class="right-auto-box">
-						<el-input id="txtQQ" v-model.trim="createModel.QQ" :maxlength="100"></el-input>
-					</div>
-				</div>
-			</div>
-			<div class="fullline">
-				<div class="wp-50">
-					<span class="w-65" v-text="$t('rowIndex')"></span>
-					<div class="right-auto-box">
-						<el-input v-model="createModel.RowIndex" :min="0" :max="999999999" :controls="false" v-format.d="{default:0}"></el-input>
-					</div>
-				</div>
-			</div>
-			<div class="fullline">
-				<span class="w-65" v-text="$t('employee.setStation')"></span>
+				<span class="w-65" v-text="$t('employee.contactMsg')"></span>
 				<div class="right-auto-box">
 					<div class="fullline">
 						<div class="wp-50">
@@ -119,17 +180,50 @@
 					</div>
 					<!--岗位列表-->
 					<div class="common-table width-p100">
-						<el-table :data="createModel.Stations" @selection-change="selectionChange">
+						<el-table :data="createModel.SupplierContacts" @selection-change="selectionChange" border>
 							<el-table-column type="selection" width="45">
 							</el-table-column>
-							<el-table-column v-for="item in stationHeaderData" :key="item.id" :prop="item.prop" :label="item.label" show-overflow-tooltip width="width" :sortable="item.sortable">
+							<el-table-column prop="ContactName" :label="$t('employee.contactName')" show-overflow-tooltip>
+								<template slot-scope="props" >
+									<el-input v-model.trim="props.row.ContactName" :maxlength="100"></el-input>
+								</template>
 							</el-table-column>
-							<el-table-column :label="$t('employee.defaultStationName')" width="100">
-								<template slot-scope="props">
-									<span @click="changeDefaultStation(props.row)">
-	                            		<el-radio class="radio" v-model="createModel.DefaultStationId" :label="props.row.StationId">&nbsp;</el-radio>
-	                        		</span>
-	                        	</template>
+							<el-table-column prop="PositionName" :label="$t('employee.contactStation')"  show-overflow-tooltip>
+								<template slot-scope="props" >
+									<el-input v-model.trim="props.row.PositionName" :maxlength="100"></el-input>
+								</template>
+							</el-table-column>
+							<!-- 性别 -->
+							<el-table-column prop="Sex" :label="$t('employee.contactSex')"  show-overflow-tooltip>
+								<template slot-scope="props" >
+									<!-- <el-input v-model.trim="props.row.Sex" :maxlength="100"></el-input> -->
+									<el-radio-group v-model="createModel.Sex">
+										<el-radio class="radio" :label="0">{{$t('employee.sexData.man')}}</el-radio>
+										<el-radio class="radio" :label="1">{{$t('employee.sexData.woman')}}</el-radio>
+									</el-radio-group>
+								</template>
+							</el-table-column>
+
+							<el-table-column prop="OfficePhone" :label="$t('employee.contactPhone')"  show-overflow-tooltip>
+								<template slot-scope="props" >
+									<el-input v-model.trim="props.row.OfficePhone" :maxlength="100"></el-input>
+								</template>
+							</el-table-column>
+							<el-table-column prop="MobileTelephone" :label="$t('employee.contactMobile')"  show-overflow-tooltip>
+								<template slot-scope="props" >
+									<el-input v-model.trim="props.row.MobileTelephone" :maxlength="100"></el-input>
+								</template>
+							</el-table-column>
+							<el-table-column prop="Email" :label="$t('employee.contactMail')"  show-overflow-tooltip>
+								<template slot-scope="props" >
+									<el-input v-model.trim="props.row.Email" :maxlength="100"></el-input>
+								</template>
+							</el-table-column>
+							<!-- 操作 -->
+							<el-table-column :label="$t('handle')" fixed="right" width="100">
+								<template slot-scope="props">   
+									<a  class="table-btn" href="javascript:void(0)" @click.stop="deleteItem(props.row,props.$index)" v-text="operateText.delete"></a>
+								</template>
 							</el-table-column>
 						</el-table>
 					</div>
@@ -149,14 +243,21 @@
 	import tips from "@/components/sapi-tips.js";
 	import dialog from "@/components/sapi-dialog.vue";
 	import station from "@/components/sapi-station-multiline.vue";
+	import upload from "@/components/sapi-upload.vue";
+	import select from "@/components/sapi-select.vue";
 	export default {
 		data() {
 			return {
+				provinces:[],
+                citys:[],
+                areas:[],
+				list: [],
 				disabled: false,
 				visible: true,
 				stationVisible: false,
 				createModel: {},
-				stationHeaderData: //员工查看页岗位表头
+
+				stationHeaderData: 
 					[{
 						prop: "StationName",
 						label: this.$t('employee.stationName'),
@@ -178,6 +279,49 @@
 		},
 		props: ["value"],
 		methods: {
+			//省份
+            getProvinces:function(){
+                this.$get("/api/plat/areas/provinces", {}, function(res) {
+					this.provinces = res;
+                });
+            },
+            provinceChange:function(province)
+            {
+                this.createModel.ProvinceName = province.Name;
+                this.createModel.CityId = null;
+                this.createModel.CityName = null;
+                this.createModel.AreaId = null;
+                this.createModel.AreaName = null;
+                this.areas = [];
+                this.getCitys(province.Id);
+            },
+            //城市
+            getCitys:function(provinceId)
+            {
+                this.$get("/api/plat/areas/"+provinceId+"/citys", {}, function(res) {
+                    this.citys = res;
+                });
+            },
+            cityChange:function(city)
+            {
+                this.createModel.CityName = city.Name;
+                this.createModel.AreaId = null;
+                this.createModel.AreaName = null;
+                this.getAreas(city.Id);
+            },
+            //区域
+            getAreas:function(cityId)
+            {
+                this.$get("/api/plat/areas/"+cityId+"/areas", {}, function(res) {
+                    this.areas = res;
+                    var area =  { Id:"", Name:"请选择" };
+                    this.areas.splice(0,0,area);
+                });
+            },
+            areaChange:function(area)
+            {
+                this.createModel.AreaName = area.Name;
+            },
 			close() {
 				this.$closeWaringTips(".form-error-tips");
 				this.$emit("input", false);
@@ -190,9 +334,17 @@
 				if(!this.validate()) {
 					return;
 				}
-
+				// if(this.createModel.SupId.length === 0) {
+				// 	this.createModel.DefaultSupId = null;
+				// }
 				this.disabled = true;
-				this.$post("/api/plat/employees/", this.createModel, function(res) {
+				if(!this.createModel.SupId)
+                {
+                    this.createModel.SupId = null;
+                    this.createModel.SupName = null;
+                }
+				
+				this.$post("/api/plat/suppliers/", this.createModel, function(res) {
 					this.disabled = false;
 					this.$parent.loadData();
 					this.close();
@@ -201,46 +353,40 @@
 			},
 			validate() {
 				this.$closeWaringTips(".form-error-tips");
-				if(!this.createModel.EmployeeName) {
+				if(!this.createModel.SupName) {
 					this.$errorTips(this.$t('employee.employeeNameNotBeEmpty'), "#addEmployeeName");
 					return false;
 				}
-				var msgASCIIContent = this.$t("inputASCIIContentPlease");
-				if(this.createModel.MobileTelephone && !this.$checkedASCII(this.createModel.MobileTelephone)) {
-					this.$errorTips(msgASCIIContent, "#txtMobileTelephone");
+				if(!this.createModel.SupNo){
+					this.$errorTips(this.$t("employee.supNoNotBeEmpty"));
 					return false;
-				}
-				if(this.createModel.OfficePhone && !this.$checkedASCII(this.createModel.OfficePhone)) {
-					this.$errorTips(msgASCIIContent, "#txtOfficePhone");
+                }						
+				if(!this.createModel.ProvinceName) {
+                    Vue.msg(this.$t("employee.selectProvinceName"));
 					return false;
-				}
-				if(this.createModel.Email && !this.$checkedASCII(this.createModel.Email)) {
-					this.$errorTips(msgASCIIContent, "#txtEmail");
+                } 		
+                if(!this.createModel.CityName) {
+                    Vue.msg(this.$t("employee.selectCityName"));
 					return false;
-				}
-				if(this.createModel.WeChat && !this.$checkedASCII(this.createModel.WeChat)) {
-					this.$errorTips(msgASCIIContent, "#txtWeChat");
+				} 		
+				if(!this.createModel.SupAddress) {
+					this.$errorTips(this.$t("employee.landAddressNotBeEmpty"));
 					return false;
-				}
-				if(this.createModel.MicroBlog && !this.$checkedASCII(this.createModel.MicroBlog)) {
-					this.$errorTips(msgASCIIContent, "#txtMicroBlog");
-					return false;
-				}
-				if(this.createModel.QQ && !this.$checkedASCII(this.createModel.QQ)) {
-					this.$errorTips(msgASCIIContent, "#txtQQ");
-					return false;
-				}
+                }
+               
+                
 				return true;
 			},
 			changeDefaultStation(row) {
 				this.createModel.DefaultStationId = row.StationId;
 			},
 			getData() {
-				this.$get("/api/plat/employees/create", function(res) {
+				this.$get("/api/plat/suppliers/create", function(res) {
 					this.createModel = res;
-					this.createModel.Birthday = '';
-					this.createModel.EntryDate = '';
+					this.getCitys(res.ProvinceId);
+                    this.getAreas(res.CityId);
 				});
+				this.getProvinces();
 			},
 			showStationPage() {
 				this.stationVisible = true;
@@ -299,7 +445,9 @@
 		},
 		components: {
 			"sapi-dialog": dialog,
-			"set-station": station
+			"set-station": station,
+			"sapi-upload": upload,
+			"sapi-select": select
 		},
 		watch: {
 			value(val) {

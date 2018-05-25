@@ -56,9 +56,9 @@
 
 			<div class="fullline">
 				<div class="wp-100">
-					<span class="w-65" v-text="$t('营业执照')"></span>
+					<span class="w-65" v-text="$t('employee.BusinessLicence')"></span>
 					<div class="right-auto-box">
-						<el-input id="RoleName" v-model.trim="viewModel.supplierClasses" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.BusinessLicence" readonly></el-input>
 					</div>
 				</div>		
 			</div>
@@ -93,9 +93,9 @@
 			</div>
 			<div class="fullline">
 				<div class="wp-50">
-					<span class="w-65" v-text="$t('公司地址')"></span>
+					<span class="w-65" v-text="$t('employee.Address')"></span>
 					<div class="right-auto-box">
-						<el-input id="RoleName" v-model.trim="viewModel.CityName" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.Address" readonly></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
@@ -127,9 +127,9 @@
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('公司网页')"></span>
+					<span class="w-65" v-text="$t('employee.OfficialWebsite')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.FaxNumber" readonly></el-input>
+						<el-input v-model.trim="viewModel.OfficialWebsite" readonly></el-input>
 					</div>
 				</div>
 			</div>
@@ -146,18 +146,11 @@
 			
 			<div class="fullline">
 				<span class="w-65" v-text="$t('联系人信息')"></span>
-				<!--岗位列表-->
+				<!--供方联系人列表-->
 				<div class="right-auto-box common-table width-p100">
-					<el-table :data="viewModel.Stations" border>  <!-- viewModer是通过具体SupId得到的数据 res -->
+					<el-table :data="viewModel.SupplierContacts" border>  <!-- viewModel是通过具体SupId得到的数据 res -->
 						<el-table-column v-for="item in stationHeaderData" :key="item.id" :prop="item.prop" :label="item.label" show-overflow-tooltip width="width" :sortable="item.sortable">
 						</el-table-column>
-						<!-- <el-table-column :label="$t('employee.defaultStationName')" width="100">
-							<template slot-scope="props">
-								<span>
-									<el-radio class="radio" v-model="viewModel.DefaultStationId" :label="props.row.StationId" disabled>&nbsp;</el-radio>
-								</span>
-							</template>							
-						</el-table-column> -->
 					</el-table>
 				</div>
 			</div>
@@ -178,9 +171,9 @@
 				visible: true,
 				viewModel: {},
 				stationListShow: false,
-				stationHeaderData: //员工查看页岗位表头
+				stationHeaderData: // 供方查看页表头
 					[{
-						prop: "StationName",
+						prop: "ContactName",
 						label: this.$t('employee.contactName'),
 						sortable: false
 					}, {
@@ -188,19 +181,19 @@
 						label: this.$t('employee.contactStation'),
 						sortable: false
 					}, {
-						prop: "CorpName",
+						prop: "Sex",
 						label: this.$t('employee.contactSex'),
 						sortable: false
 					}, {
-						prop: "DeptName",
+						prop: "OfficePhone",
 						label: this.$t('employee.contactPhone'),
 						sortable: false
 					}, {
-						prop: "DeptName",
+						prop: "MobileTelephone",
 						label: this.$t('employee.contactMobile'),
 						sortable: false
 					}, {
-						prop: "DeptName",
+						prop: "Email",
 						label: this.$t('employee.contactMail'),
 						sortable: false
 					}]
@@ -228,12 +221,12 @@
 		},
 		mounted() {
 			this.visible = this.value;
-			
 		},
 		watch: {
 			value(val) {
 				this.visible = val;
 				console.log(this.viewModel)
+				console.log(this.viewModel.SupplierContacts[0])
 			}
 			
 		}
