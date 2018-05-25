@@ -259,6 +259,7 @@
 		watch: {
 			value(val) {
 				this.visible = this.value;
+				console.log(this.createModel)
 			}
 		},
 		created() {

@@ -185,6 +185,26 @@
 		},
 		mounted() {
 			
+		},
+		watch:{
+			"params.provinceId"(val){
+				if(!val&&this.citys.length>0){
+					setTimeout(()=>{
+						this.params.cityId=null;
+						this.params.areaId=null;
+						this.citys=[];
+						this.areas=[];
+					});
+				}
+			},
+			"params.cityId"(val){
+				if(!val&&this.areas.length>0){
+					setTimeout(()=>{
+						this.params.areaId=null;
+						this.areas=[];
+					});
+				}
+			}
 		}
 	}
 </script>

@@ -15,47 +15,12 @@ var router = {
             }
         },
         {
-            path: '/user',
-            name: "user",
-            component: function(resolve) {
-                require(['./user/list.vue'], resolve);
-            }
-        },
-        {
-            path: '/structure',
-            name: 'structure',
-            component: function(resolve) {
-                require(['./structure/main.vue'], resolve);
-            }
-        },
-        {
-            path: '/station',
-            name: 'station',
-            component: function(resolve) {
-                require(['./station/main.vue'], resolve);
-            }
-        },
-        {
             path: '/employee',
             name: 'employee',
             component: function(resolve) {
                 require(['./employee/list.vue'], resolve);
             }
         },
-        {
-            path: "/position",
-            name: 'position',
-            component: function(resolve) {
-                require(['./position/list.vue'], resolve);
-            }
-        },
-        // {
-        //     path: "/permission",
-        //     name: 'permission',
-        //     component: function(resolve) {
-        //         require(['./permission/list.vue'], resolve);
-        //     }
-        // },
         {
             path: '/403',
             component: function(resolve) {

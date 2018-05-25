@@ -7,22 +7,23 @@
 				<div class="wp-50">
 					<span class="w-65 must-star" v-text="$t('employee.SupName')"></span>
 					<div class="right-auto-box">
-						<el-input id="addEmployeeName" v-model.trim="createModel.SupName" :maxlength="100"></el-input>
+						<el-input id="addSupName" v-model.trim="createModel.SupName" :maxlength="100"></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.SupNo')"></span>
+					<span class="w-65 must-star" v-text="$t('employee.SupNo')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="createModel.SupNo" :maxlength="100"></el-input>
+						<el-input id="addSupNo" v-model.trim="createModel.SupNo" :maxlength="100"></el-input>
 					</div>
 				</div>
 			</div>
 
+			<!-- 省 城市 区域 -->
 			<div class="fullline">
 				<div class="wp-50">
 					<span class="w-65 must-star" v-text="$t('employee.ProvinceName')"></span>
 					<div class="right-auto-box">
-						<sapi-select v-model="createModel.ProvinceId" :data="provinces" :props="{label:'Name',value:'Id'}" @change="provinceChange"></sapi-select>
+						<sapi-select v-model="createModel.ProvinceName" :data="provinces" :props="{label:'Name',value:'Id'}" @change="provinceChange"></sapi-select>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
@@ -42,7 +43,7 @@
 				<div class="wp-50 float-right">
 					<span class="w-65 must-star" v-text="$t('employee.SupId')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="createModel.SupId" :maxlength="100"></el-input>
+						<el-input id="addSupId" v-model.trim="createModel.SupId" :maxlength="100"></el-input>
 					</div>
 				</div>
 			</div>	
@@ -56,14 +57,16 @@
 				</div>
 			</div>
 			<!-- 营业执照 -->
-			<div class="fullline">
+			<!-- <div class="fullline">
 				<div class="wp-100">
 					<span class="w-65 must-star" v-text="$t('employee.BusinessLicence')"></span>
 					<div class="right-auto-box">
-						<el-input id="RoleName" v-model.trim="createModel.BusinessLicence" :maxlength="100"></el-input>
+						<div>
+							<sapi-upload v-model="list"></sapi-upload>
+						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- 企业类型纳税人类型 -->
 			<div class="fullline">
 				<div class="wp-50">
@@ -73,9 +76,9 @@
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('纳税类型')"></span>
+					<span class="w-65" v-text="$t('employee.TaxPayerId')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="createModel.SupId" :maxlength="100"></el-input>
+						<el-input v-model.trim="createModel.TaxPayerId" :maxlength="100"></el-input>
 					</div>
 				</div>
 			</div>
@@ -329,22 +332,27 @@
 			open() {
 				this.createModel = {};
 				this.getData();
+				this.getProvinces();
+                this.citys = [];
+                this.areas = [];
+			},
+			getData(){
+				this.$get("/api/plat/suppliers/create", function(res) {
+					this.createModel = res;
+				});
 			},
 			submit() {
 				if(!this.validate()) {
 					return;
 				}
-				// if(this.createModel.SupId.length === 0) {
-				// 	this.createModel.DefaultSupId = null;
-				// }
 				this.disabled = true;
-				if(!this.createModel.SupId)
-                {
-                    this.createModel.SupId = null;
-                    this.createModel.SupName = null;
-                }
+				// if(!this.createModel.SupId)
+                // {
+                //     this.createModel.SupId = null;
+                //     this.createModel.SupName = null;
+                // }
 				
-				this.$post("/api/plat/suppliers/", this.createModel, function(res) {
+				this.$post("/api/plat/suppliers", this.createModel, function(res) {
 					this.disabled = false;
 					this.$parent.loadData();
 					this.close();
@@ -354,11 +362,11 @@
 			validate() {
 				this.$closeWaringTips(".form-error-tips");
 				if(!this.createModel.SupName) {
-					this.$errorTips(this.$t('employee.employeeNameNotBeEmpty'), "#addEmployeeName");
+					this.$errorTips(this.$t('employee.employeeNameNotBeEmpty'), "#addSupName");
 					return false;
 				}
 				if(!this.createModel.SupNo){
-					this.$errorTips(this.$t("employee.supNoNotBeEmpty"));
+					this.$errorTips(this.$t("employee.supNoNotBeEmpty"),"#addSupNo");
 					return false;
                 }						
 				if(!this.createModel.ProvinceName) {
@@ -368,29 +376,32 @@
                 if(!this.createModel.CityName) {
                     Vue.msg(this.$t("employee.selectCityName"));
 					return false;
-				} 		
-				if(!this.createModel.SupAddress) {
-					this.$errorTips(this.$t("employee.landAddressNotBeEmpty"));
+				}
+				if(!this.createModel.AreaName) {
+                    Vue.msg(this.$t("employee.selectAreaName"));
 					return false;
-                }
-               
-                
+				}
+				if(!this.createModel.SupId) {
+                    Vue.msg(this.$t("employee.selectSupId"));
+					return false;
+				}    						              
 				return true;
 			},
 			changeDefaultStation(row) {
 				this.createModel.DefaultStationId = row.StationId;
 			},
-			getData() {
-				this.$get("/api/plat/suppliers/create", function(res) {
-					this.createModel = res;
-					this.getCitys(res.ProvinceId);
-                    this.getAreas(res.CityId);
-				});
-				this.getProvinces();
-			},
+			// getData() {
+			// 	this.$get("/api/plat/suppliers/create", function(res) {
+			// 		this.createModel = res;
+			// 		this.getCitys(res.ProvinceId);
+            //         this.getAreas(res.CityId);
+			// 	});
+			// 	this.getProvinces();
+			// },
 			showStationPage() {
 				this.stationVisible = true;
 			},
+
 			callback(res) {
 				this.createModel.Stations = res;
 				
@@ -452,7 +463,8 @@
 		watch: {
 			value(val) {
 				this.visible = val;
-			}
+				console.log(this.createModel)
+			},
 		},
 		created() {
 			Vue.use(tips);
