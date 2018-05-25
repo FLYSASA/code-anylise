@@ -258,7 +258,29 @@
 				disabled: false,
 				visible: true,
 				stationVisible: false,
-				createModel: {},
+				createModel: {
+					SupName: null,
+					SupNo: null,
+					ProvinceId: null,
+					ProvinceName: null,
+					CityId: null,
+					CityName: null,
+					AreaId: null,
+					AreaName: null,
+					TaxPayerId: null,
+					EnterpriseForm: null,
+					CreditCode: null,
+					LegalRepresentative: null,
+					RegisteredCapital: null,
+					Address: null,
+					Postalcode: null,
+					OfficePhone: null,
+					FaxNumber: null,
+					Email: null,
+					OfficialWebsite: null,
+					BusinessLicence: null,
+					Remark: null,
+				},
 
 				stationHeaderData: 
 					[{
@@ -330,17 +352,38 @@
 				this.$emit("input", false);
 			},
 			open() {
-				this.createModel = {};
-				this.getData();
+				this.createModel= {
+					SupName: null,
+					SupNo: null,
+					ProvinceId: null,
+					ProvinceName: null,
+					CityId: null,
+					CityName: null,
+					AreaId: null,
+					AreaName: null,
+					TaxPayerId: null,
+					EnterpriseForm: null,
+					CreditCode: null,
+					LegalRepresentative: null,
+					RegisteredCapital: null,
+					Address: null,
+					Postalcode: null,
+					OfficePhone: null,
+					FaxNumber: null,
+					Email: null,
+					OfficialWebsite: null,
+					BusinessLicence: null,
+					Remark: null,
+                };
 				this.getProvinces();
                 this.citys = [];
                 this.areas = [];
 			},
-			getData(){
-				this.$get("/api/plat/suppliers/create", function(res) {
-					this.createModel = res;
-				});
-			},
+			// getData(){
+			// 	this.$get("/api/plat/suppliers/create", function(res) {
+			// 		this.createModel = res;
+			// 	});
+			// },
 			submit() {
 				if(!this.validate()) {
 					return;
@@ -380,11 +423,7 @@
 				if(!this.createModel.AreaName) {
                     Vue.msg(this.$t("employee.selectAreaName"));
 					return false;
-				}
-				if(!this.createModel.SupId) {
-                    Vue.msg(this.$t("employee.selectSupId"));
-					return false;
-				}    						              
+				}  						              
 				return true;
 			},
 			changeDefaultStation(row) {

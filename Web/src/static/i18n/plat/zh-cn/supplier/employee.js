@@ -25,6 +25,8 @@ export default {
 		// stationCorpName: "所属公司",
 		// stationDeptName: "所属部门",
 
+		
+
 		// supplier	一览	
 		SupName: "供方名称",
 		SupNo: "供方编号",
