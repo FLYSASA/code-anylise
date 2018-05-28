@@ -156,7 +156,7 @@
 							<!-- 性别 -->
 							<el-table-column prop="Sex" :label="$t('employee.contactSex')"  width="120" show-overflow-tooltip>
 								<template slot-scope="props" >
-									{{viewModel.Sex == 0 ? $t('employee.sexData.man'):$t('employee.sexData.woman')}}
+									{{props.row.Sex === 0 ? $t('employee.sexData.man'):$t('employee.sexData.woman')}}
 								</template> 
 							</el-table-column>
 							<el-table-column prop="OfficePhone" :label="$t('employee.contactPhone')"  show-overflow-tooltip>
