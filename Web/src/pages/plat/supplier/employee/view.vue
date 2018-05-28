@@ -149,8 +149,23 @@
 				<!--供方联系人列表-->
 				<div class="right-auto-box common-table width-p100">
 					<el-table :data="viewModel.SupplierContacts" border>  <!-- viewModel是通过具体SupId得到的数据 res -->
-						<el-table-column v-for="item in stationHeaderData" :key="item.id" :prop="item.prop" :label="item.label" show-overflow-tooltip width="width" :sortable="item.sortable">
-						</el-table-column>
+							<el-table-column prop="ContactName" :label="$t('employee.contactName')" show-overflow-tooltip>
+							</el-table-column>
+							<el-table-column prop="PositionName" :label="$t('employee.contactStation')"  show-overflow-tooltip>
+							</el-table-column>
+							<!-- 性别 -->
+							<el-table-column prop="Sex" :label="$t('employee.contactSex')"  width="120" show-overflow-tooltip>
+								<template slot-scope="props" >
+									{{viewModel.Sex == 0 ? $t('employee.sexData.man'):$t('employee.sexData.woman')}}
+								</template> 
+							</el-table-column>
+							<el-table-column prop="OfficePhone" :label="$t('employee.contactPhone')"  show-overflow-tooltip>
+							</el-table-column>
+							<el-table-column prop="MobileTelephone" :label="$t('employee.contactMobile')"  show-overflow-tooltip>
+							</el-table-column>
+							<el-table-column prop="Email" :label="$t('employee.contactMail')"  show-overflow-tooltip>
+							</el-table-column>
+						
 					</el-table>
 				</div>
 			</div>
@@ -171,32 +186,6 @@
 				visible: true,
 				viewModel: {},
 				stationListShow: false,
-				stationHeaderData: // 供方查看页表头
-					[{
-						prop: "ContactName",
-						label: this.$t('employee.contactName'),
-						sortable: false
-					}, {
-						prop: "StationNo",
-						label: this.$t('employee.contactStation'),
-						sortable: false
-					}, {
-						prop: "Sex",
-						label: this.$t('employee.contactSex'),
-						sortable: false
-					}, {
-						prop: "OfficePhone",
-						label: this.$t('employee.contactPhone'),
-						sortable: false
-					}, {
-						prop: "MobileTelephone",
-						label: this.$t('employee.contactMobile'),
-						sortable: false
-					}, {
-						prop: "Email",
-						label: this.$t('employee.contactMail'),
-						sortable: false
-					}]
 			}
 		},
 		props: ["option", "value"],  // option 是list父组件传过来的props.row
@@ -211,8 +200,6 @@
 			getData() {
 				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {			
 					this.viewModel = res;
-					// this.viewModel.Birthday = this.$dateFormat('yyyy-MM-dd', this.viewModel.Birthday);
-					// this.viewModel.EntryDate = this.$dateFormat('yyyy-MM-dd', this.viewModel.EntryDate);
 				});
 			}
 		},
@@ -226,7 +213,6 @@
 			value(val) {
 				this.visible = val;
 				console.log(this.viewModel)
-				console.log(this.viewModel.SupplierContacts[0])
 			}
 			
 		}

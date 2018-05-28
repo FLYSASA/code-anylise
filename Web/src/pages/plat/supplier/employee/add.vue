@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<!-- 营业执照 -->
-			<!-- <div class="fullline">
+			<div class="fullline">
 				<div class="wp-100">
 					<span class="w-65 must-star" v-text="$t('employee.BusinessLicence')"></span>
 					<div class="right-auto-box">
@@ -66,7 +66,7 @@
 						</div>
 					</div>
 				</div>
-			</div> -->
+			</div>
 			<!-- 企业类型纳税人类型 -->
 			<div class="fullline">
 				<div class="wp-50">
@@ -150,23 +150,6 @@
 					</div>
 				</div>
 			</div>					
-			<!-- 性别选择 备用 -->
-			<!-- <div class="fullline">
-				<div class="wp-50">
-					<span class="w-65" v-text="$t('employee.sex')"></span>
-					<el-radio-group v-model="createModel.Sex">
-						<el-radio class="radio" :label="0">{{$t('employee.sexData.man')}}</el-radio>
-						<el-radio class="radio" :label="1">{{$t('employee.sexData.woman')}}</el-radio>
-					</el-radio-group>
-				</div>
-				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.birthday')"></span>
-					<div class="right-auto-box" style="position: relative;">
-						<el-date-picker style="width: 100%;" v-model="createModel.birthday" type="date" :placeholder="$t('selectDate')">
-						</el-date-picker>
-					</div>
-				</div>
-			</div> -->
 			
 			<div class="fullline">
 				<span class="w-65" v-text="$t('employee.contactMsg')"></span>
@@ -225,7 +208,7 @@
 							<!-- 操作 -->
 							<el-table-column :label="$t('handle')" fixed="right" width="100">
 								<template slot-scope="props">   
-									<a  class="table-btn" href="javascript:void(0)" @click.stop="deleteItem(props.row,props.$index)" v-text="operateText.delete"></a>
+									<a  class="table-btn" href="javascript:void(0)" @click.stop="deleteItem(props.row,props.$index)" ></a>
 								</template>
 							</el-table-column>
 						</el-table>
@@ -267,8 +250,8 @@
 					CityName: null,
 					AreaId: null,
 					AreaName: null,
-					TaxPayerId: null,
-					EnterpriseForm: null,
+					TaxPayerId: 0,
+					EnterpriseForm: 0,
 					CreditCode: null,
 					LegalRepresentative: null,
 					RegisteredCapital: null,
@@ -280,6 +263,54 @@
 					OfficialWebsite: null,
 					BusinessLicence: null,
 					Remark: null,
+					SupplierClassRelats: [
+						{
+						ClassId: null,
+						SupId: null,
+						RowIndex: 0
+						}
+					],
+					SupplierContacts: [
+						{
+						ContactId: null,
+						SupId: null,
+						ContactName: null,
+						PositionName: null,
+						Sex: true,
+						Email: null,
+						OfficePhone: null,
+						MobileTelephone: null,
+						RowIndex: 0
+						}
+					],
+					SupplierQualificationFiles: [
+						{
+						FileId: null,
+						FileName: null,
+						SupId: null,
+						OriginalFilePath: null,
+						ThumbnailFilePath: null,
+						ClassId: null,
+						QualificationName: null,
+						RowIndex: 0,
+						Remark: null
+						}
+					],
+					SupplierCooperativeCases: [
+						{
+						CooperativeId: null,
+						SupId: null,
+						CooperativeTypeId: 0,
+						CooperativeCompany: null,
+						CooperativeProjectName: null,
+						CooperativeRange: null,
+						ContractAmount: 0,
+						CommencementDate: null,
+						CompletionDate: null,
+						RowIndex: 0,
+						Remark: null
+						}
+					]
 				},
 
 				stationHeaderData: 
@@ -351,8 +382,9 @@
 				this.$closeWaringTips(".form-error-tips");
 				this.$emit("input", false);
 			},
+			/* 打开添加对话框触发 获取数据事件 */
 			open() {
-				this.createModel= {
+				this.createModel = {
 					SupName: null,
 					SupNo: null,
 					ProvinceId: null,
@@ -361,8 +393,8 @@
 					CityName: null,
 					AreaId: null,
 					AreaName: null,
-					TaxPayerId: null,
-					EnterpriseForm: null,
+					TaxPayerId: 0,
+					EnterpriseForm: 0,
 					CreditCode: null,
 					LegalRepresentative: null,
 					RegisteredCapital: null,
@@ -374,26 +406,74 @@
 					OfficialWebsite: null,
 					BusinessLicence: null,
 					Remark: null,
-                };
+					SupplierClassRelats: [
+						{
+						ClassId: null,
+						SupId: null,
+						RowIndex: 0
+						}
+					],
+					SupplierContacts: [
+						{
+						ContactId: null,
+						SupId: null,
+						ContactName: null,
+						PositionName: null,
+						Sex: true,
+						Email: null,
+						OfficePhone: null,
+						MobileTelephone: null,
+						RowIndex: 0
+						}
+					],
+					SupplierQualificationFiles: [
+						{
+						FileId: null,
+						FileName: null,
+						SupId: null,
+						OriginalFilePath: null,
+						ThumbnailFilePath: null,
+						ClassId: null,
+						QualificationName: null,
+						RowIndex: 0,
+						Remark: null
+						}
+					],
+					SupplierCooperativeCases: [
+						{
+						CooperativeId: null,
+						SupId: null,
+						CooperativeTypeId: 0,
+						CooperativeCompany: null,
+						CooperativeProjectName: null,
+						CooperativeRange: null,
+						ContractAmount: 0,
+						CommencementDate: null,
+						CompletionDate: null,
+						RowIndex: 0,
+						Remark: null
+						}
+					]
+				};
+
+
+
 				this.getProvinces();
                 this.citys = [];
                 this.areas = [];
 			},
-			// getData(){
-			// 	this.$get("/api/plat/suppliers/create", function(res) {
-			// 		this.createModel = res;
-			// 	});
-			// },
+
 			submit() {
 				if(!this.validate()) {
 					return;
 				}
 				this.disabled = true;
-				// if(!this.createModel.SupId)
-                // {
-                //     this.createModel.SupId = null;
-                //     this.createModel.SupName = null;
-                // }
+				/* 不存在SupId和SupName初始化为null */
+				if(!this.createModel.SupId)
+                {
+                    this.createModel.SupId = null;
+                    this.createModel.SupName = null;
+                }
 				
 				this.$post("/api/plat/suppliers", this.createModel, function(res) {
 					this.disabled = false;
@@ -429,14 +509,6 @@
 			changeDefaultStation(row) {
 				this.createModel.DefaultStationId = row.StationId;
 			},
-			// getData() {
-			// 	this.$get("/api/plat/suppliers/create", function(res) {
-			// 		this.createModel = res;
-			// 		this.getCitys(res.ProvinceId);
-            //         this.getAreas(res.CityId);
-			// 	});
-			// 	this.getProvinces();
-			// },
 			showStationPage() {
 				this.stationVisible = true;
 			},
@@ -502,7 +574,7 @@
 		watch: {
 			value(val) {
 				this.visible = val;
-				console.log(this.createModel)
+				// console.log(this.createModel)
 			},
 		},
 		created() {
