@@ -38,9 +38,9 @@
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('employee.SupId')"></span>
+					<span class="w-65" v-text="$t('employee.CreditCode')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.SupId" readonly></el-input>
+						<el-input v-model.trim="viewModel.CreditCode" readonly></el-input>
 					</div>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 				<div class="wp-100">
 					<span class="w-65" v-text="$t('供方分类')"></span>
 					<div class="right-auto-box">
-						<el-input id="RoleName" v-model.trim="viewModel.supplierClasses" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.supplierClasses" readonly></el-input>		
 					</div>
 				</div>		
 			</div>
@@ -67,13 +67,13 @@
 				<div class="wp-50">
 					<span class="w-65" v-text="$t('employee.EnterpriseForm')"></span>
 					<div class="right-auto-box">
-						<el-input id="RoleName" v-model.trim="viewModel.EnterpriseForm" readonly></el-input>
+						<el-input id="RoleName" v-model.trim="viewModel.EnterpriseForm === 1 ? '国有企业' : '民营企业'" readonly></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('纳税人类型')"></span>
+					<span class="w-65" v-text="$t('employee.TaxPayerId')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="viewModel.SupId" readonly></el-input>
+						<el-input v-model.trim="viewModel.TaxPayerId === 1 ? '一般纳税人' : '小规模纳税人'" readonly></el-input>
 					</div>
 				</div>
 			</div>

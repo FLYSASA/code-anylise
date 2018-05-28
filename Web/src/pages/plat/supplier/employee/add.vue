@@ -2,6 +2,7 @@
 	<sapi-dialog v-model="visible" width="800px" top="6%" class="add" @on-open="open" @on-close="close">
 		<span slot="title" v-text="$t('employee.addEmployeeTitle')"></span>
 		<div class="form-error-tips"></div>
+
 		<div class="form-content">
 			<div class="fullline">
 				<div class="wp-50">
@@ -41,16 +42,16 @@
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65 must-star" v-text="$t('employee.SupId')"></span>
+					<span class="w-65 must-star" v-text="$t('employee.CreditCode')"></span>
 					<div class="right-auto-box">
-						<el-input id="addSupId" v-model.trim="createModel.SupId" :maxlength="100"></el-input>
+						<el-input id="addCreditCode" v-model.trim="createModel.CreditCode" :maxlength="100"></el-input>
 					</div>
 				</div>
 			</div>	
 			<!-- 供方分类 -->
 			<div class="fullline">
 				<div class="wp-100">
-					<span class="w-65 must-star" v-text="$t('供方分类')"></span>
+					<span class="w-65" v-text="$t('供方分类')"></span>
 					<div class="right-auto-box">
 						<el-input id="RoleName" v-model.trim="createModel.supplierClasses" :maxlength="100"></el-input>
 					</div>
@@ -59,7 +60,7 @@
 			<!-- 营业执照 -->
 			<div class="fullline">
 				<div class="wp-100">
-					<span class="w-65 must-star" v-text="$t('employee.BusinessLicence')"></span>
+					<span class="w-65" v-text="$t('employee.BusinessLicence')"></span>
 					<div class="right-auto-box">
 						<div>
 							<sapi-upload v-model="list"></sapi-upload>
@@ -72,7 +73,11 @@
 				<div class="wp-50">
 					<span class="w-65" v-text="$t('employee.EnterpriseForm')"></span>
 					<div class="right-auto-box">
-						<el-input id="RoleName" v-model.trim="createModel.EnterpriseForm" :maxlength="100"></el-input>
+						<!-- <el-input id="RoleName" v-model.trim="createModel.EnterpriseForm" :maxlength="100"></el-input> -->
+						<!-- 引入下拉框 -->
+						<sapi-select :props="props"  :data="datas" @change="change"></sapi-select>
+
+
 					</div>
 				</div>
 				<div class="wp-50 float-right">
@@ -208,7 +213,7 @@
 							<!-- 操作 -->
 							<el-table-column :label="$t('handle')" fixed="right" width="100">
 								<template slot-scope="props">   
-									<a  class="table-btn" href="javascript:void(0)" @click.stop="deleteItem(props.row,props.$index)" ></a>
+									<a  class="table-btn" href="javascript:void(0)" @click.stop="deleteItem(props.row,props.$index)"  v-text="operateText.delete" ></a>
 								</template>
 							</el-table-column>
 						</el-table>
@@ -231,16 +236,26 @@
 	import station from "@/components/sapi-station-multiline.vue";
 	import upload from "@/components/sapi-upload.vue";
 	import select from "@/components/sapi-select.vue";
+	
 	export default {
 		data() {
 			return {
+				datas: [],
+				props: {label:'Name',value:'Id'},
+
 				provinces:[],
                 citys:[],
                 areas:[],
 				list: [],
+				operateText: {
+					edit: this.$t('edit'),
+					delete: this.$t('delete')					
+				},
+
 				disabled: false,
 				visible: true,
 				stationVisible: false,
+
 				createModel: {
 					SupName: null,
 					SupNo: null,
@@ -262,125 +277,14 @@
 					Email: null,
 					OfficialWebsite: null,
 					BusinessLicence: null,
-					Remark: null,
-					SupplierClassRelats: [
-						{
-						ClassId: null,
-						SupId: null,
-						RowIndex: 0
-						}
-					],
-					SupplierContacts: [
-						{
-						ContactId: null,
-						SupId: null,
-						ContactName: null,
-						PositionName: null,
-						Sex: true,
-						Email: null,
-						OfficePhone: null,
-						MobileTelephone: null,
-						RowIndex: 0
-						}
-					],
-					SupplierQualificationFiles: [
-						{
-						FileId: null,
-						FileName: null,
-						SupId: null,
-						OriginalFilePath: null,
-						ThumbnailFilePath: null,
-						ClassId: null,
-						QualificationName: null,
-						RowIndex: 0,
-						Remark: null
-						}
-					],
-					SupplierCooperativeCases: [
-						{
-						CooperativeId: null,
-						SupId: null,
-						CooperativeTypeId: 0,
-						CooperativeCompany: null,
-						CooperativeProjectName: null,
-						CooperativeRange: null,
-						ContractAmount: 0,
-						CommencementDate: null,
-						CompletionDate: null,
-						RowIndex: 0,
-						Remark: null
-						}
-					]
+					Remark: null
 				},
-
-				stationHeaderData: 
-					[{
-						prop: "StationName",
-						label: this.$t('employee.stationName'),
-						sortable: false
-					}, {
-						prop: "StationNo",
-						label: this.$t('employee.stationNo'),
-						sortable: false
-					}, {
-						prop: "CorpName",
-						label: this.$t('employee.stationCorpName'),
-						sortable: false
-					}, {
-						prop: "DeptName",
-						label: this.$t('employee.stationDeptName'),
-						sortable: false
-					}]
 			}
 		},
 		props: ["value"],
 		methods: {
-			//省份
-            getProvinces:function(){
-                this.$get("/api/plat/areas/provinces", {}, function(res) {
-					this.provinces = res;
-                });
-            },
-            provinceChange:function(province)
-            {
-                this.createModel.ProvinceName = province.Name;
-                this.createModel.CityId = null;
-                this.createModel.CityName = null;
-                this.createModel.AreaId = null;
-                this.createModel.AreaName = null;
-                this.areas = [];
-                this.getCitys(province.Id);
-            },
-            //城市
-            getCitys:function(provinceId)
-            {
-                this.$get("/api/plat/areas/"+provinceId+"/citys", {}, function(res) {
-                    this.citys = res;
-                });
-            },
-            cityChange:function(city)
-            {
-                this.createModel.CityName = city.Name;
-                this.createModel.AreaId = null;
-                this.createModel.AreaName = null;
-                this.getAreas(city.Id);
-            },
-            //区域
-            getAreas:function(cityId)
-            {
-                this.$get("/api/plat/areas/"+cityId+"/areas", {}, function(res) {
-                    this.areas = res;
-                    var area =  { Id:"", Name:"请选择" };
-                    this.areas.splice(0,0,area);
-                });
-            },
-            areaChange:function(area)
-            {
-                this.createModel.AreaName = area.Name;
-            },
-			close() {
-				this.$closeWaringTips(".form-error-tips");
-				this.$emit("input", false);
+			change(data){
+				console.log(data)
 			},
 			/* 打开添加对话框触发 获取数据事件 */
 			open() {
@@ -406,73 +310,73 @@
 					OfficialWebsite: null,
 					BusinessLicence: null,
 					Remark: null,
-					SupplierClassRelats: [
-						{
-						ClassId: null,
-						SupId: null,
-						RowIndex: 0
-						}
-					],
-					SupplierContacts: [
-						{
-						ContactId: null,
-						SupId: null,
-						ContactName: null,
-						PositionName: null,
-						Sex: true,
-						Email: null,
-						OfficePhone: null,
-						MobileTelephone: null,
-						RowIndex: 0
-						}
-					],
-					SupplierQualificationFiles: [
-						{
-						FileId: null,
-						FileName: null,
-						SupId: null,
-						OriginalFilePath: null,
-						ThumbnailFilePath: null,
-						ClassId: null,
-						QualificationName: null,
-						RowIndex: 0,
-						Remark: null
-						}
-					],
-					SupplierCooperativeCases: [
-						{
-						CooperativeId: null,
-						SupId: null,
-						CooperativeTypeId: 0,
-						CooperativeCompany: null,
-						CooperativeProjectName: null,
-						CooperativeRange: null,
-						ContractAmount: 0,
-						CommencementDate: null,
-						CompletionDate: null,
-						RowIndex: 0,
-						Remark: null
-						}
-					]
+					SupplierContacts: []
+
 				};
-
-
 
 				this.getProvinces();
                 this.citys = [];
                 this.areas = [];
 			},
+			close() {
+				this.$closeWaringTips(".form-error-tips");
+				this.$emit("input", false);
+			},
 
+			//省份
+            getProvinces:function(){
+                this.$get("/api/plat/areas/provinces", {}, function(res) {
+					this.provinces = res;
+                });
+            },
+            provinceChange:function(province)
+            {
+				this.createModel.ProvinceName = province.Name;
+				this.createModel.ProvinceId = province.Id;
+                this.areas = [];
+                this.getCitys(province.Id);
+            },
+            //城市
+            getCitys:function(provinceId)
+            {
+                this.$get("/api/plat/areas/"+provinceId+"/citys", {}, function(res) {
+                    this.citys = res;
+                });
+            },
+            cityChange:function(city)
+            {
+				this.createModel.CityName = city.Name;
+				this.createModel.CityId = city.Id
+                this.getAreas(city.Id);
+            },
+            //区域
+            getAreas:function(cityId)
+            {
+                this.$get("/api/plat/areas/"+cityId+"/areas", {}, function(res) {
+					this.areas = res;
+                    var area =  { Id:"", Name:"请选择" };
+					this.areas.splice(0,0,area);
+					console.log(2)
+					console.log(this.areas)
+                });
+            },
+            areaChange:function(area)
+            {
+				this.createModel.AreaName = area.Name;
+				this.createModel.AreaId = area.Id
+            },
+
+			
+			/* 提交表单 */
 			submit() {
 				if(!this.validate()) {
 					return;
 				}
 				this.disabled = true;
-				/* 不存在SupId和SupName初始化为null */
+				/* 不存在SupId初始化为null */
 				if(!this.createModel.SupId)
                 {
                     this.createModel.SupId = null;
-                    this.createModel.SupName = null;
                 }
 				
 				this.$post("/api/plat/suppliers", this.createModel, function(res) {
@@ -503,14 +407,31 @@
 				if(!this.createModel.AreaName) {
                     Vue.msg(this.$t("employee.selectAreaName"));
 					return false;
-				}  						              
+				}  
+				
+				if(!this.createModel.CreditCode){
+					this.$errorTips(this.$t("employee.creditCodeNotBeEmpty"),"#addCreditCode");
+					return false;
+                }	
 				return true;
 			},
 			changeDefaultStation(row) {
 				this.createModel.DefaultStationId = row.StationId;
 			},
 			showStationPage() {
-				this.stationVisible = true;
+				// this.stationVisible = true;
+				var addContact = {
+					ContactId: null,
+					SupId: null,
+					ContactName: null,
+					PositionName: null,
+					Sex: 0,
+					Email: null,
+					OfficePhone: null,
+					MobileTelephone: null,
+					RowIndex: 0
+				}
+				this.createModel.SupplierContacts.push(addContact)
 			},
 
 			callback(res) {
@@ -528,6 +449,24 @@
 				}
 
 				this.createModel.DefaultStationId = this.createModel.Stations[0].StationId;				
+			},
+			/* 删除供方联系人 */
+			deleteEmployees(apiAddress, itemIds, successFunc) {
+				if(itemIds.length == 0) {
+					Vue.msg(this.$t("selectOneWhenDeleted"));
+					return false;
+				}
+
+				this.$deleteTips(function() {
+					this.$delete(apiAddress, JSON.stringify(itemIds), function(res) {
+						successFunc(res);
+						Vue.successMsg(this.$t("employee.delEmployeeSuccess"));
+					});
+				});
+			},
+			deleteItem(row, index) {
+				console.log(index)
+				this.createModel.SupplierContacts.splice(index,1)
 			},
 			deleteItems() {
 				var stations = this.createModel.Stations;

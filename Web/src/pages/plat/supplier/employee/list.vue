@@ -25,8 +25,14 @@
 				<el-table-column prop="SupNo" :label="$t('employee.SupNo')" width="120" sortable show-overflow-tooltip>
 				</el-table-column>
 				<el-table-column prop="TaxPayerId" :label="$t('employee.TaxPayerId')" show-overflow-tooltip>
+					<template slot-scope="props" >
+								{{props.row.TaxPayerId == 1 ? '一般纳税人' : '小规模纳税人'}}
+					</template> 
 				</el-table-column>
 				<el-table-column prop="EnterpriseForm" :label="$t('employee.EnterpriseForm')" show-overflow-tooltip>
+					<template slot-scope="props" >
+								{{props.row.EnterpriseForm === 1 ? '国营企业' : '民营企业'}}
+					</template> 
 				</el-table-column>
 				<el-table-column prop="RegisteredCapital" :label="$t('employee.RegisteredCapital')" show-overflow-tooltip>
 				</el-table-column>
@@ -103,6 +109,7 @@
 				var params = this.params;
 				this.$loadingOpen();
 				this.$get("/api/plat/suppliers/", params, function(res) {
+					console.log(params)
 					this.tableData = res.Rows;
 					this.pageTotal = res.Total;
 				});
@@ -132,9 +139,9 @@
 			deleteItem(row, index) {
 				var _this = this;
 				var deleteIds = [];
-				deleteIds.push(row.EmployeeId);
+				deleteIds.push(row.SupId);
 				this.deleteEmployees(
-					"/api/plat/employees/",
+					"/api/plat/suppliers/",
 					deleteIds,
 					function(res) {
 						_this.loadData();
@@ -143,7 +150,7 @@
 			deleteItems() {
 				var _this = this;
 				this.deleteEmployees(
-					"/api/plat/employees/",
+					"/api/plat/suppliers/",
 					_this.deleteIds,
 					function(res) {
 						_this.loadData();

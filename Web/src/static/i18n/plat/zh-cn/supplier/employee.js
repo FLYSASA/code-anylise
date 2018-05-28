@@ -38,7 +38,7 @@ export default {
 		ProvinceName: "省份",
 		CityName: "城市",
 		AreaName: "区域",
-		SupId: "信用代码",
+		CreditCode: "信用代码",
 		supplierClasses: "供方分类",
 		BusinessLicence: "营业执照",
 
@@ -106,7 +106,7 @@ export default {
         selectProvinceName: "请选择省份",
 		selectCityName: "请选择城市",
 		selectAreaName: "请选择区域",
-		selectSupId: "请填写信用代码",
+		creditCodeNotBeEmpty: "请填写信用代码",
         landAddressNotBeEmpty: "请填写区域",
         landMapPositionCheckedASCII: "地块地图位置可由字母、数字、英文标点及常用特殊字符(@#等)组成",
         selectIsBidInvitationPlease: "请选择获取方式",
@@ -118,6 +118,10 @@ export default {
 		sexData: {
 			man: "男",
 			woman: "女"
+		},
+		taxPayerData: {
+			common: "一般纳税人",
+			location: "小规模纳税人"
 		},
 
 		//code

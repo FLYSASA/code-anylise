@@ -7,13 +7,13 @@
 				<div class="wp-50">
 					<span class="w-65 must-star" v-text="$t('employee.SupName')"></span>
 					<div class="right-auto-box">
-						<el-input id="EmployeeName" v-model.trim="editModel.SupName" :maxlength="100"></el-input>
+						<el-input id="editSupName" v-model.trim="editModel.SupName" :maxlength="100"></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
 					<span class="w-65 must-star" v-text="$t('employee.SupNo')"></span>
 					<div class="right-auto-box">
-						<el-input  v-model.trim="editModel.SupNo" :maxlength="100"></el-input>
+						<el-input  id="editSupNo" v-model.trim="editModel.SupNo" :maxlength="100"></el-input>
 					</div>
 				</div>
 			</div>
@@ -41,16 +41,16 @@
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65 must-star" v-text="$t('employee.SupId')"></span>
+					<span class="w-65 must-star" v-text="$t('employee.CreditCode')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="editModel.SupId" :maxlength="100"></el-input>
+						<el-input id="editCreditCode" v-model.trim="editModel.CreditCode" :maxlength="100"></el-input>
 					</div>
 				</div>
 			</div>
 			<!-- 供方分类 -->
 			<div class="fullline">
 				<div class="wp-100">
-					<span class="w-65 must-star" v-text="$t('供方分类')"></span>
+					<span class="w-65" v-text="$t('供方分类')"></span>
 					<div class="right-auto-box">
 						<el-input id="RoleName" v-model.trim="editModel.supplierClasses" :maxlength="100"></el-input>
 					</div>
@@ -59,7 +59,7 @@
 			<!-- 营业执照 -->
 			<div class="fullline">
 				<div class="wp-100">
-					<span class="w-65 must-star" v-text="$t('employee.BusinessLicence')"></span>
+					<span class="w-65" v-text="$t('employee.BusinessLicence')"></span>
 					<div class="right-auto-box">
 						<div>
 							<sapi-upload v-model="list"></sapi-upload>
@@ -72,13 +72,13 @@
 				<div class="wp-50">
 					<span class="w-65" v-text="$t('employee.EnterpriseForm')"></span>
 					<div class="right-auto-box">
-						<el-input id="RoleName" v-model.trim="editModel.EnterpriseForm" :maxlength="100"></el-input>
+						<el-input id="RoleName" v-model.trim="editModel.EnterpriseForm === 1 ? '国有企业' : '民营企业'" :maxlength="100"></el-input>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
-					<span class="w-65" v-text="$t('纳税类型')"></span>
+					<span class="w-65" v-text="$t('employee.TaxPayerId')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="editModel.SupId" :maxlength="100"></el-input>
+						<el-input v-model.trim="editModel.TaxPayerId === 1 ? '一般纳税人' : '小规模纳税人'" :maxlength="100"></el-input>
 					</div>
 				</div>
 			</div>
@@ -335,48 +335,45 @@
 				if(!this.validate()) {
 					return;
 				}
-				console.log(this.editModel)
+				
 				if(this.editModel.SupId.length === 0) {
 					this.editModel.DefaultSupId = null;
 				}
 				this.disabled = true;
+				 console.log(this.editModel)
 				this.$put("/api/plat/suppliers/", this.editModel, function(res) {
 					this.disabled = false;
 					this.$parent.loadData();
 					this.close();
 					Vue.successMsg(this.$t('employee.editEmployeeSuccess'));
 				});
+				
 			},
 			validate() {
 				if(!this.editModel.SupName) {
-					this.$errorTips(this.$t('employee.employeeNameNotBeEmpty'), "#EmployeeName");
+					this.$errorTips(this.$t('employee.employeeNameNotBeEmpty'), "#editSupName");
 					return false;
 				}
-				var msgASCIIContent = this.$t("inputASCIIContentPlease");
-				if(this.editModel.MobileTelephone && !this.$checkedASCII(this.editModel.MobileTelephone)) {
-					this.$errorTips(msgASCIIContent, "#txtMobileTelephone");
+				if(!this.editModel.SupNo){
+					this.$errorTips(this.$t("employee.supNoNotBeEmpty"),"#editSupNo");
+					return false;
+                }						
+				if(!this.editModel.ProvinceName) {
+                    Vue.msg(this.$t("employee.selectProvinceName"));
+					return false;
+                } 		
+                if(!this.editModel.CityName) {
+                    Vue.msg(this.$t("employee.selectCityName"));
 					return false;
 				}
-				if(this.editModel.OfficePhone && !this.$checkedASCII(this.editModel.OfficePhone)) {
-					this.$errorTips(msgASCIIContent, "#txtOfficePhone");
+				if(!this.editModel.AreaName) {
+                    Vue.msg(this.$t("employee.selectAreaName"));
 					return false;
 				}
-				if(this.editModel.Email && !this.$checkedASCII(this.editModel.Email)) {
-					this.$errorTips(msgASCIIContent, "#txtEmail");
+				if(!this.editModel.CreditCode){
+					this.$errorTips(this.$t("employee.creditCodeNotBeEmpty"),"#editCreditCode");
 					return false;
-				}
-				if(this.editModel.WeChat && !this.$checkedASCII(this.editModel.WeChat)) {
-					this.$errorTips(msgASCIIContent, "#txtWeChat");
-					return false;
-				}
-				if(this.editModel.MicroBlog && !this.$checkedASCII(this.editModel.MicroBlog)) {
-					this.$errorTips(msgASCIIContent, "#txtMicroBlog");
-					return false;
-				}
-				if(this.editModel.QQ && !this.$checkedASCII(this.editModel.QQ)) {
-					this.$errorTips(msgASCIIContent, "#txtQQ");
-					return false;
-				}
+                }	  						              
 				return true;
 			},
 			changeDefaultStation(row) {
@@ -385,13 +382,26 @@
 			getData() {
 				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {
 					this.editModel = res;
+					// console.log(this.editModel)
 					this.getCitys(res.ProvinceId);
                     this.getAreas(res.CityId);
 				});
 				this.getProvinces();
 			},
 			showStationPage() {
-				this.stationVisible = true;
+				// this.stationVisible = true;
+				var addContact = {
+					ContactId: null,
+					SupId: null,
+					ContactName: null,
+					PositionName: null,
+					Sex: 0,
+					Email: null,
+					OfficePhone: null,
+					MobileTelephone: null,
+					RowIndex: 0
+				}
+				this.editModel.SupplierContacts.push(addContact)
 			},
 			callback(res) {
 				this.editModel.Stations = res;
@@ -425,31 +435,11 @@
 			// 		this.pageTotal = res.Total;
 			// 	});
 			// },
-			/* 删除供方联系人 */
-			deleteEmployees(apiAddress, itemIds, successFunc) {
-				if(itemIds.length == 0) {
-					Vue.msg(this.$t("selectOneWhenDeleted"));
-					return false;
-				}
 
-				this.$deleteTips(function() {
-					this.$delete(apiAddress, JSON.stringify(itemIds), function(res) {
-						successFunc(res);
-						Vue.successMsg(this.$t("employee.delEmployeeSuccess"));
-					});
-				});
-			},
+			/* 删除供方联系人 */
 			deleteItem(row, index) {
-				var _this = this;
-				var deleteIds = [];
-				deleteIds.push(row.SupId);
-				console.log(row.SupId)
-				this.deleteEmployees(
-					"/api/plat/suppliers/",
-					deleteIds,
-					function(res) {
-						_this.loadData();
-					});
+				console.log(index)
+				this.editModel.SupplierContacts.splice(index,1)
 			},
 			deleteItems() {
 				var _this = this;
