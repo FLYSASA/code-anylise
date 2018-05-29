@@ -377,7 +377,7 @@
 				this.editModel.SupplierContacts.push(addContact)
 			},
 
-			/* 获取所有联系人项id */
+			/* 获取所有已勾选联系人项id */
 			selectionChange(datas) {
 				this.deleteIds = [];
 				if(datas.length > 0) {
@@ -409,7 +409,6 @@
 						contacts.splice(i,1);  // 在SupplierContacts移除这个供方联系人
 						ids.splice(index,1)	   // 在勾选数组中移除这个联系人id
 					}
-
 				}
 			}
 		},

@@ -443,41 +443,35 @@
 					});
 				});
 			},
+
+			/* 删除已勾选联系人 */
 			deleteItem(row, index) {
 				this.createModel.SupplierContacts.splice(index,1)
 			},
 			deleteItems() {
-				var stations = this.createModel.Stations;
-				if(this.deleteIds.length == 0) {
+				var _this = this;
+				var ids = this.deleteIds; // 已勾选的contactId数组
+				var contacts = this.createModel.SupplierContacts
+
+				if(this.deleteIds.length === 0) {
 					Vue.msg(this.$t('selectOneWhenDeleted'));
 					return false;
 				}
-
-				var defaultId = this.createModel.DefaultStationId;
-				var hasDeleteDefault = false;
-				var ids=this.deleteIds;
-				for(var i=stations.length-1; i>-1 ; i--) {
-					var stationId = stations[i].StationId;
-					var index=ids.indexOf(stationId);
-					if(index>-1){
-						stations.splice(i,1);
-						ids.splice(index,1);
-						if(defaultId === stationId) {
-							hasDeleteDefault = true;
-						}
+				for(var i = contacts.length - 1; i > -1 ; i--) {  // 遍历当前的SupplierContacts
+					var contId = contacts[i].ContactId;  // 获取SupplierContacts中的每一项的 ContactId
+					var index = ids.indexOf(contId)      // 获取这一项的  ContactId 在 勾选数组contactId中的index值()
+					// index为-1,则说明没有勾选这项
+					if( index > -1 ){
+						contacts.splice(i,1);  // 在SupplierContacts移除这个供方联系人
+						ids.splice(index,1)	   // 在勾选数组中移除这个联系人id
 					}
-				}
-
-				//禅道bug8461，如果之前已有默认岗位，则该员工的默认岗位应该还为之前的岗位。
-				if(hasDeleteDefault && this.createModel.Stations[0]) {
-					this.createModel.DefaultStationId = this.createModel.Stations[0].StationId;
 				}
 			},
 			selectionChange(datas) {
 				this.deleteIds = [];
 				if(datas.length > 0) {
 					datas.forEach((data) => {
-						this.deleteIds.push(data.StationId);
+						this.deleteIds.push(data.ContactId);
 					});
 				}
 			}

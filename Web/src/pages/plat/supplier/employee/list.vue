@@ -121,6 +121,18 @@
 				this.option = row;
 				this.visible = true;
 			},
+
+			// 勾选项选择
+			rowSelect(datas) {
+				var _this = this;
+				_this.deleteIds = [];
+				if(datas.length > 0) {
+					datas.forEach(function(data) {
+						_this.deleteIds.push(data.SupId);
+					});
+				}
+			},
+
 			deleteEmployees(apiAddress, itemIds, successFunc) {
 				if(itemIds.length == 0) {
 					Vue.msg(this.$t("selectOneWhenDeleted"));
@@ -165,15 +177,7 @@
 				this.params.sortType = obj.order;
 				this.pageCurrentChange(1);
 			},
-			rowSelect(datas) {
-				var _this = this;
-				_this.deleteIds = [];
-				if(datas.length > 0) {
-					datas.forEach(function(data) {
-						_this.deleteIds.push(data.EmployeeId);
-					});
-				}
-			},
+
 			openViewDialog(row, index) {
 				this.currentView = "employee-view";
 				this.option = row;
