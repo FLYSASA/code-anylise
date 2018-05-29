@@ -161,14 +161,14 @@
 						</div>
 						<div class="wp-50 float-right btn-outer">
 							<ul class="btn-wrap">
-								<li class="icon-build" @click="showStationPage"></li>
+								<li class="icon-build" @click="addContact"></li>
 								<li class="icon-deleter" @click="deleteItems"></li>
 							</ul>
 						</div>
 					</div>
 					<!--供方联系人表格-->
 					<div class="common-table width-p100">
-						<el-table :data="editModel.SupplierContacts" @selection-change="selectionChange" border>
+						<el-table :data="editModel.SupplierContacts" border>
 							<el-table-column type="selection" width="45">
 							</el-table-column>
 							<el-table-column prop="ContactName" :label="$t('employee.contactName')" show-overflow-tooltip>
@@ -183,7 +183,7 @@
 							</el-table-column>
 							<!-- 性别 -->
 							<el-table-column prop="Sex" :label="$t('employee.contactSex')"  width="120" show-overflow-tooltip>
-								<template slot-scope="props" >
+								<template slot-scope="props" >  
 									<!-- <el-input v-model.trim="props.row.Sex" :maxlength="100"></el-input> -->
 									<el-radio-group v-model="props.row.Sex">
 										<el-radio class="radio" :label="0">{{$t('employee.sexData.man')}}</el-radio>
@@ -223,7 +223,7 @@
 			<el-button size="small" class="default-button" @click="close" v-text="$t('cancel')"></el-button>
 			<el-button class="blue-button" size="small" :disabled="disabled" @click="submit" v-text="$t('submit')"></el-button>
 		</div>
-		<set-station slot="moreDialog" :node-id="editModel.EmployeeId" :node-datas="editModel.Stations" v-model="stationVisible" :call-back="callback"></set-station>
+		<!-- <set-station slot="moreDialog" :node-id="editModel.EmployeeId" :node-datas="editModel.Stations" v-model="stationVisible" :call-back="callback"></set-station> -->
 	</sapi-dialog>
 </template>
 
@@ -250,42 +250,33 @@
 				deleteIds: [],
 				stationListShow: false,
 				stationVisible: false,
-				stationHeaderData: 
-					[{
-						prop: "ContactName",
-						label: this.$t('employee.contactName'),
-						sortable: false
-					}, {
-						prop: "PositionName",
-						label: this.$t('employee.contactStation'),
-						sortable: false
-					}, {
-						prop: "Sex",
-						label: this.$t('employee.contactSex'),
-						sortable: false
-					}, {
-						prop: "OfficePhone",
-						label: this.$t('employee.contactPhone'),
-						sortable: false
-					}, {
-						prop: "MobileTelephone",
-						label: this.$t('employee.contactMobile'),
-						sortable: false
-					}, {
-						prop: "Email",
-						label: this.$t('employee.contactMail'),
-						sortable: false
-					}]
 			}
 		},
 		props: ["value", "option"],
 		methods: {
-			 //省份
+			close() {
+				this.$closeWaringTips(".form-error-tips");
+				this.$emit("input", false);
+			},
+			open() {
+				this.getData();
+			},
+			getData() {
+				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {
+					this.editModel = res;
+					// console.log(this.editModel)
+					this.getCitys(res.ProvinceId);
+                    this.getAreas(res.CityId);
+				});
+				this.getProvinces();
+			},
+			 // 省份
             getProvinces:function(){
                 this.$get("/api/plat/areas/provinces", {}, function(res) {
 					this.provinces = res;
                 });
-            },
+			},
+			// 用户选择省份后触发
             provinceChange:function(province)
             {
                 this.editModel.ProvinceName = province.Name;
@@ -296,7 +287,7 @@
                 this.areas = [];
                 this.getCitys(province.Id);
             },
-            //城市
+            // 城市
             getCitys:function(provinceId)
             {
                 this.$get("/api/plat/areas/"+provinceId+"/citys", {}, function(res) {
@@ -310,7 +301,7 @@
                 this.editModel.AreaName = null;
                 this.getAreas(city.Id);
             },
-            //区域
+            // 区域
             getAreas:function(cityId)
             {
                 this.$get("/api/plat/areas/"+cityId+"/areas", {}, function(res) {
@@ -322,32 +313,23 @@
             areaChange:function(area)
             {
                 this.editModel.AreaName = area.Name;
-            },
-			close() {
-				this.$closeWaringTips(".form-error-tips");
-				this.$emit("input", false);
 			},
-			open() {
-				this.getData();
-			},
+			
 			/* 提交 */
 			submit() {
 				if(!this.validate()) {
 					return;
-				}
-				
+				}				
 				if(this.editModel.SupId.length === 0) {
 					this.editModel.DefaultSupId = null;
 				}
 				this.disabled = true;
-				 console.log(this.editModel)
 				this.$put("/api/plat/suppliers/", this.editModel, function(res) {
 					this.disabled = false;
 					this.$parent.loadData();
 					this.close();
 					Vue.successMsg(this.$t('employee.editEmployeeSuccess'));
-				});
-				
+				});				
 			},
 			validate() {
 				if(!this.editModel.SupName) {
@@ -376,19 +358,8 @@
                 }	  						              
 				return true;
 			},
-			changeDefaultStation(row) {
-				this.editModel.DefaultStationId = row.StationId;
-			},
-			getData() {
-				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {
-					this.editModel = res;
-					// console.log(this.editModel)
-					this.getCitys(res.ProvinceId);
-                    this.getAreas(res.CityId);
-				});
-				this.getProvinces();
-			},
-			showStationPage() {
+
+			addContact() {
 				// this.stationVisible = true;
 				var addContact = {
 					ContactId: null,
@@ -403,42 +374,9 @@
 				}
 				this.editModel.SupplierContacts.push(addContact)
 			},
-			callback(res) {
-				this.editModel.Stations = res;
-				
-				//edit by 杨俊  2018-03-22  禅道bug #9541 修改岗位选择页面删除默认岗位后，默认岗位没有的情况
-				if (this.editModel.Stations == null || this.editModel.Stations.length == 0){
-					this.editModel.DefaultStationId = null;
-					return;
-				}
-				for (var i = 0; i < this.editModel.Stations.length; i++){
-					if (this.editModel.DefaultStationId == this.editModel.Stations[i].StationId){
-						return;
-					}
-				}
-
-				this.editModel.DefaultStationId = this.editModel.Stations[0].StationId;		
-			},
-			selectionChange(datas) {
-				this.deleteIds = [];
-				if(datas.length > 0) {
-					datas.forEach((data) => {
-						this.deleteIds.push(data.StationId);
-					});
-				}
-			},
-			// loadData() {
-			// 	var params = this.params;
-			// 	this.$loadingOpen();
-			// 	this.$get("/api/plat/suppliers/", params, function(res) {
-			// 		this.tableData = res.Rows;
-			// 		this.pageTotal = res.Total;
-			// 	});
-			// },
 
 			/* 删除供方联系人 */
 			deleteItem(row, index) {
-				console.log(index)
 				this.editModel.SupplierContacts.splice(index,1)
 			},
 			deleteItems() {

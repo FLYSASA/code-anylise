@@ -76,8 +76,6 @@
 				tableData: [],
 				deleteIds: [],
 				option: {},
-				viewOption: {},
-				addOption: {},
 				currentView: "",
 				visible: false,
 				importVisible: false,
