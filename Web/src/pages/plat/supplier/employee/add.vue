@@ -68,20 +68,22 @@
 					</div>
 				</div>
 			</div>
-			<!-- 企业类型纳税人类型 -->
+			<!-- 企业类型 -->
 			<div class="fullline">
 				<div class="wp-50">
 					<span class="w-65" v-text="$t('employee.EnterpriseForm')"></span>
 					<div class="right-auto-box">
 						<!-- <el-input id="RoleName" v-model.trim="createModel.EnterpriseForm" :maxlength="100"></el-input> -->
 						<!-- 引入下拉框 -->
-						<sapi-select :props="props"  :data="datas" @change="change"></sapi-select>
+						<sapi-select :props="props"  :data="priseFormDatas" @change="formChange"></sapi-select>
 					</div>
 				</div>
+				<!-- 纳税人类型 -->
 				<div class="wp-50 float-right">
 					<span class="w-65" v-text="$t('employee.TaxPayerId')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="createModel.TaxPayerId" :maxlength="100"></el-input>
+						<!-- <el-input v-model.trim="createModel.TaxPayerId" :maxlength="100"></el-input> -->
+						<sapi-select :props="props"  :data="taxPayerFormDatas" @change="payerChange"></sapi-select>
 					</div>
 				</div>
 			</div>
@@ -238,8 +240,13 @@
 	export default {
 		data() {
 			return {
-				datas: [],
-				props: {label:'Name',value:'Id'},
+				// 下拉选项数据
+				priseFormDatas : [],
+				taxPayerFormDatas : [],
+				// 选项内容
+				props: {
+					label:"label",
+				},
 
 				provinces:[],
                 citys:[],
@@ -280,10 +287,6 @@
 		},
 		props: ["value"],
 		methods: {
-			// 下拉选项
-			change(data){
-				console.log(data)
-			},
 			/* 打开添加对话框触发 获取数据事件 */
 			open() {
 				this.createModel = {
@@ -411,9 +414,6 @@
                 }	
 				return true;
 			},
-			changeDefaultStation(row) {
-				this.createModel.DefaultStationId = row.StationId;
-			},
 			addContact() {
 				// this.stationVisible = true;
 				var addContact = {
@@ -474,6 +474,21 @@
 						this.deleteIds.push(data.ContactId);
 					});
 				}
+			},
+			// 企业类型用户选择
+			formChange(datas) {
+				if(datas.label === '国营企业'){
+					this.createModel.EnterpriseForm = 1
+				}else{
+					this.createModel.EnterpriseForm = 0
+				}
+			},
+			payerChange(datas) {
+				if(datas.label === '一般纳税人'){
+					this.createModel.TaxPayerId = 1
+				}else{
+					this.createModel.TaxPayerId = 0
+				}
 			}
 		},
 		components: {
@@ -493,6 +508,13 @@
 		},
 		mounted() {
 			this.visible = this.value;
+			// 企业类型数据
+			var dataPrise = this.priseFormDatas
+			dataPrise.push({label:"民营企业"},{label:"国营企业"});
+
+			// 纳税类型数据
+			var dataPayer = this.taxPayerFormDatas
+			dataPayer.push({label:"一般纳税人"},{label:"小规模纳税人"})
 		}
 	}
 </script>

@@ -26,7 +26,7 @@
 				</el-table-column>
 				<el-table-column prop="TaxPayerId" :label="$t('employee.TaxPayerId')" show-overflow-tooltip>
 					<template slot-scope="props" >
-								{{props.row.TaxPayerId == 1 ? '一般纳税人' : '小规模纳税人'}}
+								{{props.row.TaxPayerId === 1 ? '一般纳税人' : '小规模纳税人'}}
 					</template> 
 				</el-table-column>
 				<el-table-column prop="EnterpriseForm" :label="$t('employee.EnterpriseForm')" show-overflow-tooltip>

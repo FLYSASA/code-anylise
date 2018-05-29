@@ -72,13 +72,15 @@
 				<div class="wp-50">
 					<span class="w-65" v-text="$t('employee.EnterpriseForm')"></span>
 					<div class="right-auto-box">
-						<el-input id="RoleName" v-model.trim="editModel.EnterpriseForm === 1 ? '国有企业' : '民营企业'" :maxlength="100"></el-input>
+						<!-- <el-input id="RoleName" v-model.trim="editModel.EnterpriseForm === 1 ? '国有企业' : '民营企业'" :maxlength="100"></el-input> -->
+						<sapi-select :props="props"  :data="priseFormDatas" @change="formChange"></sapi-select>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
 					<span class="w-65" v-text="$t('employee.TaxPayerId')"></span>
 					<div class="right-auto-box">
-						<el-input v-model.trim="editModel.TaxPayerId === 1 ? '一般纳税人' : '小规模纳税人'" :maxlength="100"></el-input>
+						<!-- <el-input v-model.trim="editModel.TaxPayerId === 1 ? '一般纳税人' : '小规模纳税人'" :maxlength="100"></el-input> -->
+						<sapi-select :props="props"  :data="taxPayerFormDatas" @change="payerChange" ></sapi-select>
 					</div>
 				</div>
 			</div>
@@ -236,6 +238,13 @@
 	export default {
 		data() {
 			return {
+				// 下拉选项数据
+				priseFormDatas : [],
+				taxPayerFormDatas : [],
+				// 选项内容
+				props: {
+					label:"label",
+				},
 				provinces:[],
                 citys:[],
                 areas:[],
@@ -410,7 +419,24 @@
 						ids.splice(index,1)	   // 在勾选数组中移除这个联系人id
 					}
 				}
+			},
+			// 企业类型用户选择
+			formChange(datas) {
+				console.log(datas)
+				if(datas.label === '国营企业'){
+					this.editModel.EnterpriseForm = 1
+				}else{
+					this.editModel.EnterpriseForm = 0
+				}
+			},
+			payerChange(datas) {
+				if(datas.label === '一般纳税人'){
+					this.editModel.TaxPayerId = 1
+				}else{
+					this.editModel.TaxPayerId = 0
+				}
 			}
+
 		},
 		components: {
 			"sapi-dialog": dialog,
@@ -422,7 +448,17 @@
 			Vue.use(tips);
 		},
 		mounted() {
-			this.visible = this.value;		
+			this.visible = this.value;	
+			
+			// 企业类型数据
+			var dataPrise = this.priseFormDatas
+			
+			dataPrise.push({label:"民营企业"},{label:"国营企业"});
+
+			// 纳税类型数据
+			var dataPayer = this.taxPayerFormDatas
+			dataPayer.push({label:"一般纳税人"},{label:"小规模纳税人"})
+			
 		},
 		watch: {
 			value(val) {
