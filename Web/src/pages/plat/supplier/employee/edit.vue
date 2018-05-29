@@ -168,7 +168,7 @@
 					</div>
 					<!--供方联系人表格-->
 					<div class="common-table width-p100">
-						<el-table :data="editModel.SupplierContacts" border>
+						<el-table :data="editModel.SupplierContacts"  @selection-change="selectionChange" border>
 							<el-table-column type="selection" width="45">
 							</el-table-column>
 							<el-table-column prop="ContactName" :label="$t('employee.contactName')" show-overflow-tooltip>
@@ -250,6 +250,8 @@
 				deleteIds: [],
 				stationListShow: false,
 				stationVisible: false,
+
+				
 			}
 		},
 		props: ["value", "option"],
@@ -358,7 +360,7 @@
                 }	  						              
 				return true;
 			},
-
+			/* 添加供方联系人 */
 			addContact() {
 				// this.stationVisible = true;
 				var addContact = {
@@ -375,36 +377,39 @@
 				this.editModel.SupplierContacts.push(addContact)
 			},
 
-			/* 删除供方联系人 */
+			/* 获取所有联系人项id */
+			selectionChange(datas) {
+				this.deleteIds = [];
+				if(datas.length > 0) {
+					datas.forEach((data) => {
+						this.deleteIds.push(data.ContactId);
+					});
+				}
+			},
+
+			/* 尾部操作删除供方联系人 */
 			deleteItem(row, index) {
 				this.editModel.SupplierContacts.splice(index,1)
 			},
+			/* 右上角删除供方联系人 多选项 */
 			deleteItems() {
 				var _this = this;
-				var stations = this.editModel.Stations;
+				var ids = this.deleteIds; // 已勾选的contactId数组
+				var contacts = this.editModel.SupplierContacts
 
-				if(this.deleteIds.length == 0) {
+				if(this.deleteIds.length === 0) {
 					Vue.msg(this.$t('selectOneWhenDeleted'));
 					return false;
 				}
-				
-				var defaultId = this.editModel.DefaultStationId;
-				var hasDeleteDefault = false;
-				var ids=this.deleteIds;
-				for(var i=stations.length-1; i>-1 ; i--) {
-					var stationId = stations[i].StationId;
-					var index=ids.indexOf(stationId);
-					if(index>-1){
-						stations.splice(i,1);
-						ids.splice(index,1);
-						if(defaultId === stationId) {
-							hasDeleteDefault = true;
-						}
+				for(var i = contacts.length - 1; i > -1 ; i--) {  // 遍历当前的SupplierContacts
+					var contId = contacts[i].ContactId;  // 获取SupplierContacts中的每一项的 ContactId
+					var index = ids.indexOf(contId)      // 获取这一项的  ContactId 在 勾选数组contactId中的index值()
+					// index为-1,则说明没有勾选这项
+					if( index > -1 ){
+						contacts.splice(i,1);  // 在SupplierContacts移除这个供方联系人
+						ids.splice(index,1)	   // 在勾选数组中移除这个联系人id
 					}
-				}
 
-				if(hasDeleteDefault && this.editModel.Stations[0]) {
-					this.editModel.DefaultStationId = this.editModel.Stations[0].StationId;
 				}
 			}
 		},

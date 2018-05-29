@@ -76,8 +76,6 @@
 						<!-- <el-input id="RoleName" v-model.trim="createModel.EnterpriseForm" :maxlength="100"></el-input> -->
 						<!-- 引入下拉框 -->
 						<sapi-select :props="props"  :data="datas" @change="change"></sapi-select>
-
-
 					</div>
 				</div>
 				<div class="wp-50 float-right">
@@ -164,7 +162,7 @@
 						</div>
 						<div class="wp-50 float-right btn-outer">
 							<ul class="btn-wrap">
-								<li class="icon-build" @click="showStationPage"></li>
+								<li class="icon-build" @click="addContact"></li>
 								<li class="icon-deleter" @click="deleteItems"></li>
 							</ul>
 						</div>
@@ -226,7 +224,7 @@
 			<el-button size="small" class="default-button" @click="close" v-text="$t('cancel')"></el-button>
 			<el-button class="blue-button" size="small" :disabled="disabled" @click="submit" v-text="$t('submit')"></el-button>
 		</div>
-		<set-station slot="moreDialog" :node-id="createModel.EmployeeId" :node-datas="createModel.Stations" v-model="stationVisible" :call-back="callback"></set-station>
+		<!-- <set-station slot="moreDialog" :node-id="createModel.EmployeeId" :node-datas="createModel.Stations" v-model="stationVisible" :call-back="callback"></set-station> -->
 	</sapi-dialog>
 </template>
 
@@ -254,7 +252,6 @@
 
 				disabled: false,
 				visible: true,
-				stationVisible: false,
 
 				createModel: {
 					SupName: null,
@@ -283,6 +280,7 @@
 		},
 		props: ["value"],
 		methods: {
+			// 下拉选项
 			change(data){
 				console.log(data)
 			},
@@ -356,8 +354,6 @@
 					this.areas = res;
                     var area =  { Id:"", Name:"请选择" };
 					this.areas.splice(0,0,area);
-					console.log(2)
-					console.log(this.areas)
                 });
             },
             areaChange:function(area)
@@ -418,7 +414,7 @@
 			changeDefaultStation(row) {
 				this.createModel.DefaultStationId = row.StationId;
 			},
-			showStationPage() {
+			addContact() {
 				// this.stationVisible = true;
 				var addContact = {
 					ContactId: null,
@@ -432,23 +428,6 @@
 					RowIndex: 0
 				}
 				this.createModel.SupplierContacts.push(addContact)
-			},
-
-			callback(res) {
-				this.createModel.Stations = res;
-				
-				//edit by 杨俊  2018-03-22  禅道bug #9541 修改岗位选择页面删除默认岗位后，默认岗位没有的情况
-				if (this.createModel.Stations == null || this.createModel.Stations.length == 0){
-					this.createModel.DefaultStationId = null;
-					return;
-				}
-				for (var i = 0; i < this.createModel.Stations.length; i++){
-					if (this.createModel.DefaultStationId == this.createModel.Stations[i].StationId){
-						return;
-					}
-				}
-
-				this.createModel.DefaultStationId = this.createModel.Stations[0].StationId;				
 			},
 			/* 删除供方联系人 */
 			deleteEmployees(apiAddress, itemIds, successFunc) {
@@ -465,7 +444,6 @@
 				});
 			},
 			deleteItem(row, index) {
-				console.log(index)
 				this.createModel.SupplierContacts.splice(index,1)
 			},
 			deleteItems() {

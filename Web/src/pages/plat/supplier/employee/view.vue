@@ -212,7 +212,6 @@
 		watch: {
 			value(val) {
 				this.visible = val;
-				console.log(this.viewModel)
 			}
 			
 		}
