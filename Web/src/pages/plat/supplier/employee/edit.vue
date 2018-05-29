@@ -73,14 +73,15 @@
 					<span class="w-65" v-text="$t('employee.EnterpriseForm')"></span>
 					<div class="right-auto-box">
 						<!-- <el-input id="RoleName" v-model.trim="editModel.EnterpriseForm === 1 ? '国有企业' : '民营企业'" :maxlength="100"></el-input> -->
-						<sapi-select :props="props"  :data="priseFormDatas" @change="formChange"></sapi-select>
+						<!-- <sapi-select v-model="editModel.AreaId" :data="areas" :props="{label:'Name',value:'Id'}" @change="areaChange"></sapi-select> -->
+						<sapi-select :props="props" v-model="editModel.EnterpriseForm" :data="priseFormDatas" @change="formChange"></sapi-select>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
 					<span class="w-65" v-text="$t('employee.TaxPayerId')"></span>
 					<div class="right-auto-box">
 						<!-- <el-input v-model.trim="editModel.TaxPayerId === 1 ? '一般纳税人' : '小规模纳税人'" :maxlength="100"></el-input> -->
-						<sapi-select :props="props"  :data="taxPayerFormDatas" @change="payerChange" ></sapi-select>
+						<sapi-select :props="props" v-model="editModel.TaxPayerId" :data="taxPayerFormDatas" @change="payerChange" ></sapi-select>
 					</div>
 				</div>
 			</div>
@@ -275,7 +276,7 @@
 			getData() {
 				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {
 					this.editModel = res;
-					// console.log(this.editModel)
+
 					this.getCitys(res.ProvinceId);
                     this.getAreas(res.CityId);
 				});
@@ -422,7 +423,6 @@
 			},
 			// 企业类型用户选择
 			formChange(datas) {
-				console.log(datas)
 				if(datas.label === '国营企业'){
 					this.editModel.EnterpriseForm = 1
 				}else{
