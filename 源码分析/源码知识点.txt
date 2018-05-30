@@ -1,0 +1,115 @@
+1. el-table的使用
+在某一项定义 slot-scope="props",
+将会把:data="tableData"的值等于props
+prop变成props的key,用于展示table某一行的内容
+
+--------------------------------------------
+2. 在项目文件夹src > static里:
+
+①i18n文件夹:  相当于公共的data库,用于标题label等等
+  
+其目录下分为common(公共)和plat(某个模块)文件目录
+
+文件夹内部继续细分为多语言 zh-cn 和 zh-tw语言目录
+
+在zh-cn下继续细分为文件夹(以模块命名)和模块js(用于引入文件夹定义的对象)
+
+$t()是绑定在Vue实例上的属性,在data中通过this.$t()调用,在html中直接 $t()即可获取,前提是需要在main.js中引入
+
+在以模块命名的文件夹中的js文件,一个文件封装一个对象,可以在组件中通过 $t(对象.属性)获取到值.  多用于标题输入框标题表格文字等.
+
+② js文件夹: 封装共用的方法
+
+common.js : {
+
+在Vue.prototype上封装了 $get $post $put $delete $request $getUrlParams等等
+
+同时也定义了params等等.
+
+调用这些方法直接 this.$delete(参数) 即可.
+
+
+}
+
+---------------------------------------------------
+3. 关于list.vue文件中的 v-if="permissions.Add || permissions.Delete || permissions.Import ||  permissions.Export" 控制对应图标显示
+
+permissions(权限)从哪儿来? 
+
+在Web/src/pages/plat/admin/main   设置权限资源
+
+
+---------------------------------------------------
+4. 详细某些组件用法可以在 src/pages/demo 里面看到
+
+-----------------------------------------------------
+
+5. 项目业务开展具体流程:
+
+① 比较常见的是在plat模块下开发新的版块. 比如新开供方管理模块,新建plat < supplier文件夹.
+
+② 后台系统绑定,右上角 菜单管理 > 新增同级
+设置菜单名称(如供方管理),链接地址(如/plat/supplier.html#/), 设置根节点, 根节点不需要设置权限资源
+
+③ 新增子级, 设置菜单名称(如供方一览),链接地址(如/plat/supplier.html#/employee),设置权限资源((如勾选新增 修改 删除 导入 导出等等) 设置资源名称时添加路径 即 对照api 地址填写即可. 
+
+④ 后台新增版块完成之后,开始实际开发. 
+
+
+-----------------------------------------------------------
+6. deleteIds 参见supplier > employee下的list.vue
+如果数据并不会影响到视图变化,不建议放到data中,统一在created钩子函数中定义
+
+
+------------------------------------------------------------
+
+7. 组件/实例的选项顺序:
+
+// 副作用: 触发组件外的影响
+el,
+
+// 模板依赖: 模板内使用的资源
+components: {},
+
+// 组合: 向选型里合并属性 
+mixins: [],
+
+// 本地状态: 本地的响应式属性
+data(){
+  return {}
+},
+
+computed(){},
+
+// 观察本地属性
+watch: {
+
+},
+
+// 非响应式的属性(每次都重新计算)
+methods: {
+  loadData(){}
+}
+
+// 生命周期钩子: 按照被调用的顺序
+beforecreated(){}    
+created(){}
+beforeMount(){}
+mounted(){}
+Destroyed(){}
+
+
+--------------------------------------------
+8. minxins 混入属性 混入的属性见 src < static < common.js
+
+混入对象的钩子将在组件自身钩子之前调用。
+
+----------------------------------------------
+9. v-bind:is=""  is特性  见 https://cn.vuejs.org/v2/guide/components.html
+v-bind:is="currentTabComponent"
+
+---------------------------------------------
+10. 创建的vue根实例在
+import initImport from "@/static/js/mainBaseImport.js";
+
+
