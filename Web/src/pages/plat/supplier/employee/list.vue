@@ -55,10 +55,10 @@
 			</el-pagination>
 		</div>
 
+		<!-- 子组件展示 -->
 		<component v-bind:is="currentView" v-model="visible" :option="option"></component>
 
-		<import-employee v-model="importVisible" template-url="/Templates/Excel/Import/企业员工导入模板.xlsx" :title="$t('employee.importEmployeeTitle')" confirm-api="/api/plat/employees/import" @callback="loadData">
-		</import-employee>
+		<import-employee v-model="importVisible" template-url="/Templates/Excel/Import/企业员工导入模板.xlsx" :title="$t('employee.importEmployeeTitle')" confirm-api="/api/plat/employees/import" @callback="loadData"></import-employee>
 
 		<export-employee v-model="exportVisible" :title="$t('employee.exportEmployeeTitle')" export-url="/api/plat/employees/export"></export-employee>
 	</div>
@@ -71,11 +71,30 @@
 	import employeeImport from "@/components/sapi-import.vue";
 	import employeeExport from "@/components/sapi-export.vue";
 	export default {
+
+		components: {
+			// "employee-add": (resolve) => {
+			// 	require(['./add.vue'], resolve);
+			// },
+			//简写:
+			"employee-add": () => import('./add.vue'),
+			"employee-edit": () => import('./edit.vue'),
+			"employee-view": () => import('./view.vue'),
+			
+			"sapi-search": search,
+			"import-employee": employeeImport,
+			"export-employee": employeeExport
+		},
+
+		// 组合: 向选型里合并属性
+		mixins: [getPagerMixin(), getTabMixin()],
+
+		// 本地状态: 本地的响应式属性		
 		data() {
 			return {
 				tableData: [],
-				deleteIds: [],
 				option: {},
+				//控制子组件显隐
 				currentView: "",
 				visible: false,
 				importVisible: false,
@@ -87,27 +106,35 @@
 				
 			}
 		},
-		components: {
-			"employee-add": (resolve) => {
-				require(['./add.vue'], resolve);
+
+		// 观察本地属性
+		watch:{
+			"params.provinceId"(val){
+				if(!val&&this.citys.length>0){
+					setTimeout(()=>{
+						this.params.cityId=null;
+						this.params.areaId=null;
+						this.citys=[];
+						this.areas=[];
+					});
+				}
 			},
-			"employee-edit": (resolve) => {
-				require(['./edit.vue'], resolve);
-			},
-			"employee-view": (resolve) => {
-				require(['./view.vue'], resolve);
-			},
-			"sapi-search": search,
-			"import-employee": employeeImport,
-			"export-employee": employeeExport
-		},
-		mixins: [getPagerMixin(), getTabMixin()],
+			"params.cityId"(val){
+				if(!val&&this.areas.length>0){
+					setTimeout(()=>{
+						this.params.areaId=null;
+						this.areas=[];
+					});
+				}
+			}
+		},		
+
+		// 非响应式的属性
 		methods: {
 			loadData() {
 				var params = this.params;
 				this.$loadingOpen();
 				this.$get("/api/plat/suppliers/", params, function(res) {
-					console.log(params)
 					this.tableData = res.Rows;
 					this.pageTotal = res.Total;
 				});
@@ -118,6 +145,11 @@
 			},
 			openEditDialog(row, index) {
 				this.currentView = "employee-edit";
+				this.option = row;
+				this.visible = true;
+			},
+			openViewDialog(row, index) {
+				this.currentView = "employee-view";
 				this.option = row;
 				this.visible = true;
 			},
@@ -146,6 +178,7 @@
 					});
 				});
 			},
+			// 每一行尾部删除
 			deleteItem(row, index) {
 				var _this = this;
 				var deleteIds = [];
@@ -157,6 +190,7 @@
 						_this.loadData();
 					});
 			},
+			// 右上角勾选删除
 			deleteItems() {
 				var _this = this;
 				this.deleteEmployees(
@@ -176,15 +210,11 @@
 				this.params.sortName = obj.prop;
 				this.params.sortType = obj.order;
 				this.pageCurrentChange(1);
-			},
-
-			openViewDialog(row, index) {
-				this.currentView = "employee-view";
-				this.option = row;
-				this.visible = true;
 			}
 		},
-		created() {
+
+		// 生命周期钩子: 按照被调用的顺序
+		created() {			
 			Vue.use(confirm);
 			//pager改变时将要执行的函数，对该值进行初始化
 			this.pageFunc = this.loadData;
@@ -192,28 +222,8 @@
 			//初始化权限等
 			this.$init();
 		},
+
 		mounted() {
-			
-		},
-		watch:{
-			"params.provinceId"(val){
-				if(!val&&this.citys.length>0){
-					setTimeout(()=>{
-						this.params.cityId=null;
-						this.params.areaId=null;
-						this.citys=[];
-						this.areas=[];
-					});
-				}
-			},
-			"params.cityId"(val){
-				if(!val&&this.areas.length>0){
-					setTimeout(()=>{
-						this.params.areaId=null;
-						this.areas=[];
-					});
-				}
-			}
 		}
 	}
 </script>

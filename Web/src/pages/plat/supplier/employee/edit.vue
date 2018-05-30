@@ -73,7 +73,7 @@
 					<span class="w-65" v-text="$t('employee.EnterpriseForm')"></span>
 					<div class="right-auto-box">
 						<!-- <el-input id="RoleName" v-model.trim="editModel.EnterpriseForm === 1 ? '国有企业' : '民营企业'" :maxlength="100"></el-input> -->
-						<!-- <sapi-select v-model="editModel.AreaId" :data="areas" :props="{label:'Name',value:'Id'}" @change="areaChange"></sapi-select> -->
+			
 						<sapi-select :props="props" v-model="editModel.EnterpriseForm" :data="priseFormDatas" @change="formChange"></sapi-select>
 					</div>
 				</div>
