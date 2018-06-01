@@ -168,9 +168,67 @@ https://cn.vuejs.org/v2/guide/reactivity.html#异步更新队列
 	</template> 
 </el-table-column>
 
-
+:data 为注入的数据data
 lable为显示的标题
 prop 是对应列的内容
 
 在el-table-column 内部可以自定义列内容,使用 template  和 slot-scope. 
 slot-scope  其属性有 { row, column, $index }  , 通过获取slot-scope的属性  来展示内容
+
+
+14.  于 JavaScript 的限制，Vue 不能检测对象属性的添加或删除
+
+后台返回数据,直接赋值data声明的对象,这样的赋值有很多问题，不是响应式的，无法更新，如果返回的data中有二级的对象或者数字，绑定该字段就会出现报错。。。
+对于已经创建的实例，Vue 不能动态添加根级别的响应式属性。但是，可以使用 Vue.set(object, key, value) 方法向嵌套对象添加响应式属性。
+
+this.$set(this.editModel, 'EnterpriseForm', 1);       // vm.$set( target, key, value )
+
+举例: 
+var vm = new Vue({
+  data: {
+    a: 1
+  }
+})
+// `vm.a` 现在是响应式的
+
+vm.b = 2
+// `vm.b` 不是响应式的
+
+
+15.  如果在data选项中定义 editModel为空对象的话,
+尽量在后台获取到数据之后不要 直接  this.editModel = res
+因为如果res对象有多个属性,则editModel 的属性属于后添加不具备响应式
+
+解决办法:
+1. 在data中定义的时候,将editModel的属性和后台一致 ,值可以定义为null
+2. 在获取到后台数据后,然后 使用 this.editModel = res 替换属性值
+3. 也可以通过 this.editModel.xxx = res.xxx 来更新属性值
+4. 也可以 通过  this.$set(this.editModel, 'EnterpriseForm', 1), 增加原来没有的新属性以及值
+
+16. 总结sapi-select下拉框的使用
+
+① 需要传入 :data  一般从后台获取.首先在data选项中声明,一般是个数组,
+如: priseFormDatas : [{label:"民营企业",value:2},{label:"国营企业", value: 1}]
+label属性对应的是每一项的内容
+value属性对应的是v-model的值
+
+② 需要传入props ,配置选项,data中的每个属性都需要在这里声明一下, 其实props就是每一项的缩影
+如: 
+props: {              // 下拉选项配置内容
+	label:"label",	// label是每一项展示内容
+	value: 'value'	// value根据值展示不同label,可以通过绑定的v-model 得到value
+
+③ 需要传入 v-model
+如: 
+v-model="editModel.EnterpriseForm"    // 绑定之后得到value值, value值不同展示不同label
+},
+
+④ 需要传入 @change = "formChange"事件  ,用户下拉选择不同项后触发
+如: 
+formChange(datas) {                // datas是用户选的某一项如 {label:"民营企业",value:2}
+	if(datas.label === '民营企业'){
+		this.editModel.EnterpriseForm = 2
+	}else if(datas.label === '国营企业'){
+		this.editModel.EnterpriseForm = 1
+	}
+},
