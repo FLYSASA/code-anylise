@@ -273,8 +273,8 @@
 					SupplierContacts: []
 				},
 				// 下拉选项数据
-				priseFormDatas : [{label:"民营企业",value:0},{label:"国营企业", value: 1}],
-				taxPayerFormDatas : [{label:"小规模纳税人",value:0},{label:"一般纳税人",value:1}],
+				priseFormDatas : [{label:"民营企业",value:2},{label:"国营企业", value: 1}],
+				taxPayerFormDatas : [{label:"小规模纳税人",value:2},{label:"一般纳税人",value:1}],
 				// 选项内容
 				props: {              // 下拉选项配置内容
 					label:"label",
@@ -315,9 +315,10 @@
 					this.editModel = res   //尽量在this.editModel为空的时候,不要直接写 this.editModel = res, 因为属性不具备响应式
 					// vm.$set( target, key, value ) 对于已经创建的实例，Vue 不能动态添加根级别的响应式属性。让这个属性具有响应式,可以使用 this.$set(target,key,value)
 					// this.$set(this.editModel, 'EnterpriseForm', res.EnterpriseForm);  
-					console.log(this.editModel.EnterpriseForm)  //企业类型
-					console.log('---------------')
+					// console.log(this.editModel.EnterpriseForm)  //企业类型
+					
 					console.log(this.editModel.TaxPayerId)
+					console.log('---------------')
 					this.getCitys(res.ProvinceId);
                     this.getAreas(res.CityId);
 				});
@@ -325,17 +326,17 @@
 			},
 			// 企业类型用户选择
 			formChange(datas) {
-				if(datas.label === '国营企业'){
+				if(datas.label === '民营企业'){
+					this.editModel.EnterpriseForm = 2
+				}else if(datas.label === '国营企业'){
 					this.editModel.EnterpriseForm = 1
-				}else{
-					this.editModel.EnterpriseForm = 0
 				}
 			},
 			payerChange(datas) {
 				if(datas.label === '一般纳税人'){
 					this.editModel.TaxPayerId = 1
-				}else{
-					this.editModel.TaxPayerId = 0
+				}else if(datas.label === '小规模纳税人'){
+					this.editModel.TaxPayerId = 2
 				}
 			},
 			 // 省份
