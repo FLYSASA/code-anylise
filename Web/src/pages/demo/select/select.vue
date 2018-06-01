@@ -25,10 +25,10 @@
 			return {
 				arrs:[],
 				datas:[],
-				props:{
-					disabled:"disabled",
-					label:"label",
-					value:"value",
+				props:{    				   // 配置选项
+					disabled:"disabled",   // 禁用项
+					label:"label",		   // 标题
+					value:"value",			// 值
 				},
 				visible:false,
 				treeDatas:[],

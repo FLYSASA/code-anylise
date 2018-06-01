@@ -74,7 +74,7 @@
 					<div class="right-auto-box">
 						<!-- <el-input id="RoleName" v-model.trim="editModel.EnterpriseForm === 1 ? '国有企业' : '民营企业'" :maxlength="100"></el-input> -->
 			
-						<sapi-select :props="props" v-model="editModel.EnterpriseForm" :data="priseFormDatas" @change="formChange"></sapi-select>
+						<sapi-select :props="props" v-model="editModel.EnterpriseForm"  :data="priseFormDatas" @change="formChange"></sapi-select>
 					</div>
 				</div>
 				<div class="wp-50 float-right">
@@ -237,14 +237,48 @@
 	import upload from "@/components/sapi-upload.vue";
 	import select from "@/components/sapi-select.vue";
 	export default {
+		components: {
+			"sapi-dialog": dialog,
+			"set-station": station,
+			"sapi-upload": upload,
+			"sapi-select": select
+		},
+
+		props: ["value", "option"],
+
 		data() {
 			return {
+				editModel: {
+					SupName: null,
+					SupNo: null,
+					ProvinceId: null,
+					ProvinceName: null,
+					CityId: null,
+					CityName: null,
+					AreaId: null,
+					AreaName: null,
+					TaxPayerId: 0,
+					EnterpriseForm: 0,
+					CreditCode: null,
+					LegalRepresentative: null,
+					RegisteredCapital: null,
+					Address: null,
+					Postalcode: null,
+					OfficePhone: null,
+					FaxNumber: null,
+					Email: null,
+					OfficialWebsite: null,
+					BusinessLicence: null,
+					Remark: null,
+					SupplierContacts: []
+				},
 				// 下拉选项数据
-				priseFormDatas : [],
-				taxPayerFormDatas : [],
+				priseFormDatas : [{label:"民营企业",value:0},{label:"国营企业", value: 1}],
+				taxPayerFormDatas : [{label:"小规模纳税人",value:0},{label:"一般纳税人",value:1}],
 				// 选项内容
-				props: {
+				props: {              // 下拉选项配置内容
 					label:"label",
+					value: 'value'
 				},
 				provinces:[],
                 citys:[],
@@ -256,15 +290,18 @@
 				},
 				disabled: false,
 				visible: true,
-				editModel: {},
 				deleteIds: [],
 				stationListShow: false,
-				stationVisible: false,
-
-				
+				stationVisible: false,			
 			}
 		},
-		props: ["value", "option"],
+		
+		watch: {
+			value(val) {
+				this.visible = val;
+			}
+		},
+
 		methods: {
 			close() {
 				this.$closeWaringTips(".form-error-tips");
@@ -275,23 +312,43 @@
 			},
 			getData() {
 				this.$get("/api/plat/suppliers/" + this.option.SupId, function(res) {
-					this.editModel = res;
-
+					this.editModel = res   //尽量在this.editModel为空的时候,不要直接写 this.editModel = res, 因为属性不具备响应式
+					// vm.$set( target, key, value ) 对于已经创建的实例，Vue 不能动态添加根级别的响应式属性。让这个属性具有响应式,可以使用 this.$set(target,key,value)
+					// this.$set(this.editModel, 'EnterpriseForm', res.EnterpriseForm);  
+					console.log(this.editModel.EnterpriseForm)  //企业类型
+					console.log('---------------')
+					console.log(this.editModel.TaxPayerId)
 					this.getCitys(res.ProvinceId);
                     this.getAreas(res.CityId);
 				});
 				this.getProvinces();
 			},
+			// 企业类型用户选择
+			formChange(datas) {
+				if(datas.label === '国营企业'){
+					this.editModel.EnterpriseForm = 1
+				}else{
+					this.editModel.EnterpriseForm = 0
+				}
+			},
+			payerChange(datas) {
+				if(datas.label === '一般纳税人'){
+					this.editModel.TaxPayerId = 1
+				}else{
+					this.editModel.TaxPayerId = 0
+				}
+			},
 			 // 省份
             getProvinces:function(){
                 this.$get("/api/plat/areas/provinces", {}, function(res) {
-					this.provinces = res;
+					this.provinces = res;   // 将res 传入 :data="provinces"
                 });
 			},
 			// 用户选择省份后触发
             provinceChange:function(province)
             {
-                this.editModel.ProvinceName = province.Name;
+				console.log(province)
+                this.editModel.ProvinceName = province.Name;   // provice即用户下拉选择后,传入的数据. 结构为{name:''}
                 this.editModel.CityId = null;
                 this.editModel.CityName = null;
                 this.editModel.AreaId = null;
@@ -421,50 +478,18 @@
 					}
 				}
 			},
-			// 企业类型用户选择
-			formChange(datas) {
-				if(datas.label === '国营企业'){
-					this.editModel.EnterpriseForm = 1
-				}else{
-					this.editModel.EnterpriseForm = 0
-				}
-			},
-			payerChange(datas) {
-				if(datas.label === '一般纳税人'){
-					this.editModel.TaxPayerId = 1
-				}else{
-					this.editModel.TaxPayerId = 0
-				}
-			}
+
 
 		},
-		components: {
-			"sapi-dialog": dialog,
-			"set-station": station,
-			"sapi-upload": upload,
-			"sapi-select": select
-		},
+
 		created() {
 			Vue.use(tips);
 		},
 		mounted() {
 			this.visible = this.value;	
-			
-			// 企业类型数据
-			var dataPrise = this.priseFormDatas
-			
-			dataPrise.push({label:"民营企业"},{label:"国营企业"});
-
-			// 纳税类型数据
-			var dataPayer = this.taxPayerFormDatas
-			dataPayer.push({label:"一般纳税人"},{label:"小规模纳税人"})
-			
-		},
-		watch: {
-			value(val) {
-				this.visible = val;
-			}
+						
 		}
+
 	}
 </script>
 <style type="text/css">

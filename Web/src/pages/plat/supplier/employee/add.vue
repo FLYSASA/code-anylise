@@ -238,6 +238,13 @@
 	import select from "@/components/sapi-select.vue";
 	
 	export default {
+		components: {
+			"sapi-dialog": dialog,
+			"set-station": station,
+			"sapi-upload": upload,
+			"sapi-select": select
+		},
+		props: ["value"],
 		data() {
 			return {
 				// 下拉选项数据
@@ -260,7 +267,7 @@
 				disabled: false,
 				visible: true,
 
-				createModel: {
+				createModel: {          // data中定义这么多属性是为了数据响应式,因为根实例之外添加属性不具备响应式
 					SupName: null,
 					SupNo: null,
 					ProvinceId: null,
@@ -285,7 +292,13 @@
 				},
 			}
 		},
-		props: ["value"],
+
+		watch: {
+			value(val) {
+				this.visible = val;
+			},
+		},
+
 		methods: {
 			/* 打开添加对话框触发 获取数据事件 */
 			open() {
@@ -491,18 +504,7 @@
 				}
 			}
 		},
-		components: {
-			"sapi-dialog": dialog,
-			"set-station": station,
-			"sapi-upload": upload,
-			"sapi-select": select
-		},
-		watch: {
-			value(val) {
-				this.visible = val;
-				// console.log(this.createModel)
-			},
-		},
+
 		created() {
 			Vue.use(tips);
 		},

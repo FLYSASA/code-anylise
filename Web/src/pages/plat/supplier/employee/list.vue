@@ -74,10 +74,10 @@
 
 		components: {
 			// "employee-add": (resolve) => {
-			// 	require(['./add.vue'], resolve);
+			// 	require(['./add.vue'], resolve);   // 这个`require`语法会告诉webpack自动将构建代码切割成多个包,这些包会通过Ajax请求加载
 			// },
 			//简写:
-			"employee-add": () => import('./add.vue'),
+			"employee-add": () => import('./add.vue'),  // 按需求加载
 			"employee-edit": () => import('./edit.vue'),
 			"employee-view": () => import('./view.vue'),
 			
@@ -95,7 +95,7 @@
 				tableData: [],
 				option: {},
 				//控制子组件显隐
-				currentView: "",
+				currentView: "",   //初始为空即不渲染任何异步组件
 				visible: false,
 				importVisible: false,
 				exportVisible: false,
@@ -149,7 +149,7 @@
 				this.visible = true;
 			},
 			openViewDialog(row, index) {
-				this.currentView = "employee-view";
+				this.currentView = "employee-view";  //请求渲染 employee-view 组件
 				this.option = row;
 				this.visible = true;
 			},

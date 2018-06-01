@@ -166,7 +166,7 @@
 							<el-table-column prop="Email" :label="$t('employee.contactMail')"  show-overflow-tooltip>
 							</el-table-column>
 						
-					</el-table>
+					</el-table> 
 				</div>
 			</div>
 
@@ -180,6 +180,12 @@
 <script>
 	import dialog from "@/components/sapi-dialog.vue";
 	export default {
+		components: {
+			"sapi-dialog": dialog
+		},
+
+		props: ["option", "value"],  // option 是list父组件传过来的props.row, value即 父组件绑定的v-model的值,这是单向的.
+		
 		data() {
 			return {
 				disabled: false,
@@ -188,7 +194,13 @@
 				stationListShow: false,
 			}
 		},
-		props: ["option", "value"],  // option 是list父组件传过来的props.row
+
+		watch: {
+			value(val) {
+				this.visible = val;   // 监视 val值的变化
+			}		
+		},
+
 		methods: {
 			close() {
 				this.$emit("input", false);
@@ -203,17 +215,10 @@
 				});
 			}
 		},
-		components: {
-			"sapi-dialog": dialog
-		},
+
 		mounted() {
 			this.visible = this.value;
 		},
-		watch: {
-			value(val) {
-				this.visible = val;
-			}
-			
-		}
+
 	}
 </script>
