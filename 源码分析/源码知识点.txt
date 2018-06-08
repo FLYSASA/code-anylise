@@ -82,7 +82,8 @@ data(){
   return {}
 },
 
-computed(){},
+computed: {
+},
 
 // 观察本地属性
 watch: {
@@ -232,3 +233,198 @@ formChange(datas) {                // datas是用户选的某一项如 {label:"民营企业",
 		this.editModel.EnterpriseForm = 1
 	}
 },
+
+
+17.  computed 计算属性 和 methods 方法,  watch 侦听属性的区别:
+
+computed 计算属性:   基于它们的依赖进行缓存,只有在它的相关依赖发生改变时才会重新求值.  这就意味着当依赖信息没有改变时,计算属性会立即返回之前的计算结果,而不必再次执行函数.
+computed默认只有getter,不过也可以提供setter
+
+computed: {
+  fullName: {
+    // getter
+    get: function () {
+      return this.firstName + ' ' + this.lastName
+    },
+    // setter
+    set: function (newValue) {
+      var names = newValue.split(' ')
+      this.firstName = names[0]
+      this.lastName = names[names.length - 1]
+    }
+  }
+}
+
+如例:
+computed: {
+         now: function(){
+                  return Date.now()
+         }
+}
+上面的now将得不再更新,因为依赖Date一直没有改变,Date.now()不是响应式依赖.
+
+所以为什么需要缓存?
+因为如果有一个性能开销比较大的计算属性A,它需要遍历一个巨大的数组并做大量的计算. 我们可能有其他的计算属性依赖于A,如果没有缓存,我们将不可避免的多次执行A的getter.
+如果不希望有缓存,请用方法代替.
+
+methods 方法:
+每次都会重新计算,即使依赖没有发生任何变化. 但方法每次都会重新执行.返回结果
+
+
+
+watch侦听属性:
+观察和响应vue实例上的数据变动. 当数据变化时,会触发函数
+
+  watch: {
+    // 如果 `question` 发生改变，这个函数就会运行
+    question: function (newQuestion, oldQuestion) {
+      this.answer = 'Waiting for you to stop typing...'
+      this.debouncedGetAnswer()
+    }
+  },
+  },
+
+18. 模块创建
+基础平台pages, 现有三个模块: demo、home、plat三个模块.  他们都是模块.
+模块创建可根据类型来创建: 比如工作流，投资管理、财务系统、报表系统等来确定一个模块
+
+注意: 不要把一个功能（单页面）就创建为一个模块
+
+所以所有页面都在pages(基础平台)下面进行开发,如果是模块则直接在pages下新建模块文件夹.
+如果是单页面,则一般在 plat 模块下进行开发.
+
+19.  创建一个功能(单页面)至少需要 page.js(html配置) 和 main.js(页面入口js)
+参考: 前端培训ppt,  平台新文档 IDWIKI > docs > home.md
+
+①关于 page.js 页面html配置文件,可以配置的下列属性:
+template:  页面模板路径,路径从src子目录开始, 如: 
+      template: 'templates > list.html'(项目共同母版)   //表示以src目录下的templates文件夹内的list.html为模板.
+
+filename:  发布后的页面文件名,如登录页的filename设置为index.html，表示发布为根目录下的index.html，filename设置为system/group.html表示发布为system目录下的group.html（除登录页外，一般不需要设置filename，会默认按照页面目录的位置和名称来发布页面文件）
+
+------------------------------------------------------
+②关于main.js 页面入口js, 以在page.js中 template定义的模板为页面进行开发,若需要引入其他js或css,都在main.js里进行引入
+
+  1.一般情况下，静态资源在main.js中通过import的方式引入，如：
+import '@/static/css/style.css';
+@是src目录的别名
+
+  2. main.js 可以引入vue、element-ui、css、路由等，vue的实例也在这里创建
+
+
+20. 新平台文档 源码分析  IDWIKI  > web > src
+pages依然是基础平台,下面有home主模块.
+
+① 主模块的page.js中,以同目录下的template.html为html模板,
+
+这个模板里面分为 
+web-header:  头部组件,用于展示logo头部区域
+section: 内容主体,里面分为 <web-menu> 组件(用于展示左侧标题菜单) 和 router-view(点击菜单显示的内容路由)两部分
+
+② 模块的main.js (主要是新建实例并传入参数,定义组件,启动路由等等)
+引入Vue,router(router.js文件中导出的Router实例), 引入组件,新建实例, 挂载实例
+
+new Vue({
+    router,   //把路由注入到根实例中,启动路由.
+    components: {
+        "web-header": header,
+        "web-menu": menu
+    }
+}).$mount("#plat-word");
+
+③ 模块的router.js,主要是导出路由实例,并传入routes参数
+引入Vue, Router(路由对象), router函数(./assets/js/router.js)
+
+import Vue from 'vue'
+import Router from 'vue-router'
+import {router} from "./assets/js/router.js";
+
+Vue.use(Router)               //告诉vue使用Router管理路由routes
+const routes=router();     //routes即多组路由(在version中定义好的路由数组)
+
+export default new Router({       // 导出实例主要为了被main.js引入作为vue实例的参数,用于启动router
+    routes: [                  	 // 将routes作为对象参数传给VueRouter的实例
+        {
+            path: '/',		 //   "/"即定义初始(页面打开时)显示的路由组件
+            name: 'index',
+            component: ()=>import("./index/main.vue")       // 映射组件,当路径为/是显示index下main.vue组件
+        },
+        ...routes            	 // ...扩展运算符,将数组routes扩展为逗号分隔的多个route对象
+    ]
+})
+
+
+
+21. export   
+从模块中导出函数,对象或原始值,以便其它程序可以通过import语句使用它们.
+
+export 和 export default区别:
+1. 两个均可用于导出常量,函数,文件,模块等
+2. 可以在其它文件或模块通过 import+(常量 | 函数 | 文件 | 模块) 名的方式,将其导入,以便能够对其进行使用
+3. 在一个文件或模板中, export 和 import可以有多个,  而export default仅有一个
+4. 通过export方式导出,在导入时要加 {} , export default 不需要
+5. 使用export default命令,为模块指定默认输出,这样就不需要知道所要加载模块的变量名.
+(在引入模块的文件中可以自定义引入的模块的名字)
+
+
+-------------------------------------------------------------------------------
+22. 关于树形组件
+
+关于:data="data",
+data是个数组,如:
+data: [{
+          label: '一级 1',
+          children: [{
+            label: '二级 1-1',
+            children: [{
+              label: '三级 1-1-1'
+            }]
+          }]
+        }, {
+          label: '一级 2',
+          children: [{
+            label: '二级 2-1',
+            children: [{
+              label: '三级 2-1-1'
+            }]
+          }, {
+            label: '二级 2-2',
+            children: [{
+              label: '三级 2-2-1'
+            }]
+          }]
+        }, {
+          label: '一级 3',
+          children: [{
+            label: '二级 3-1',
+            children: [{
+              label: '三级 3-1-1'
+            }]
+          }, {
+            label: '二级 3-2',
+            children: [{
+              label: '三级 3-2-1'
+            }]
+          }]
+        }],
+数组中是多个对象,每个对象的一般是由一个label(即这一级显示的名字)以及children(前提有次级菜单)构成,children也是一个数组,里面是包含label的对象.
+
+
+备用: 
+
+loadChild(item, callback) {
+            let child = [];
+            for (let g = 1; g < 3; g++) {    // 三级菜单
+                let curchild = {};
+                for (let j = 1; j < 17; j++) {
+                    curchild["a" + j] = "叶子-" + g;
+                }
+
+                child.push(curchild);
+            }
+            callback(child);    // 将定义的child传入callback执行
+ },
+
+created(){
+        setTimeout(() => {   // 异步执行
+            let da
